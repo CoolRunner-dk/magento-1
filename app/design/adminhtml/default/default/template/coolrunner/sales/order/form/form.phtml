@@ -1,0 +1,66 @@
+<?php if(Mage::getStoreConfig('coolrunner/settings/active')) : ?>
+
+	<div id="coolrunner-form">
+		<form action="<?php echo Mage::helper('adminhtml')->getUrl('coolrunner/adminhtml_grid/process',array('_current'=>true)); ?>" method="post" id="coolrunner-label-request-form">
+			<input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>" />
+			<h2><?php echo $this->__('Create Shipping Label'); ?></h2>
+                        <div style="display: none;">
+			<?php if($options = Mage::helper('coolrunner')->getCarrierProductServiceOptions($withLabels = true,$extraAuto = true)) : ?>
+			    <?php if(is_array($options) && !empty($options)) : ?>
+					<label for="coolrunner-carrier-options"><?php echo Mage::helper('coolrunner')->__('Labeltype'); ?></label>
+			    	<select id="coolrunner-carrier-options" name="carrier_product_service">
+						<?php foreach($options as $value) : ?>
+							<option value="<?php echo $value['value']; ?>"><?php echo substr($value['label'], 0, strpos($value['label'], '(')); ?></option>
+					    <?php endforeach; ?>
+			    	</select>
+			    <?php endif; ?>
+		    <?php endif; ?>
+                        </div>
+			<div class="clearer"></div>
+			<?php if($package_sizes = Mage::getStoreConfig('coolrunner/package/size')) : ?>
+				<?php $package_sizes = unserialize($package_sizes); ?>
+					<label for="package-size"><?php echo $this->__('Package Size'); ?></label>
+					<select id="package-size" name="package-size">
+						<option value="manuel" data-title="<?php echo $this->__("Type package size manually"); ?>" data-weight="" data-length="" data-height="" data-width=""><?php echo $this->__("Type package size manually"); ?></option>
+						<?php foreach($package_sizes as $id => $label) : ?>
+							<option value="<?php echo $id; ?>" <?php foreach($label as $key => $value) : ?>data-<?php echo $key; ?>="<?php echo $value; ?>" <?php endforeach; ?>><?php echo $label['title']; ?></option>
+					    <?php endforeach; ?>
+			    	</select>
+			<?php else : ?>
+				<input id="coolrunner_id" type="text" name="coolrunner_id" placeholder="<?php echo $this->__("CoolRunner Product Id"); ?>"/>
+			<?php endif; ?>
+	
+			<div class="clearer"></div>
+			
+			<div class="packageinfo">
+				<label for="weight"><?php echo $this->__("Weight"); ?></label>
+				<input id="weight" type="text" name="weight" class="input-text required-entry validate-number"/>
+				<span class="unit">kg</span>
+				<div class="clearer"></div>
+				<label for="length"><?php echo $this->__("Length"); ?></label>
+				<input id="length" type="text" name="length" class="input-text required-entry validate-number"/>
+				<span class="unit">cm</span>
+				<div class="clearer"></div>
+				<label for="width"><?php echo $this->__("Width"); ?></label>		
+				<input id="width" type="text" name="width" class="input-text required-entry validate-number"/>
+				<span class="unit">cm</span>
+				<div class="clearer"></div>
+				<label for="height"><?php echo $this->__("Height"); ?></label>		
+				<input id="height" type="text" name="height" class="input-text required-entry validate-number"/>	
+				<span class="unit">cm</span>
+			</div>
+			
+			<div class="clearer"></div>
+			<input type="hidden" value="<?php echo Mage::getStoreConfig('coolrunner/settings/download'); ?>" name="download" />
+			<input id="order_id" type="hidden" value="" name="order_ids" />
+			<button type="submit"><span><span><?php echo $this->__("Create Shipping Label"); ?></span></span></button>
+			
+			<img class="coolrunner-logo" src="<?php echo $this->getSkinUrl() ?>coolrunner/images/coolrunner.dk.png" />
+		</form>
+		<script type="text/javascript">
+			//< ![CDATA[
+				var coolrunner_label_request_form = new varienForm('coolrunner-label-request-form');
+			//]]>
+		</script>	
+	</div>
+<?php endif; ?>

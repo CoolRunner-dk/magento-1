@@ -1,0 +1,60 @@
+<?php if($pricelist = Mage::helper('coolrunner')->getConfig('coolrunner/pricelist/list')) : ?>
+	<?php $pricelist = unserialize($pricelist); ?>
+
+	<table class="coolrunner-pricelist">
+		<thead>
+			<th><?php echo Mage::helper('coolrunner')->__("To"); ?></th>
+			<th><?php echo Mage::helper('coolrunner')->__("Carrier product service"); ?></th>
+			<th><?php echo Mage::helper('coolrunner')->__("Title"); ?></th>
+			<th><?php echo Mage::helper('coolrunner')->__("Weight from (kg)"); ?></th>
+			<th><?php echo Mage::helper('coolrunner')->__("Weight to (kg)"); ?></th>										
+			<th><?php echo Mage::helper('coolrunner')->__("Price excl tax"); ?></th>
+			<th><?php echo Mage::helper('coolrunner')->__("Price incl tax"); ?></th>
+		</thead>
+		<tbody>
+			<?php foreach($pricelist as $zone_to => $rates) : ?>
+				<?php foreach($rates as $rate) : ?>
+					<tr>
+						<td><?php echo Mage::helper('coolrunner')->__($zone_to); ?></td>
+						
+						<?php $rate['carrier_product_service'] = 
+							rtrim(
+								implode('_', array(
+									Mage::helper('coolrunner')->__($rate['carrier']),
+									Mage::helper('coolrunner')->__($rate['carrier_product']),
+									Mage::helper('coolrunner')->__($rate['carrier_service']))
+								),
+							'_'); ?>
+							
+						<td><?php echo Mage::helper('coolrunner')->__($rate['carrier_product_service']);?></td>
+						<td><?php echo $rate['title']; ?></td>
+						<td><?php echo $rate['weight_from']/1000; ?></td>
+						<td><?php echo $rate['weight_to']/1000; ?></td>
+						<td><?php echo $rate['price_excl_tax'] ?> DKK</td>
+						<td><?php echo $rate['price_incl_tax'] ?> DKK</td>																																
+					</tr>
+				<?php endforeach; ?>
+			<?php endforeach; ?>
+		</tbody>
+	</table>
+	
+	<style>
+		
+		table.coolrunner-pricelist {
+		    width: 100%;
+			max-width: 1000px;
+		}
+		
+		table.coolrunner-pricelist tbody tr:nth-child(odd) {
+			background-color: #FFFFFF;
+		}
+
+		table.coolrunner-pricelist tbody tr:nth-child(even) {
+			background-color: #EBEBEB;
+		}
+		
+	</style>
+
+<?php else : ?>
+	<?php echo Mage::helper('coolrunner')->__("No prices found"); ?>
+<?php endif; ?>

@@ -1,0 +1,119 @@
+<?php $prefix = str_replace("_","-",$this->getCode()); ?>
+
+<div id="<?php echo $prefix."-"; ?>droppoint-form" style="display:none;">
+	<div class="<?php echo $prefix."-"; ?>droppoint-description">
+		<?php echo $this->__('Få sendt dine varer til et afhentningssted nær dig.') ?>
+	</div>
+	<label for="<?php echo $prefix."-"; ?>postalCode"><?php echo $this->__('Indtast postnummer:'); ?></label>
+	<input type="text" size="10" value="<?php echo $this->getPostnr(); ?>" id="<?php echo $prefix."-"; ?>postalCode" name="<?php echo $prefix."-"; ?>postalCode" onkeypress="return <?php echo $prefix; ?>.onEnterGetJson(event)" />
+	<input type="hidden" value="<?php echo ($country = Mage::getSingleton('checkout/session')->getQuote()->getShippingAddress()->getCountry()) ? $country : 'DK'; ?>" id="<?php echo $prefix."-"; ?>countryCode" name="<?php echo $prefix."-"; ?>countryCode" />
+	<button type="button" class="button" onclick="<?php echo $this->getCode(); ?>.loadDroppoints()"><span><span><?php echo $this->__('Søg afhentningssted'); ?></span></span></button>
+	<span id='<?php echo $prefix."-"; ?>loading' style='display:none'>
+		<img src='<?php echo $this->getSkinUrl('coolrunner/images/ajax-loader.gif') ?>'/>
+	</span>
+
+	<label style="padding-top: 5px;" for="<?php echo $prefix."-"; ?>pickup-firstname"><?php echo Mage::helper('coolrunner')->__("Navn på den, der afhenter pakken:") ?><span class="required">*</span></label>
+	<div style="clear: both"></div>
+	<div style="width:49%;float:left;max-width: 200px;margin-right: 10px">
+		<?php if(isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/(?i)msie [2-8]/',$_SERVER['HTTP_USER_AGENT'])) : ?>
+			<label for="<?php echo $prefix."-"; ?>pickup-firstname"><?php echo Mage::helper('coolrunner')->__("Firstname"); ?></label>
+		<?php endif; ?>
+		<input type="text" placeholder="<?php echo Mage::helper('coolrunner')->__("Firstname"); ?>" id="<?php echo $prefix."-"; ?>pickup-firstname" value="<?php echo $this->getPickupFirstname(); ?>" name="<?php echo $prefix."-"; ?>pickup-firstname" class="required-entry" />
+	</div>
+	<div style="width:49%;float:left;max-width: 200px;">
+		<?php if(isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/(?i)msie [2-8]/',$_SERVER['HTTP_USER_AGENT'])) : ?>
+			<label for="<?php echo $prefix."-"; ?>pickup-lastname"><?php echo Mage::helper('coolrunner')->__("Lastname"); ?></label>
+		<?php endif; ?>
+		<input type="text" placeholder="<?php echo Mage::helper('coolrunner')->__("Lastname"); ?>" id="<?php echo $prefix."-"; ?>pickup-lastname" value="<?php echo $this->getPickupLastname(); ?>" name="<?php echo $prefix."-"; ?>pickup-lastname" class="required-entry" />
+	</div>
+	<div style="clear: both"></div>
+	<label style="padding-top: 5px; float: left;" for="<?php echo $prefix."-"; ?>telephone"><?php echo Mage::helper('coolrunner')->__("Advisering på mobilnummer:") ?><span class="required">*</span></label>
+	<div style="clear: both"></div>
+	<input type="text" value="<?php echo $this->getTelephone(); ?>" id="<?php echo $prefix."-"; ?>telephone" name="<?php echo $prefix."-"; ?>telephone" class="required-entry" />		
+
+
+	<?php // TEXT CONTAINERS TIL JAVASCRIPTS START ?>
+	
+	<div id="<?php echo $prefix."-"; ?>selected-droppoint-text-container" style="display:none"><strong><?php echo $this->__('Vælg afhentningssted:'); ?></strong><br/><i>
+		<?php echo $this->__('Indtast dit postnummer og tryk "Søg afhentningssted" herover for at vælge et afhentningssted.'); ?></i></div>
+	<div id="<?php echo $prefix."-"; ?>selected-droppoint-text-container-selected" style="display:none"><strong><?php echo $this->__('Valgt afhentningssted:'); ?></strong><br /></div>
+	<?php // TEXT CONTAINERS TIL JAVASCRIPTS END ?>
+	<div  class="selected-droppoint" id="<?php echo $prefix."-"; ?>selected-droppoint"><strong><?php echo $this->__('Vælg afhentningssted:'); ?></strong><br/><i>
+		<?php echo $this->__('Indtast dit postnummer og tryk "Søg afhentningssted" herover for at vælge et afhentningssted'); ?></i></div>
+	<input type="hidden" class="required-entry" name="<?php echo $prefix."-"; ?>droppoint-id" id="<?php echo $prefix."-"; ?>droppoint-id" value=""/>
+	<div class="hidden address">
+		<input type="hidden" name="<?php echo $prefix."-"; ?>droppoint-name" id="<?php echo $prefix."-"; ?>droppoint-name" value="" />
+		<input type="hidden" name="<?php echo $prefix."-"; ?>droppoint-city" id="<?php echo $prefix."-"; ?>droppoint-city" value="" />
+		<input type="hidden" name="<?php echo $prefix."-"; ?>droppoint-postalcode" id="<?php echo $prefix."-"; ?>droppoint-postalcode" value="" />
+		<input type="hidden" name="<?php echo $prefix."-"; ?>droppoint-streetname" id="<?php echo $prefix."-"; ?>droppoint-streetname" value="" />
+	</div>
+</div>
+
+
+<div id="<?php echo $prefix."-"; ?>droppoint-overlay">
+	<div id="<?php echo $prefix."-"; ?>droppoint-wrapper">
+		<div id="<?php echo $prefix."-"; ?>droppoint-header"><h2><?php echo $this->__('Vælg afhentningssted'); ?></h2></div>
+		<div id="<?php echo $prefix."-"; ?>droppoint-result">
+			<div class="map">
+				<div id="<?php echo $prefix."-"; ?>map-canvas"></div>
+			</div>
+			<div id="<?php echo $prefix."-"; ?>address-container">
+				<ul id="<?php echo $prefix."-"; ?>addresses"></ul>
+				<div class="clearer"></div>
+			</div>
+			<div id="<?php echo $prefix."-"; ?>opening-container">
+				<div class="<?php echo $prefix."-"; ?>-opening-header-empty"><?php echo $this->__("Vælg et afhentningssted i venstre side, og se åbningstiderne her"); ?></div>
+			</div>
+			<div style="display:none">
+				<span id="<?php echo $prefix."-"; ?>opening-header-text"><?php echo $this->__("Adresse & Åbningstider"); ?></span>
+				<span id="<?php echo $prefix."-"; ?>opening-hours-text"><?php echo $this->__("Åbningstider"); ?></span>
+				<span id="<?php echo $prefix."-"; ?>opening-hours-weekday-mo"><?php echo $this->__("Mandag"); ?></span>
+				<span id="<?php echo $prefix."-"; ?>opening-hours-weekday-tu"><?php echo $this->__("Tirsdag"); ?></span>
+				<span id="<?php echo $prefix."-"; ?>opening-hours-weekday-we"><?php echo $this->__("Onsdag"); ?></span>
+				<span id="<?php echo $prefix."-"; ?>opening-hours-weekday-th"><?php echo $this->__("Torsdag"); ?></span>
+				<span id="<?php echo $prefix."-"; ?>opening-hours-weekday-fr"><?php echo $this->__("Fredag"); ?></span>
+				<span id="<?php echo $prefix."-"; ?>opening-hours-weekday-sa"><?php echo $this->__("Lørdag"); ?></span>
+				<span id="<?php echo $prefix."-"; ?>opening-hours-weekday-su"><?php echo $this->__("Søndag"); ?></span>
+			</div>
+		</div>
+		<div class="clearer"></div>
+		<div id="<?php echo $prefix."-"; ?>droppoint-buttons-set">
+			
+			<button type="button" id="<?php echo $prefix."-"; ?>close-droppoint-selector-save">
+				<?php echo $this->__('Vælg') ?>
+			</button>
+
+			<button type="button" id="<?php echo $prefix."-"; ?>close-droppoint-selector-remove">
+				<?php echo $this->__('Annullér') ?>
+			</button>	
+			
+		</div>
+	</div>
+	<div id="<?php echo $prefix."-"; ?>droppoint-bg-overlay">
+	</div>
+</div>
+
+
+
+<script type="text/javascript">
+	
+	<?php echo $this->getCode(); ?> = new <?php echo $this->getJsModel(); ?>;
+
+	baseUrl = "<?php echo Mage::getUrl('',array('_secure'=>true)); ?>";
+	lastUpdatedDroppointId = false;
+	
+	<?php echo $this->getCode(); ?>.idArrayDroppoints = [];
+	<?php $droppointsIds = Mage::helper('coolrunner/droppoints')->getDroppointsIds($this->getCode()); ?>
+	<?php foreach($droppointsIds as $id) : ?>
+		<?php echo $this->getCode(); ?>.idArrayDroppoints.push('<?php echo $id ?>');
+	<?php endforeach; ?>
+
+	Ajax.Responders.register({
+		onComplete: <?php echo $this->getCode(); ?>.checkDroppointShipping
+	});
+	
+	<?php echo $this->getCode(); ?>.checkDroppointShipping();
+	<?php echo $this->getCode(); ?>.setDroppointFromLocalStorage();
+	//<?php echo $this->getCode(); ?>.setMarkerIcon('<?php echo $this->getSkinUrl("coolrunner/images/".$prefix."-pakkeshop-icon.png"); ?>');
+
+</script>
