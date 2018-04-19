@@ -1,0 +1,5 @@
+{
+    "require": {
+        "coolrunner/php-sdk": "dev-master"
+    }
+}
