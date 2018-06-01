@@ -1,0 +1,87 @@
+<?php
+/** @var CoolRunner_CoolShipping_ShippingController $this */
+$this;
+/** @var CoolRunner_CoolShipping_Helper_Information $helper */
+$helper = Mage::helper('coolrunner/information');
+
+$id = $this->__getId();
+
+$items = $helper->getOrderItems($id);
+$order_info = $helper->getOrderByEntityId($id);
+$img = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN) . 'adminhtml/default/default/coolshipping/images/coolrunner.png';
+$stylesheet = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN) . 'adminhtml/default/default/coolshipping/css/label.css';
+
+/** @var \CoolRunnerSDK\API $apiv3 */
+$apiv3 = Mage::getModel('coolrunner/apiv3')->loadAPI(Mage_Core_Model_App::ADMIN_STORE_ID);
+/** @var CoolRunner_CoolShipping_Helper_Information $helper */
+$order_id = $this->getRequest()->getParam('order_id');
+/** @var CoolRunner_CoolShipping_Model_Order_Pdf $order_pdf */
+$order_pdf = $helper->getOrderPdf($order_id);
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title><?php echo $this->__('Tracking') ?> - <?php echo $order_pdf->package_number ?></title>
+    <link rel="stylesheet" href="<?php echo $stylesheet ?>">
+    <style>
+        table tr th:nth-child(1) {
+            width : 10px;
+        }
+        table tr td:nth-child(1) {
+            text-align : center;
+        }
+        table tr td:nth-child(3) {
+            width : 100%;
+        }
+    </style>
+</head>
+<body>
+<h1>
+    <img draggable="false" oncontextmenu="return false;" src="<?php echo $img ?>">
+    <?php echo $this->__('Tracking') ?> - <?php echo $order_pdf->package_number ?>
+</h1>
+<hr>
+<h2><?php echo $this->__('Orderno.:') ?><?php echo $this->__getId() ?></h2>
+<hr>
+<h4><?php echo $order_info->getShippingDescription() ?></h4>
+<div>
+    <?php $tracking = $apiv3->getShipmentTracking($order_pdf->package_number); ?>
+    <?php if ($tracking) : ?>
+        <table>
+            <?php if (count($tracking->events) !== 0) : ?>
+                <thead>
+                <tr>
+                    <?php foreach (array_keys($tracking->events[0]) as $key) : ?>
+                        <th style="width: 5px;"><?php echo ucfirst($key) ?></th>
+                    <?php endforeach; ?>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($tracking->events as $event) : ?>
+                    <tr>
+                        <?php foreach ($event as $key => $value) : ?>
+                            <td><?php echo $event[$key] ?></td>
+                        <?php endforeach; ?>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            <?php else: ?>
+            <tbody>
+            <tr>
+                <td><?php echo $this->__('No tracking available at the moment') ?></td>
+            </tr>
+            </tbody>
+            <?php endif; ?>
+        </table>
+    <?php else : ?>
+        <h3><?php echo $this->__('No tracking for this parcel') ?></h3>
+    <?php endif; ?>
+</div>
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+</body>
+</html>

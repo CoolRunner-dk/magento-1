@@ -1,0 +1,14 @@
+<?php if ($this->getRequest()->getParam('section', '') == 'coolrunner') : ?>
+    <script type="text/javascript">
+        var ids = ['row_coolrunner_rates_carrier_options', 'row_coolrunner_package_size'];
+        for (var i = 0; i < ids.length; i++) {
+            (function (id) {
+                var sortable_id = id + '_sortable';
+                var parentElement = $$('#' + id + ' table tbody')[0].id = sortable_id;
+                Sortable.create(sortable_id, {elements: $$('#' + sortable_id + ' tr[id^=_]'), handles: $$('#' + sortable_id + ' tr[id^=_] td img.sortable')})
+
+            })(ids[i]);
+        }
+        var id = 'row_coolrunner_rates_carrier_options';
+    </script>
+<?php endif; ?>

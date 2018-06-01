@@ -1,0 +1,64 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "1854909d6d8be3053bc83c09b66d88f8",
+    "packages": [
+        {
+            "name": "coolrunner/php-sdk",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CoolRunner-dk/coolrunner-php-sdk.git",
+                "reference": "f46abbf2bc9a3932f2cbb5cade80f57f8ee89c00"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CoolRunner-dk/coolrunner-php-sdk/zipball/f46abbf2bc9a3932f2cbb5cade80f57f8ee89c00",
+                "reference": "f46abbf2bc9a3932f2cbb5cade80f57f8ee89c00",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CoolRunnerSDK\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Morten Harders",
+                    "email": "mh@coolrunner.dk",
+                    "role": "Developer"
+                }
+            ],
+            "description": "CoolRunner API SDK",
+            "homepage": "https://coolrunner.dk",
+            "keywords": [
+                "coolrunner",
+                "sdk",
+                "shipping"
+            ],
+            "time": "2018-05-31T07:32:47+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "coolrunner/php-sdk": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

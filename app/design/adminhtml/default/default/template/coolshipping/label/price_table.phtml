@@ -1,0 +1,213 @@
+<?php
+
+$store_id = Mage::app()->getStore()->getStoreId();
+/** @var Mage_Core_Block_Template $this */
+$this;
+/** @var CoolRunner_CoolShipping_Helper_Information $helper */
+$helper = Mage::helper('coolrunner/information');
+/** @var CoolRunner_CoolShipping_Model_Order_Info $info */
+$info = Mage::getModel('coolrunner/order_info');
+/** @var CoolRunner_CoolShipping_Model_Order_Pdf $pdf */
+$pdf = Mage::getModel('coolrunner/order_pdf');
+/** @var \CoolRunnerSDK\API $api */
+$api = Mage::getModel('coolrunner/apiv3')->loadAPI($store_id);
+/** @var CoolRunner_CoolShipping_Model_Tools $tools */
+$tools = Mage::getModel('coolrunner/tools');
+
+$prices = $api->getProducts(Mage::helper('coolrunner')->getConfig('coolrunner/sender/country', $store_id));
+
+$prices = $prices->toArray();
+
+uksort($prices, function ($a, $b) use ($tools) {
+    return strcmp($tools->isoToCountry($a), $tools->isoToCountry($b));
+});
+
+$carrier_code_overrides = array('POSTNORD' => 'Postnord', 'POSTI' => 'Posti', 'COOLRUNNER' => 'CoolRunner', 'HELTHJEM' => 'helthjem');
+
+$package_sizes = Mage::getStoreConfig('coolrunner/package/size');
+$package_sizes = unserialize($package_sizes);
+
+$shipments = array();
+foreach ($package_sizes as $size) {
+    $size['weight'] = (float)$size['weight'] * 1000;
+    $shipments[] = new \CoolRunnerSDK\Models\Shipments\Shipment($size);
+}
+?>
+
+<style>
+    .pricetable .dimension {
+        text-align : center;
+    }
+
+    .pricetable .price {
+        text-align : right;
+    }
+
+    .toc > li {
+        position   : relative;
+        display    : inline-block;
+        float      : left;
+        border     : 1px solid #666;
+        box-sizing : border-box;
+    }
+
+    .toc > li:first-child {
+        border-radius : 3px 0 0 3px;
+    }
+
+    .toc > li:last-child {
+        border-radius : 0 3px 3px 0;
+    }
+
+    .toc > li:not(:last-child ) {
+        border-right : 0;
+    }
+
+    .toc > li a {
+        text-decoration : none;
+        display         : inline-block;
+        padding         : 5px;
+    }
+
+    .toc::before, .toc::after {
+        float   : none;
+        clear   : both;
+        display : table;
+        content : '';
+    }
+
+    .toc {
+        list-style-type : circle;
+        margin-bottom   : 15px;
+    }
+
+    .toc > li:first-child:hover {
+        border-radius : 3px 0 0 0;
+    }
+
+    .toc > li:last-child:hover {
+        border-radius : 0 0 3px 0;
+    }
+
+    .toc > li:hover ul {
+        display : block;
+    }
+
+    .toc li:hover {
+        background : #dadfe0;
+    }
+
+    .toc ul {
+        top           : 100%;
+        left          : -1px;
+        position      : absolute;
+        display       : none;
+        background    : #FFFFFF;
+        border-radius : 0 5px 5px 5px;
+        border        : 1px solid #666;
+    }
+
+    .toc ul li {
+        white-space : nowrap;
+    }
+</style>
+
+<ul class="toc">
+    <?php foreach ($prices as $cc => $carriers) : /** @var \CoolRunnerSDK\Models\Products\CarrierList $carriers */ ?>
+        <li>
+            <a href="#coolshipping-<?php echo $cc ?>"><?php echo $tools->isoToCountry($cc) ?></a>
+            <ul>
+                <?php foreach ($carriers as $carrier => $types) : /** @var \CoolRunnerSDK\Models\Products\ProductTypeList $types */ ?>
+                    <?php foreach ($types as $key => $type) : /** @var \CoolRunnerSDK\Models\Products\ProductList $type */ ?>
+                        <li><a href="#coolshipping-<?php echo $cc ?>-<?php echo $carrier ?>-<?php echo $key ?>">
+                                <?php echo(isset($carrier_code_overrides[$carrier]) ? $carrier_code_overrides[$carrier] : $carrier) ?>
+                                -
+                                <?php echo ucfirst
+                                (strtolower($key)) ?>
+                            </a></li>
+                    <?php endforeach; ?>
+                <?php endforeach; ?>
+            </ul>
+        </li>
+    <?php endforeach; ?>
+</ul>
+<div class="grid pricetable">
+    <?php foreach ($prices as $cc => $carriers) : /** @var \CoolRunnerSDK\Models\Products\CarrierList $carriers */ ?>
+        <h2 id="coolshipping-<?php echo $cc ?>"><?php echo $tools->isoToCountry($cc) ?></h2>
+        <table cellspacing="0" cellpadding="0">
+            <colgroup>
+                <col>
+                <col width="10">
+                <col width="10">
+                <col width="10">
+                <col width="10">
+                <col width="10">
+                <col width="10">
+                <col width="10">
+                <col width="10">
+                <col width="10">
+            </colgroup>
+            <?php foreach ($carriers as $carrier => $types) : /** @var \CoolRunnerSDK\Models\Products\ProductTypeList $types */ ?>
+                <?php foreach ($types as $key => $type) : /** @var \CoolRunnerSDK\Models\Products\ProductList $type */ ?>
+                    <thead>
+                    <tr class="headings fold">
+                        <th id="coolshipping-<?php echo $cc ?>-<?php echo $carrier ?>-<?php echo $key ?>" class="no-link" colspan="1000">
+                            <?php echo(isset($carrier_code_overrides[$carrier]) ? $carrier_code_overrides[$carrier] : $carrier) ?>
+                            -
+                            <?php echo ucfirst(strtolower($key)) ?> - <?php echo $tools->isoToCountry($cc) ?></th>
+                    </tr>
+                    <tr class="headings">
+                        <th class="no-link"><?php echo $this->__('Title') ?></th>
+                        <th class="no-link"><?php echo $this->__('Code') ?></th>
+                        <th class="no-link"><?php echo $this->__('Min weight (kg)') ?></th>
+                        <th class="no-link"><?php echo $this->__('Max weight (kg)') ?></th>
+                        <th class="no-link"><?php echo $this->__('Max height (cm)') ?></th>
+                        <th class="no-link"><?php echo $this->__('Max width (cm)') ?></th>
+                        <th class="no-link"><?php echo $this->__('Max length (cm)') ?></th>
+                        <th class="no-link"><?php echo $this->__('Price excl. tax (DKK)') ?></th>
+                        <th class="no-link"><?php echo $this->__('Price incl. tax (DKK)') ?></th>
+                        <th class="no-link"><?php echo $this->__('Type') ?></th>
+                    </tr>
+                    </thead>
+                    <?php
+                    $type = $type->toArray();
+                    uasort($type, function ($prod1, $prod2) {
+                        /** @var \CoolRunnerSDK\Models\Products\Product $prod1 */
+                        /** @var \CoolRunnerSDK\Models\Products\Product $prod2 */
+                        $cmp = strcmp($prod1->services[0]->code, $prod2->services[0]->code);
+                        if ($cmp === 0) {
+                            return $prod1->weight->to > $prod2->weight->to;
+                        }
+                        return $cmp;
+                    });
+                    ?>
+                    <tbody>
+                    <?php foreach ($type as $product) : /** @var \CoolRunnerSDK\Models\Products\Product $product */ ?>
+                        <tr class="content">
+                            <td style="white-space: nowrap;"><?php echo $product->title ?></td>
+                            <td><?php echo strtoupper(implode('_', array_filter(array($carrier, $key, $product->services[0]->code)))) ?></td>
+                            <td class="weight"><?php echo number_format($product->weight->from / 1000, 2) ?>kg</td>
+                            <td class="weight"><?php echo number_format($product->weight->to / 1000, 2) ?>kg</td>
+                            <td class="dimension"><?php echo (float)$product->max_size->height ?></td>
+                            <td class="dimension"><?php echo (float)$product->max_size->width ?></td>
+                            <td class="dimension"><?php echo (float)$product->max_size->length ?></td>
+                            <td class="price">DKK <?php echo number_format($product->prices->excl_tax, 2) ?></td>
+                            <td class="price">DKK <?php echo number_format($product->prices->incl_tax, 2) ?></td>
+                            <td class="dimension">
+                                <?php $services = array() ?>
+                                <?php foreach ($product->services as $service) : ?>
+                                    <?php $services[] = $service->code ?>
+                                <?php endforeach; ?>
+                                <?php echo implode('<br>', $services) ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                <?php endforeach; ?>
+            <?php endforeach; ?>
+        </table>
+        <br>
+    <?php endforeach; ?>
+</div>
+
+

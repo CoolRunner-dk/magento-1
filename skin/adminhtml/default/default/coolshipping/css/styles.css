@@ -1,0 +1,208 @@
+#package-form .receiver table tr td:not(:first-child) {
+    width : 100%;
+}
+
+#package-form table {
+    margin-bottom : 10px;
+}
+
+#package-form small {
+    display    : block;
+    font-style : italic;
+    color      : #01C5FF;
+}
+
+#package-form > .row {
+    width      : 100%;
+    float      : left;
+    text-align : right;
+}
+
+@media screen and (max-width : 959px) {
+    #package-form .receiver table:nth-child(2) th:first-of-type {
+        border-top-color : transparent;
+    }
+}
+
+.package-order:not(:last-child) {
+    border-bottom  : 1px solid #666666;
+    margin-bottom  : 5px;
+    padding-bottom : 5px;
+}
+
+#package-form .receiver table.full {
+    width : 100%;
+}
+
+#package-form table {
+    border-collapse : collapse;
+    width           : 100%;
+}
+
+#package-form table h4 {
+    margin : 0;
+}
+
+#package-form table td {
+    border-collapse : collapse;
+}
+
+#package-form td, #package-form th {
+    border      : 1px solid black;
+    padding     : 5px 10px;
+    white-space : nowrap;
+}
+
+#package-form img {
+    vertical-align : middle;
+}
+
+#package-form::after, #package-form::before {
+    content : '';
+    display : table;
+    clear   : both;
+}
+
+.coolrunner-shipping-index td {
+    white-space : nowrap;
+}
+
+img.sortable {
+    cursor : url(https://ssl.gstatic.com/ui/v1/icons/mail/images/2/openhand.cur), default;
+}
+
+#sales_order_grid_table td.last {
+    /*min-width : 180px;*/
+    white-space : nowrap;
+}
+
+.coolrunner-pdf-download {
+    background  : url(../images/coolrunner-download.png) no-repeat scroll 0 0 transparent;
+    display     : inline-block;
+    width       : 40px;
+    height      : 31px;
+    text-indent : -99999px;
+    margin      : 0 2px 0;
+}
+
+.coolrunner-create {
+    background  : url(../images/coolrunner-create.png) no-repeat scroll 0 0 transparent;
+    display     : inline-block;
+    width       : 40px;
+    height      : 31px;
+    text-indent : -99999px;
+    margin      : 0 2px 0 10px;
+}
+
+#coolrunner-form { display : none; position : relative; }
+
+#coolrunner-popup-modal {
+    position         : absolute;
+    left             : 0;
+    right            : 0;
+    top              : 100px;
+    background-color : #FFF;
+    z-index          : 99999;
+    width            : 800px;
+    margin           : 0 auto;
+    padding          : 40px;
+    box-sizing       : border-box;
+    box-shadow       : 0px 2px 25px rgba(0, 0, 0, 0.2);
+    border-radius    : 2px;
+}
+
+#coolrunner-popup-modal-close {
+    right     : 20px;
+    top       : 15px;
+    position  : absolute;
+    font-size : 20px;
+    cursor    : pointer;
+    padding   : 10px;
+}
+
+#coolrunner-popup-modal-overlay {
+    background-color : #000;
+    opacity          : 0.5;
+    position         : fixed;
+    top              : 0;
+    left             : 0;
+    z-index          : 8000;
+    width            : 100%;
+    height           : 100%;
+}
+
+#coolrunner-popup-modal iframe {
+    width  : 100%;
+    height : 600px;
+}
+
+#coolrunner-popup-modal label {
+    display     : inline-block;
+    width       : 100px;
+    padding-top : 15px;
+}
+
+#coolrunner-popup-modal .packageinfo {
+    margin-top    : 20px;
+    margin-bottom : 20px;
+}
+
+#coolrunner-popup-modal .packageinfo label {
+    display     : inline-block;
+    width       : 50px;
+    padding-top : 7px;
+}
+
+#coolrunner-popup-modal .packageinfo input {
+    display : inline-block;
+    width   : 25px;
+}
+
+#coolrunner-popup-modal .coolrunner-logo {
+    position : absolute;
+    right    : 30px;
+    bottom   : 20px;
+    width    : 230px;
+}
+
+/* Backend System Config */
+
+#row_coolrunner_rates_carrier_options td.label, #row_coolrunner_package_size td.label {
+    display : none;
+}
+
+#row_coolrunner_rates_carrier_options select.carrierproductservice {
+    width : 170px;
+}
+
+#row_coolrunner_rates_carrier_options select.countries {
+    width : 90px;
+}
+
+#row_coolrunner_rates_carrier_options select.conditions {
+    width : 160px;
+}
+
+#row_coolrunner_rates_carrier_options input.condition_from, #row_coolrunner_rates_carrier_options input.condition_to {
+    width : 100px;
+}
+
+#row_coolrunner_rates_carrier_options input.title {
+    width : 160px;
+}
+
+#row_coolrunner_rates_carrier_options input.price {
+    width : 95% !important;
+}
+
+#row_coolrunner_rates_carrier_options button.delete {
+    width : 100%;
+}
+
+.massaction td:first-child {
+    width : 25%;
+}
+
+.massaction td:last-child {
+    width : 75%;
+}

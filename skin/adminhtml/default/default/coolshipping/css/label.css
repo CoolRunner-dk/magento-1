@@ -1,0 +1,113 @@
+
+#receiver table tr td:not(:first-child) {
+    width : 100%;
+}
+
+@media screen and (min-width : 1060px) {
+    #receiver table {
+        width     : 50%;
+        max-width : 50%;
+        float     : left;
+    }
+
+    #receiver table:nth-child(2) tr td:first-child, #receiver table:nth-child(2) tr th:first-child {
+        border-left-color : transparent;
+    }
+}
+
+@media screen and (max-width : 1059px) {
+    #receiver table:nth-child(2) th:first-of-type {
+        border-top-color : transparent;
+    }
+}
+
+#receiver table.full {
+    width : 100%;
+}
+
+* {
+    font-family : sans-serif;
+}
+
+table {
+    border-collapse : collapse;
+    width           : 100%;
+}
+
+td, th {
+    border      : 1px solid black;
+    padding     : 5px 10px;
+    white-space : nowrap;
+    overflow    : hidden;
+}
+
+img {
+    vertical-align : middle;
+}
+
+form::after, form::before {
+    content : '';
+    display : table;
+    clear   : both;
+}
+
+.row {
+    /*float   : left;*/
+    display : block;
+}
+
+.row::after, .row::before {
+    content : '';
+    display : table;
+    clear   : both;
+}
+
+.row.half {
+    width : 50%;
+}
+
+form .row {
+    margin-bottom : 10px;
+}
+
+.row > .row {
+    margin : 10px 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin : 5px;
+}
+
+small.help {
+    display    : block;
+    font-style : italic;
+    color      : #01C5FF;
+}
+
+button {
+    -webkit-appearance : none;
+    -moz-appearance    : none;
+    appearance         : none;
+    padding            : 5px 10px;
+    background         : #01C5FF;
+    color              : white;
+    font-weight        : bold;
+    border             : 0;
+    cursor             : pointer;
+}
+
+button:hover, button:disabled {
+    background : #00B1E6;
+}
+
+button:disabled {
+    cursor : not-allowed;
+}
+
+.validation-message {
+    font-size      : .7em;
+    vertical-align : middle;
+    color          : red;
+    display        : inline-block;
+    padding        : 0 3px;
+}

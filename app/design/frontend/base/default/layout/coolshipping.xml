@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<layout version="1.0">
+	<checkout_onepage_index>
+		<reference name="head">
+			<action method="addItem"><type>skin_css</type><name>coolshipping/css/coolshipping.css</name><params/></action>
+			<action method="addItem"><type>skin_js</type><name>coolshipping/js/coolshipping.js</name><params/></action>
+			<block type="core/text" name="google_api_maps.js">
+				<action method="setText"><text><![CDATA[<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYAzzWBB_f-zosHKVAIPpIv2403ckDziY"
+  type="text/javascript"></script>]]></text></action>
+			</block>
+		</reference>
+	</checkout_onepage_index>
+	
+	<onestepcheckout_index_index>
+		<reference name="head">
+			<action method="addItem"><type>skin_css</type><name>coolshipping/css/coolshipping.css</name><params/></action>
+			<action method="addItem"><type>skin_js</type><name>coolshipping/js/coolshipping.js</name><params/></action>
+			<block type="core/text" name="google_api_maps.js">
+				<action method="setText"><text><![CDATA[<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYAzzWBB_f-zosHKVAIPpIv2403ckDziY"
+  type="text/javascript"></script>]]></text></action>
+			</block>
+		</reference>
+	</onestepcheckout_index_index>
+	
+	<onepagecheckout_index_index>
+		<reference name="head">
+			<action method="addItem"><type>skin_css</type><name>coolshipping/css/coolshipping.css</name><params/></action>
+			<action method="addItem"><type>skin_js</type><name>coolshipping/js/coolshipping.js</name><params/></action>
+			<block type="core/text" name="google_api_maps.js">
+				<action method="setText"><text><![CDATA[<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYAzzWBB_f-zosHKVAIPpIv2403ckDziY"
+  type="text/javascript"></script>]]></text></action>
+			</block>
+		</reference>
+	</onepagecheckout_index_index>
+	
+	<gomage_checkout_onepage_index>
+		<reference name="head">
+			<action method="addItem"><type>skin_css</type><name>coolshipping/css/coolshipping.css</name><params/></action>
+			<action method="addItem"><type>skin_js</type><name>coolshipping/js/coolshipping.js</name><params/></action>
+			<block type="core/text" name="google_api_maps.js">
+				<action method="setText"><text><![CDATA[<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYAzzWBB_f-zosHKVAIPpIv2403ckDziY"
+  type="text/javascript"></script>]]></text></action>
+			</block>
+		</reference>
+	</gomage_checkout_onepage_index>
+	
+	<supercheckout_index_index>
+		<reference name="head">
+			<action method="addItem"><type>skin_css</type><name>coolshipping/css/coolshipping.css</name><params/></action>
+			<action method="addItem"><type>skin_js</type><name>coolshipping/js/coolshipping.js</name><params/></action>
+			<block type="core/text" name="google_api_maps.js">
+				<action method="setText"><text><![CDATA[<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYAzzWBB_f-zosHKVAIPpIv2403ckDziY"
+  type="text/javascript"></script>]]></text></action>
+			</block>
+		</reference>
+	</supercheckout_index_index>
+	
+	<firecheckout_index_index>
+		<reference name="head">
+			<action method="addItem"><type>skin_css</type><name>coolshipping/css/coolshipping.css</name><params/></action>
+			<action method="addItem"><type>skin_js</type><name>coolshipping/js/coolshipping.js</name><params/></action>
+			<block type="core/text" name="google_api_maps.js">
+				<action method="setText"><text><![CDATA[<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYAzzWBB_f-zosHKVAIPpIv2403ckDziY"
+  type="text/javascript"></script>]]></text></action>
+			</block>
+		</reference>
+	</firecheckout_index_index>	
+	
+	<aw_onestepcheckout_index_index>
+		<reference name="head">
+			<action method="addItem"><type>skin_css</type><name>coolshipping/css/coolshipping.css</name><params/></action>
+			<action method="addItem"><type>skin_js</type><name>coolshipping/js/coolshipping.js</name><params/></action>
+			<block type="core/text" name="google_api_maps.js">
+				<action method="setText"><text><![CDATA[<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYAzzWBB_f-zosHKVAIPpIv2403ckDziY"
+  type="text/javascript"></script>]]></text></action>
+			</block>
+		</reference>
+	</aw_onestepcheckout_index_index>
+	
+	<oscheckout_index_index>
+		<reference name="head">
+			<action method="addItem"><type>skin_css</type><name>coolshipping/css/coolshipping.css</name><params/></action>
+			<action method="addItem"><type>skin_js</type><name>coolshipping/js/coolshipping.js</name><params/></action>
+			<block type="core/text" name="google_api_maps.js">
+				<action method="setText"><text><![CDATA[<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYAzzWBB_f-zosHKVAIPpIv2403ckDziY"
+  type="text/javascript"></script>]]></text></action>
+			</block>
+		</reference>
+	</oscheckout_index_index>
+	
+	<opc_index_index>
+		<reference name="head">
+			<action method="addItem"><type>skin_css</type><name>coolshipping/css/coolshipping.css</name><params/></action>
+			<action method="addItem"><type>skin_js</type><name>coolshipping/js/coolshipping.js</name><params/></action>
+			<block type="core/text" name="google_api_maps.js">
+				<action method="setText"><text><![CDATA[<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYAzzWBB_f-zosHKVAIPpIv2403ckDziY"
+  type="text/javascript"></script>]]></text></action>
+			</block>
+		</reference>
+	</opc_index_index>
+
+
+	<shipping_tracking_popup translate="label">
+		<reference name="content">
+			<block type="shipping/tracking_popup" name="coolshipping.tracking.popup" template="coolshipping/tracking_popup.phtml" />
+		</reference>
+	</shipping_tracking_popup>
+</layout>

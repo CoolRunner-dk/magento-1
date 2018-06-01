@@ -1,0 +1,329 @@
+<?php
+/** @var CoolRunner_CoolShipping_ShippingController $this */
+$this;
+/** @var CoolRunner_CoolShipping_Helper_Information $helper */
+$helper = Mage::helper('coolrunner/information');
+
+$id = $this->__getId();
+$base = Mage::helper('adminhtml')->getUrl('coolrunner/shipping/createlabel', array('_secure' => true));
+$post_href = "{$base}order_id/{$id}";
+
+$items = $helper->getOrderItems($id);
+$order_info = $helper->getOrderByEntityId($id);
+$img = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN) . 'adminhtml/default/default/coolshipping/images/coolrunner-create.png';
+$stylesheet = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN) . 'adminhtml/default/default/coolshipping/css/label.css';
+
+$shipping_address = $order_info->getShippingAddress();
+$receiver = $helper->getReceiverInformation($id);
+
+/** @var \CoolRunnerSDK\API $api */
+$api = Mage::getModel('coolrunner/apiv3')->loadAPI(Mage_Core_Model_App::ADMIN_STORE_ID);
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title><?php echo $this->__('Create Label - CoolShipping') ?></title>
+    <link rel="stylesheet" href="<?php echo $stylesheet ?>">
+</head>
+<body>
+<h1>
+    <img draggable="false" oncontextmenu="return false;" src="<?php echo $img ?>">
+    <?php echo $this->__('Create Label') ?>
+</h1>
+<hr>
+<h2><?php echo $this->__('Order No.:') ?><?php echo $this->__getId() ?></h2>
+<hr>
+<h4><?php echo $order_info->getShippingDescription() ?></h4>
+<form id="package-form" method="post" action="<?php echo $post_href ?>">
+    <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>">
+    <input type="hidden" name="id" value="<?php echo $id ?>">
+    <div id="receiver" class="row">
+        <table class="<?php echo !$receiver->getServicepoint() ? 'full' : '' ?>">
+            <thead>
+            <tr>
+                <th colspan="100"><h4><?php echo $this->__('Receiver Information') ?></h4></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><?php echo $this->__('Name:') ?></td>
+                <td><?php echo $shipping_address->getName() ?></td>
+            </tr>
+            <?php if ($shipping_address->getCompany()) : ?>
+                <tr>
+                    <td><?php echo $this->__('Company:') ?></td>
+                    <td><?php echo $shipping_address->getCompany() ?></td>
+                </tr>
+            <?php endif; ?>
+            <tr>
+                <td><?php echo $this->__('Address:') ?></td>
+                <td><?php echo $shipping_address->getStreet1() ?></td>
+            </tr>
+            <?php if ($shipping_address->getRegion()) : ?>
+                <tr>
+                    <td><?php echo $this->__('Postal/city:') ?></td>
+                    <td><?php echo $shipping_address->getCountry() ?>-<?php echo $shipping_address->getPostcode() ?> <?php echo $shipping_address->getCity() ?>, <?php echo $shipping_address->getRegion() ?></td>
+                </tr>
+            <?php else : ?>
+                <tr>
+                    <td><?php echo $this->__('Postal/city:') ?></td>
+                    <td><?php echo $shipping_address->getCountry() ?>-<?php echo $shipping_address->getPostcode() ?> <?php echo $shipping_address->getCity() ?></td>
+                </tr>
+            <?php endif; ?>
+            <tr>
+                <td><?php echo $this->__('Phone:') ?></td>
+                <td><?php echo $shipping_address->getTelephone() ?></td>
+            </tr>
+            <tr>
+                <td><?php echo $this->__('Email:') ?></td>
+                <td><?php echo $shipping_address->getEmail() ?></td>
+            </tr>
+            </tbody>
+        </table>
+        <?php if ($receiver->getServicepoint()) : ?>
+            <table>
+                <thead>
+                <tr>
+                    <th colspan="100"><h4><?php echo $this->__('Pickup Information') ?></h4></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><?php echo $this->__('Name:') ?></td>
+                    <td><?php echo $receiver->getName() ?></td>
+                </tr>
+                <tr>
+                    <td><?php echo $this->__('Telephone:') ?></td>
+                    <td><?php echo $receiver->getTelephone() ?></td>
+                </tr>
+                <tr>
+                    <td><?php echo $this->__('Servicepoint:') ?></td>
+                    <td><?php echo $api->getServicepoint($receiver->getCarrier(), $receiver->getServicepoint()) ?></td>
+                </tr>
+                </tbody>
+            </table>
+        <?php endif; ?>
+    </div>
+    <div class="row">
+        <table>
+            <thead>
+            <tr>
+                <th colspan="100"><h4><?php echo $this->__('Order Information') ?></h4></th>
+            </tr>
+            <tr>
+                <th style="width: 0;"><?php echo $this->__('SKU') ?></th>
+                <th style="width: 100%"><?php echo $this->__('Description') ?></th>
+                <th style="width: 0"><?php echo $this->__('Amt.') ?></th>
+                <th style="width: 0;"><?php echo $this->__('Weight') ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php $total_weight = 0; ?>
+            <?php foreach ($items as $item) :
+                $total_weight += $item->getWeight() ?>
+                <tr>
+                    <td><?php echo $item->getSku() ?></td>
+                    <td><?php echo $item->getName() ?></td>
+                    <td align="center"><?php echo floatval($item->getQtyOrdered()) ?></td>
+                    <td align="center"><?php echo number_format(floatval($item->getWeight()), 2) ?></td>
+                </tr>
+            <?php endforeach; ?>
+            <tr>
+                <td colspan="3">&nbsp;</td>
+                <td align="center"><?php echo number_format(floatval($total_weight), 2) ?></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <?php if ($package_sizes = Mage::getStoreConfig('coolrunner/package/size')) : ?>
+            <?php
+            $package_sizes = unserialize($package_sizes);
+            uasort($package_sizes, function ($a, $b) {
+                return $a['weight'] === $b['weight'] ? ($a['height'] + $a['width'] + $a['length']) / 3 < ($b['height'] + $b['width'] + $b['length']) : $a['weight'] > $b['weight'];
+            })
+            ?>
+            <label for="package-size"><?php echo $this->__('Package Size'); ?></label>
+            <select onchange="validateForm(event); getPrice(event);" oninput="validateForm(event); getPrice(event)" autofocus id="package-size" name="package-size" required>
+                <option style="display: none;" disabled selected value="" data-title="<?php echo $this->__("Vælg størrelse"); ?>" data-weight="" data-length="" data-height=""
+                        data-width=""><?php echo $this->__('Chose Package Size') ?></option>
+                <?php
+                $opts_grps = array();
+                ?>
+                <?php foreach ($package_sizes as $id => $package) : ?>
+                    <?php
+                    ob_start();
+                    $attrs = array();
+                    foreach ($package as $key => $value) {
+                        $attrs[] = "data-$key='$value'";
+                    }
+                    $attrs = implode(' ', $attrs);
+                    ?>
+                    <option value="<?php echo $id; ?>" <?php echo $attrs ?>>
+                        <?php echo sprintf($this->__('Max %skg | H:W:L → %sx%sx%s', $package['weight'], $package['height'], $package['width'], $package['length'])) ?>
+                    </option>
+                    <?php
+                    if (floatval($package['weight'] >= $total_weight)) {
+                        $opts_grps[$package['title']][] = ob_get_clean();
+                    } else {
+                        ob_clean();
+                    }
+                    ?>
+                <?php endforeach; ?>
+                <?php foreach ($opts_grps as $grp => $opts) : ?>
+                    <optgroup label="<?php echo $grp ?>">
+                        <?php foreach ($opts as $opt) : ?>
+                            <?php echo $opt ?>
+                        <?php endforeach; ?>
+                    </optgroup>
+                <?php endforeach; ?>
+            </select>
+            <span class="shipment-info" style="display: none;">
+                <span data-type="title">
+                    <label><?php echo $this->__('Product') ?>:</label>
+                    <b><span></span></b>
+                </span>
+                <span data-type="price">
+                    <label><?php echo $this->__('Price') ?>:</label>
+                    <b><span prefix="<?php echo $this->__('excl. tax') ?>"></span></b> /
+                    <b><span prefix="<?php echo $this->__('incl. tax') ?>"></span></b>
+                </span>
+            </span>
+            <small class="help">
+                <?php echo $this->__('Add, remove and edit package sizes under System > Configuration > CoolRunner Settings') ?>
+            </small>
+            <small class="help">
+                <?php echo $this->__('The above price preview is only for reference and may not reflect the actual price') ?>
+            </small>
+
+        <?php else : ?>
+            <?php echo $this->__('<h1>CoolShipping er ikke aktiveret</h1>'); ?>
+        <?php endif; ?>
+    </div>
+    <div class="row">
+        <button class="reset" onclick="window.close()">
+            <?php echo $this->__('Close') ?>
+        </button>
+        <button class="reset" onclick="confirm('<?php echo $this->__('Reset?') ?>') ? document.getElementById('package-form').reset() : null; return false;">
+            <?php echo $this->__('Reset') ?>
+        </button>
+        <button disabled type="submit" onclick="return validateForm(event, '<?php echo $this->__('Do you wish to create a label for this order?') ?>')">
+            <?php echo $this->__('Create') ?>
+        </button>
+
+        <script>
+
+            var xhttp = new XMLHttpRequest(),
+                priceUrl = "<?php echo Mage::helper('adminhtml')->getUrl('coolrunner/shipping/getpackageprice', array('_secure' => true)) ?>";
+
+            xhttp.addEventListener('load', function () {
+                var data = JSON.parse(this.responseText),
+                    info_container = $('.shipment-info'),
+                    title = info_container.find('[data-type=title]').find('span:first-of-type'),
+                    price_container = info_container.find('[data-type=price]'),
+                    priceA = price_container.find('b:first-of-type span'),
+                    priceB = price_container.find('b:last-of-type span');
+
+                if (typeof data !== 'string') {
+                    title.html(data.title);
+                    price_container.show();
+                    priceA.html('DKK ' + data.prices.incl_tax.toFixed(2) + ' ' + priceA.attr('prefix'));
+                    priceB.html('DKK ' + data.prices.excl_tax.toFixed(2) + ' ' + priceB.attr('prefix'));
+                } else {
+                    var form = document.getElementById('package-form');
+                    title.html(data);
+                    price_container.hide();
+                    form.querySelector('button[type=submit]').setAttribute('disabled', 'disabled');
+                }
+
+                info_container.fadeIn();
+            });
+
+
+            function getPrice() {
+                var select = document.getElementById('package-size'),
+                    option = select.options[select.selectedIndex];
+
+                var info = {
+                    height: option.attributes['data-height'].nodeValue,
+                    width: option.attributes['data-width'].nodeValue,
+                    length: option.attributes['data-length'].nodeValue,
+                    weight: option.attributes['data-weight'].nodeValue,
+                    carrier: "<?php echo $order_info->getShippingMethod() ?>",
+                    servicepoint: "<?php echo $receiver->getServicepoint() ?>",
+                    country: "<?php echo $shipping_address->getCountryId() ?>"
+                };
+
+                if (!info.servicepoint) {
+                    delete info.servicepoint;
+                }
+
+                var params = [];
+                for (var i in info) {
+                    params.push(i + '/' + encodeURI(info[i]));
+                }
+
+                xhttp.open('GET', priceUrl + params.join('/'));
+                xhttp.send();
+            }
+
+            function validateForm(e, msg) {
+                var form = document.getElementById('package-form');
+
+                if (form.checkValidity) {
+                    var validMsgs = document.querySelectorAll('.validation-message'),
+                        validState = true;
+                    for (var j = 0; j < validMsgs.length; j++) {
+                        validMsgs[j].parentNode.removeChild(validMsgs[j]);
+                    }
+                    if (!form.checkValidity()) {
+                        var fields = form.querySelectorAll('input[required], select[required], textarea[required]');
+
+                        for (var i = 0; i < fields.length; i++) {
+                            (function (field) {
+                                if (field.value === '' || field.value === undefined) {
+                                    var validMsg = document.createElement('span');
+
+                                    validMsg.className = 'validation-message';
+                                    validMsg.innerHTML = '<?php echo $this->__('Dette felt er påkrævet') ?>';
+                                    field.parentNode.insertBefore(validMsg, field.nextSibling);
+
+                                    validState = false;
+                                }
+                            })(fields[i])
+                        }
+
+                    }
+
+                    if (msg !== undefined && validState) {
+                        var result = confirm(msg);
+
+                        return result;
+                    } else {
+                        if (validState) {
+                            form.querySelector('button[type=submit]').removeAttribute('disabled');
+                        } else {
+                            form.querySelector('button[type=submit]').setAttribute('disabled', 'disabled');
+                        }
+                        return validState;
+                    }
+                }
+
+                e.preventDefault();
+                return false;
+            }
+
+            window.addEventListener('unload', function (e) {
+                window.opener.location.reload();
+            });
+        </script>
+    </div>
+</form>
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+<?php if (Mage::getStoreConfig('coolrunner/settings/active')) : ?>
+    <script type="text/javascript">
+
+        var shipping_controller_url = "<?php echo $base = Mage::helper('adminhtml')->getUrl('coolrunner/shipping/', array('_secure' => true)) ?>",
+            get_label_url = shipping_controller_url + 'getlabel/';
+
+        <?php if($order = Mage::registry('current_order')) : ?>
+            CoolRunner.ShowLabelFrame(shipping_controller_url, <?php echo $order->getId() ?>);
+        <?php endif; ?>
+    </script>
+<?php endif; ?>

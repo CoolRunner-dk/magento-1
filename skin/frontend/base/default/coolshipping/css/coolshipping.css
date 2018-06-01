@@ -1,0 +1,1447 @@
+.coolrunner-logo {
+    width : 60px;
+    margin-right : 10px;
+    vertical-align : middle;
+}
+
+.coolrunner-servicepoint-form {
+}
+
+.coolrunner-servicepoint-form .coolrunner-form {
+    margin-right : -5px;
+    margin-left  : -5px;
+}
+
+.coolrunner-servicepoint-form .coolrunner-form::after, .coolrunner-servicepoint-form .coolrunner-form::before {
+    display : table;
+    clear   : both;
+    float   : none;
+    content : '';
+}
+
+.coolrunner-servicepoint-form .coolrunner-form .row {
+    width         : 100%;
+    float         : left;
+    padding-left  : 5px;
+    padding-right : 5px;
+}
+
+.coolrunner-servicepoint-form .coolrunner-form .row > .row {
+    margin-right : -5px;
+    margin-left  : -5px;
+}
+
+.coolrunner-servicepoint-form .coolrunner-form .form-header {
+    font-weight: bold;
+}
+
+@media screen and (min-width : 321px) {
+    .coolrunner-servicepoint-form .coolrunner-form .row.half {
+        width : 50%;
+    }
+}
+
+.coolrunner-servicepoint-form .coolrunner-form .row:not(:last-child) {
+    margin-bottom : 5px;
+}
+
+.coolrunner-servicepoint-form .coolrunner-form .row label {
+    display : block;
+}
+
+.coolrunner-servicepoint-form .coolrunner-form .row input {
+    display : block;
+    width   : 100%;
+}
+
+.coolrunner-servicepoint-form .coolrunner-form .row button {
+    width : 100%;
+}
+
+.coolrunner-carrier .servicepoints {
+    position          : absolute;
+    top               : 50%;
+    left              : 50%;
+    -webkit-transform : translate(-50%, -50%);
+    -moz-transform    : translate(-50%, -50%);
+    -ms-transform     : translate(-50%, -50%);
+    -o-transform      : translate(-50%, -50%);
+    transform         : translate(-50%, -50%);
+    max-height        : 100vh;
+    max-width         : 100vw;
+    background        : white;
+    padding           : 15px;
+    width             : 100%;
+    height            : 100%;
+    overflow          : auto;
+}
+
+.coolrunner-carrier .servicepoints::after, .coolrunner-carrier .servicepoints::before {
+    display : table;
+    clear   : both;
+    content : '';
+}
+
+.coolrunner-carrier .servicepoints > * {
+    float : left;
+    width : 100%;
+}
+
+.coolrunner-carrier .servicepoints-header {
+    width         : 100%;
+    font-size     : 2em;
+    padding       : 5px;
+    margin-bottom : 5px;
+    border-bottom : 1px solid #666;
+}
+
+.coolrunner-carrier .servicepoints-openhours table {
+    width : 100%;
+}
+
+.coolrunner-carrier .servicepoints-openhours table, .coolrunner-carrier .servicepoints-openhours tr, .coolrunner-carrier .servicepoints-openhours td {
+    border          : 1px solid #666;
+    border-collapse : collapse;
+}
+
+.coolrunner-carrier .servicepoints-openhours td {
+    padding : 3px;
+}
+
+.coolrunner-carrier .servicepoints-controls {
+    text-align : right;
+    margin-top : 15px;
+}
+
+.coolrunner-carrier .servicepoints .servicepoint {
+    cursor             : pointer;
+    margin-right       : -10px;
+    margin-left        : -10px;
+    padding            : 5px 10px;
+    -webkit-transition : background 250ms;
+    -moz-transition    : background 250ms;
+    -ms-transition     : background 250ms;
+    -o-transition      : background 250ms;
+    transition         : background 250ms;
+}
+
+.coolrunner-carrier .servicepoints .servicepoint .servicepoint-name {
+    font-weight : bold;
+}
+
+.coolrunner-carrier .servicepoints .servicepoint.hover, .coolrunner-carrier .servicepoints .servicepoint.selected {
+    background : #AFD7EB;
+}
+
+.coolrunner-carrier .servicepoints .servicepoint:not(:last-child) {
+    border-bottom : 1px solid #666;
+}
+
+.coolrunner-carrier .servicepoints .servicepoint input {
+    display : none;
+}
+
+.coolrunner-carrier .servicepoints .servicepoint input + .checkbox {
+    position       : relative;
+    display        : inline-block;
+    height         : 20px;
+    width          : 20px;
+    vertical-align : middle;
+    border         : 1px solid #666;
+    border-radius  : 2px;
+}
+
+.coolrunner-carrier .servicepoints .servicepoint input + .checkbox::after {
+    position           : absolute;
+    top                : 47%;
+    left               : 24%;
+    height             : 14px;
+    width              : 7px;
+    border             : 2px solid #CCC;
+    border-top-color   : transparent;
+    border-left-color  : transparent;
+    -webkit-transform  : rotate(37deg) translate(-50%, -50%);
+    -moz-transform     : rotate(37deg) translate(-50%, -50%);
+    -ms-transform      : rotate(37deg) translate(-50%, -50%);
+    -o-transform       : rotate(37deg) translate(-50%, -50%);
+    transform          : rotate(37deg) translate(-50%, -50%);
+    content            : '';
+    border-radius      : 3px;
+    -webkit-transition : border 250ms;
+    -moz-transition    : border 250ms;
+    -ms-transition     : border 250ms;
+    -o-transition      : border 250ms;
+    transition         : border 250ms;
+}
+
+.coolrunner-carrier .servicepoints .servicepoint input:checked + .checkbox::after {
+    border            : 2px solid #000;
+    border-top-color  : transparent;
+    border-left-color : transparent;
+}
+
+.coolrunner-carrier .servicepoints .servicepoint label {
+    vertical-align : middle;
+    cursor         : pointer;
+}
+
+.coolrunner-carrier .servicepoints-list .coolrunner-servicepoint-required {
+    position      : relative;
+    color         : white;
+    text-align    : center;
+    background    : red;
+    padding       : 5px;
+    border-radius : 3px;
+    display       : none;
+}
+
+.coolrunner-carrier .servicepoints-list .coolrunner-servicepoint-required::after {
+    content          : '';
+    position         : absolute;
+    height           : 15px;
+    width            : 15px;
+    border           : 8px solid transparent;
+    border-top-color : red;
+    top              : 100%;
+    left             : 10px;
+}
+
+.coolrunner-carrier .servicepoints-list .coolrunner-servicepoint-required.pulse {
+    animation : coolrunner-pulse alternate 500ms infinite ease-in-out;
+}
+
+.coolrunner-carrier .servicepoints-list .coolrunner-servicepoint-required.pulse::after {
+    animation : coolrunner-pulse-caret alternate 500ms infinite ease-in-out;
+}
+
+@keyframes coolrunner-pulse {
+    0% {
+        background : red;
+    }
+    100% {
+        background : darkred;
+    }
+}
+
+@keyframes coolrunner-pulse-caret {
+    0% {
+        border-top-color : red;
+    }
+    100% {
+        border-top-color : darkred;
+    }
+}
+
+.coolrunner-carrier .shown-address > span {
+    display : block;
+}
+
+.coolrunner-carrier .shown-address .servicepoint-name {
+    font-weight : bold;
+}
+
+.coolrunner-carrier .shown-address .servicepoint-city:empty + span {
+    display : inline-block;
+}
+
+.coolrunner-carrier .shown-address {
+}
+
+.coolrunner-carrier .servicepoints-map, .coolrunner-carrier .servicepoints-list, .coolrunner-carrier .servicepoints-openhours {
+    padding-right : 10px;
+    padding-left  : 10px;
+}
+
+.coolrunner-carrier .servicepoints-map .coolrunner-map-canvas {
+    height : 100%;
+}
+
+@media screen and (max-width : 767px) {
+    .coolrunner-carrier .servicepoints-map {
+        height : 90vh;
+    }
+
+    .coolrunner-carrier .servicepoints-map, .coolrunner-carrier .servicepoints-list {
+        border-bottom : 1px solid #666;
+    }
+
+    .coolrunner-carrier .servicepoints-map, .coolrunner-carrier .servicepoints-list, .coolrunner-carrier .servicepoints-openhours {
+        padding-top    : 10px;
+        padding-bottom : 10px;
+    }
+}
+
+@media screen and (min-width : 768px) {
+    .coolrunner-carrier .servicepoints {
+        width                 : 80vw;
+        height                : 90vh;
+        -webkit-border-radius : 5px;
+        -moz-border-radius    : 5px;
+        border-radius         : 5px;
+        -webkit-box-shadow    : 2px 2px 15px rgba(0, 0, 0, 0.3);
+        -moz-box-shadow       : 2px 2px 15px rgba(0, 0, 0, 0.3);
+        box-shadow            : 2px 2px 15px rgba(0, 0, 0, 0.3);
+        padding-bottom        : 50px;
+    }
+
+    .coolrunner-carrier .servicepoint .servicepoints-openhours {
+        display : none;
+    }
+
+    .coolrunner-carrier .servicepoints-map {
+        width   : 50% !important;
+        left    : 0;
+        z-index : 1001;
+    }
+
+    .coolrunner-carrier .servicepoints-list {
+        width   : 25% !important;
+        left    : 50%;
+        z-index : 1001;
+    }
+
+    .coolrunner-carrier .servicepoints-openhours {
+        width   : 25% !important;
+        left    : 75%;
+        z-index : 999;
+    }
+
+    .coolrunner-carrier .servicepoints-map, .coolrunner-carrier .servicepoints-list, .coolrunner-carrier .servicepoints-openhours {
+        position   : absolute;
+        top        : 80px;
+        bottom     : 15px;
+        overflow-y : auto;
+    }
+
+    .coolrunner-carrier .servicepoints-map, .coolrunner-carrier .servicepoints-list {
+        border-right : 1px solid #666;
+    }
+
+    .coolrunner-carrier .servicepoints-controls {
+        position : absolute;
+        bottom   : 15px;
+        left     : 15px;
+        right    : 15px;
+        width    : auto;
+        z-index  : 1000;
+    }
+}
+
+@media screen and (min-width : 960px) {
+    .coolrunner-carrier .servicepoints {
+        width : 80vw;
+    }
+}
+
+@media screen and (min-width : 1280px) {
+
+}
+
+/* region Overlays */
+
+.coolrunner-servicepoint-overlay {
+    cursor : pointer;
+}
+
+.coolrunner-servicepoint-overlay > * {
+    cursor : auto;
+}
+
+/* region Loading */
+
+.coolrunner-loading-overlay, .coolrunner-servicepoint-overlay {
+    position   : fixed;
+    top        : 0;
+    bottom     : 0;
+    right      : 0;
+    left       : 0;
+    background : rgba(0, 0, 0, .3);
+    z-index    : 8000;
+    display    : none;
+}
+
+.coolrunner-loading-overlay .coolrunner-loading-icon {
+    height            : 50px;
+    width             : 50px;
+    position          : absolute;
+    top               : 50%;
+    left              : 50%;
+    -webkit-transform : translate(-50%, -50%);
+    -moz-transform    : translate(-50%, -50%);
+    -ms-transform     : translate(-50%, -50%);
+    -o-transform      : translate(-50%, -50%);
+    transform         : translate(-50%, -50%);
+}
+
+.coolrunner-loading-icon::after {
+    display           : inline-block;
+    content           : '';
+    width             : 100%;
+    height            : 100%;
+    border            : 5px solid rgba(255, 255, 255, .5);
+    border-top-color  : #297AA3;:;
+    border-radius     : 100%;
+    -webkit-animation : coolrunner-loading infinite 5s;
+    -o-animation      : coolrunner-loading infinite 5s;
+    animation         : coolrunner-loading infinite 5s;
+}
+
+@keyframes coolrunner-loading {
+    0% {
+        -webkit-transform : rotate(0deg);
+        -moz-transform    : rotate(0deg);
+        -ms-transform     : rotate(0deg);
+        -o-transform      : rotate(0deg);
+        transform         : rotate(0deg);
+    }
+    33% {
+        -webkit-transform : rotate(480deg);
+        -moz-transform    : rotate(480deg);
+        -ms-transform     : rotate(480deg);
+        -o-transform      : rotate(480deg);
+        transform         : rotate(480deg);
+    }
+    66% {
+        -webkit-transform : rotate(960deg);
+        -moz-transform    : rotate(960deg);
+        -ms-transform     : rotate(960deg);
+        -o-transform      : rotate(960deg);
+        transform         : rotate(960deg);
+    }
+    100% {
+        -webkit-transform : rotate(1440deg);
+        -moz-transform    : rotate(1440deg);
+        -ms-transform     : rotate(1440deg);
+        -o-transform      : rotate(1440deg);
+        transform         : rotate(1440deg);
+    }
+}
+
+/* endregion */
+
+/* region Servicepoint Picker */
+
+.coolrunner-servicepoint-overlay {
+    z-index    : 8001;
+    background : none;
+}
+
+/* endregion */
+
+/* endregion */
+
+/* DROPPOINTS prefix = coolrunner-pdk- */
+/* DROPPOINTS prefix = coolrunner-gls- */
+
+/* RESET CSS -------------------------------------------------------------------- */
+
+#coolrunner-posti-droppoint-wrapper h2, #coolrunner-pdk-droppoint-wrapper h2, #coolrunner-gls-droppoint-wrapper h2, #coolrunner-dao-droppoint-wrapper h2,
+#coolrunner-posti-droppoint-wrapper h4, #coolrunner-pdk-droppoint-wrapper h4, #coolrunner-gls-droppoint-wrapper h4, #coolrunner-dao-droppoint-wrapper h4,
+#coolrunner-posti-droppoint-wrapper p, #coolrunner-pdk-droppoint-wrapper p, #coolrunner-gls-droppoint-wrapper p, #coolrunner-dao-droppoint-wrapper p,
+#coolrunner-posti-droppoint-wrapper a, #coolrunner-pdk-droppoint-wrapper a, #coolrunner-gls-droppoint-wrapper a, #coolrunner-dao-droppoint-wrapper a,
+#coolrunner-posti-droppoint-wrapper span, #coolrunner-pdk-droppoint-wrapper span, #coolrunner-gls-droppoint-wrapper span, #coolrunner-dao-droppoint-wrapper span {
+    font-family : helvetica, arial, sans-serif;
+    font-size   : 12px;
+    background  : none;
+    color       : #0A263C;
+    text-align  : left;
+}
+
+#coolrunner-posti-droppoint-wrapper a:active, #coolrunner-pdk-droppoint-wrapper a:active, #coolrunner-gls-droppoint-wrapper a:active, #coolrunner-dao-droppoint-wrapper a:active,
+#coolrunner-posti-droppoint-wrapper a:focus, #coolrunner-pdk-droppoint-wrapper a:focus, #coolrunner-gls-droppoint-wrapper a:focus, #coolrunner-dao-droppoint-wrapper a:focus,
+#coolrunner-posti-droppoint-wrapper a:hover, #coolrunner-pdk-droppoint-wrapper a:hover, #coolrunner-gls-droppoint-wrapper a:hover, #coolrunner-dao-droppoint-wrapper a:hover {
+    outline : 0;
+}
+
+#coolrunner-posti-droppoint-wrapper button::-moz-focus-inner, #coolrunner-pdk-droppoint-wrapper button::-moz-focus-inner, #coolrunner-gls-droppoint-wrapper button::-moz-focus-inner, #coolrunner-dao-droppoint-wrapper button::-moz-focus-inner,
+#coolrunner-posti-droppoint-wrapper input::-moz-focus-inner, #coolrunner-pdk-droppoint-wrapper input::-moz-focus-inner, #coolrunner-gls-droppoint-wrapper input::-moz-focus-inner, #coolrunner-dao-droppoint-wrapper input::-moz-focus-inner {
+    padding : 0;
+    border  : 0;
+}
+
+#coolrunner-posti-droppoint-wrapper ul, #coolrunner-pdk-droppoint-wrapper ul, #coolrunner-gls-droppoint-wrapper ul, #coolrunner-dao-droppoint-wrapper ul {
+    list-style : none;
+}
+
+#coolrunner-posti-droppoint-wrapper ul li, #coolrunner-pdk-droppoint-wrapper ul li, #coolrunner-gls-droppoint-wrapper ul li, #coolrunner-dao-droppoint-wrapper ul li {
+    float   : none;
+    padding : 0;
+    margin  : 0;
+}
+
+/* 
+ON-PAGE FORM -------------------------------------------------------------------- */
+
+#coolrunner-posti-droppoint-form, #coolrunner-pdk-droppoint-form, #coolrunner-gls-droppoint-form, #coolrunner-dao-droppoint-form {
+    min-height  : 20px;
+    padding     : 10px 5px 10px 15px;
+    font-family : helvetica, arial, sans-serif;
+}
+
+#coolrunner-posti-droppoint-form label, #coolrunner-pdk-droppoint-form label, #coolrunner-gls-droppoint-form label, #coolrunner-dao-droppoint-form label {
+    padding-left : 0px !important;
+    background   : none !important;
+    display      : block !important;
+}
+
+#coolrunner-posti-droppoint-form .coolrunner-posti-droppoint-description, #coolrunner-pdk-droppoint-form .coolrunner-pdk-droppoint-description, #coolrunner-gls-droppoint-form .coolrunner-gls-droppoint-description, #coolrunner-dao-droppoint-form .coolrunner-dao-droppoint-description {
+    margin-bottom : 7px;
+    font-style    : italic;
+}
+
+#coolrunner-posti-droppoint-form input#coolrunner-posti-postalCode, #coolrunner-pdk-droppoint-form input#coolrunner-pdk-postalCode, #coolrunner-gls-droppoint-form input#coolrunner-gls-postalCode, #coolrunner-dao-droppoint-form input#coolrunner-dao-postalCode {
+    padding : 1px 3px;
+    width   : 50px;
+}
+
+#coolrunner-posti-selected-droppoint, #coolrunner-pdk-selected-droppoint, #coolrunner-gls-selected-droppoint, #coolrunner-dao-selected-droppoint {
+    margin-top : 5px;
+}
+
+/* 
+OVERLAY ------------------------------------------------------------------------- */
+
+#coolrunner-posti-droppoint-overlay, #coolrunner-pdk-droppoint-overlay, #coolrunner-gls-droppoint-overlay, #coolrunner-dao-droppoint-overlay {
+    display : none;
+}
+
+#coolrunner-posti-droppoint-bg-overlay, #coolrunner-pdk-droppoint-bg-overlay, #coolrunner-gls-droppoint-bg-overlay, #coolrunner-dao-droppoint-bg-overlay {
+    background-color : rgba(0, 0, 0, 0.4);
+    position         : fixed;
+    top              : 0;
+    bottom           : 0;
+    left             : 0;
+    right            : 0;
+    z-index          : 99998;
+}
+
+/* 
+WRAPPER ------------------------------------------------------------------------- */
+
+#coolrunner-posti-droppoint-wrapper, #coolrunner-pdk-droppoint-wrapper, #coolrunner-gls-droppoint-wrapper, #coolrunner-dao-droppoint-wrapper {
+    position         : fixed;
+    max-width        : 1000px;
+    width            : 85%;
+    max-height       : 622px;
+    height           : 100%;
+    background-color : white;
+    top              : 0;
+    box-shadow       : 0px 0px 135px #444;
+    color            : #444;
+    font             : 12px/1.55 Arial, Helvetica, sans-serif;
+    border-radius    : 4px;
+    overflow         : hidden;
+    margin           : auto;
+    right            : 0;
+    left             : 0;
+    z-index          : 99999;
+}
+
+#coolrunner-posti-droppoint-wrapper hr, #coolrunner-pdk-droppoint-wrapper hr, #coolrunner-gls-droppoint-wrapper hr, #coolrunner-dao-droppoint-wrapper hr {
+    border             : 0;
+    height             : 0;
+    border-top         : 1px solid #E5E5E5;
+    -webkit-box-sizing : content-box;
+    -moz-box-sizing    : content-box;
+    box-sizing         : content-box;
+}
+
+/* 
+HEADER -------------------------------------------------------------------------- */
+
+#coolrunner-posti-droppoint-header, #coolrunner-pdk-droppoint-header, #coolrunner-gls-droppoint-header, #coolrunner-dao-droppoint-header {
+    position      : relative;
+    width         : 100%;
+    padding       : 15px;
+    box-sizing    : border-box;
+    height        : 50px;
+    border-bottom : 1px solid #E5E5E5;
+}
+
+#coolrunner-posti-droppoint-header h2, #coolrunner-pdk-droppoint-header h2, #coolrunner-gls-droppoint-header h2, #coolrunner-dao-droppoint-header h2 {
+    font-size     : 18px;
+    line-height   : normal;
+    text-align    : center;
+    margin-bottom : 0;
+}
+
+/* 
+RESULT: CONTAINER ---------------------------------------------------------------- */
+
+#coolrunner-posti-droppoint-result, #coolrunner-pdk-droppoint-result, #coolrunner-gls-droppoint-result, #coolrunner-dao-droppoint-result {
+    position : relative;
+    float    : left;
+    height   : auto;
+    width    : 100%;
+}
+
+/* 
+RESULT: OPENING HOURS ------------------------------------------------------------- */
+
+#coolrunner-posti-droppoint-result #coolrunner-posti-opening-container, #coolrunner-pdk-droppoint-result #coolrunner-pdk-opening-container, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container {
+    position   : absolute;
+    max-height : 500px;
+    max-width  : 250px;
+    width      : 25%;
+    padding    : 20px 25px;
+    text-align : left;
+    overflow-y : scroll;
+    right      : 0;
+    box-sizing : border-box;
+}
+
+#coolrunner-posti-droppoint-result #coolrunner-posti-opening-container .coolrunner-posti-opening-header, #coolrunner-pdk-droppoint-result #coolrunner-pdk-opening-container .coolrunner-pdk-opening-header, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container .coolrunner-gls-opening-header, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container .coolrunner-dao-opening-header {
+    font-size      : 18px;
+    margin-bottom  : 20px;
+    color          : #0A263C;
+    font-weight    : 400;
+    font-style     : normal;
+    text-transform : uppercase;
+}
+
+#coolrunner-posti-droppoint-result #coolrunner-posti-opening-container .coolrunner-posti-opening-header-empty, #coolrunner-pdk-droppoint-result #coolrunner-pdk-opening-container .coolrunner-pdk-opening-header-empty, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container .coolrunner-gls-opening-header-empty, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container .coolrunner-dao-opening-header-empty {
+    font-size   : 13px;
+    color       : #666;
+    font-weight : 400;
+    font-style  : normal;
+}
+
+#coolrunner-posti-droppoint-result #coolrunner-posti-opening-container span, #coolrunner-pdk-droppoint-result #coolrunner-pdk-opening-container span, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container span, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container span {
+    font-weight    : bold;
+    text-transform : uppercase;
+}
+
+#coolrunner-posti-droppoint-result #coolrunner-posti-opening-container .coolrunner-posti-openinghours span, #coolrunner-pdk-droppoint-result #coolrunner-pdk-opening-container .coolrunner-pdk-openinghours span, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container .coolrunner-gls-openinghours span, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container .coolrunner-dao-openinghours span {
+    font-weight : normal;
+}
+
+#coolrunner-posti-droppoint-result #coolrunner-posti-opening-container .coolrunner-posti-openinghours span.from::after, #coolrunner-pdk-droppoint-result #coolrunner-pdk-opening-container .coolrunner-pdk-openinghours span.from::after, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container .coolrunner-gls-openinghours span.from::after, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container .coolrunner-dao-openinghours span.from::after {
+    display : inline;
+    content : " - ";;
+}
+
+#coolrunner-posti-droppoint-result #coolrunner-posti-opening-container .coolrunner-posti-content, #coolrunner-pdk-droppoint-result #coolrunner-pdk-opening-container .coolrunner-pdk-content, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container .coolrunner-gls-content, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container .coolrunner-dao-content {
+    margin-bottom : 20px;
+}
+
+#coolrunner-posti-droppoint-result #coolrunner-posti-opening-container ul, #coolrunner-pdk-droppoint-result #coolrunner-pdk-opening-container ul, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container ul, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container ul {
+    border     : 1px solid #E5E5E5;
+    margin-top : 4px;
+}
+
+#coolrunner-posti-droppoint-result #coolrunner-posti-opening-container ul li, #coolrunner-pdk-droppoint-result #coolrunner-pdk-opening-container ul li, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container ul li, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container ul li {
+    padding       : 4px 8px;
+    border-bottom : 1px solid #E5E5E5;
+}
+
+#coolrunner-posti-droppoint-result #coolrunner-posti-opening-container ul li:last-child, #coolrunner-pdk-droppoint-result #coolrunner-pdk-opening-container ul li:last-child, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container ul li:last-child, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container ul li:last-child {
+    border-bottom : 0;
+}
+
+#coolrunner-posti-droppoint-result #coolrunner-posti-opening-container ul .coolrunner-posti-weekday, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container ul .coolrunner-gls-weekday, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container ul .coolrunner-dao-weekday {
+    display : inline-block;
+}
+
+#coolrunner-posti-droppoint-result #coolrunner-posti-opening-container ul .coolrunner-posti-openinghours, #coolrunner-pdk-droppoint-result #coolrunner-pdk-opening-container ul .coolrunner-pdk-openinghours, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container ul .coolrunner-gls-openinghours, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container ul .coolrunner-dao-openinghours {
+    display : inline;
+    float   : right;
+}
+
+/* 
+RESULT: ADRESSES ------------------------------------------------------------------ */
+
+#coolrunner-posti-droppoint-result #coolrunner-posti-address-container, #coolrunner-pdk-droppoint-result #coolrunner-pdk-address-container, #coolrunner-gls-droppoint-result #coolrunner-gls-address-container, #coolrunner-dao-droppoint-result #coolrunner-dao-address-container {
+    float        : left;
+    max-height   : 500px;
+    max-width    : 250px;
+    width        : 25%;
+    padding      : 20px;
+    border-right : 1px solid #E5E5E5;
+    border-left  : 1px solid #E5E5E5;
+    box-sizing   : border-box;
+    overflow-y   : scroll;
+}
+
+#coolrunner-posti-droppoint-result #coolrunner-posti-addresses li, #coolrunner-pdk-droppoint-result #coolrunner-pdk-addresses li, #coolrunner-gls-droppoint-result #coolrunner-gls-addresses li, #coolrunner-dao-droppoint-result #coolrunner-dao-addresses li {
+    float       : left;
+    width       : 175px;
+    display     : block;
+    font-family : helvetica, arial, sans-serif;
+    overflow    : visible;
+}
+
+#coolrunner-posti-droppoint-result #coolrunner-posti-addresses li input.coolrunner-posti-radio, #coolrunner-pdk-droppoint-result #coolrunner-pdk-addresses li input.coolrunner-pdk-radio, #coolrunner-gls-droppoint-result #coolrunner-gls-addresses li input.coolrunner-gls-radio, #coolrunner-dao-droppoint-result #coolrunner-dao-addresses li input.coolrunner-dao-radio {
+    float      : left;
+    display    : block;
+    width      : 13px;
+    height     : 13px;
+    margin     : 0px;
+    margin-top : 2px;
+}
+
+#coolrunner-posti-droppoint-result #coolrunner-posti-addresses li .coolrunner-posti-address, #coolrunner-pdk-droppoint-result #coolrunner-pdk-addresses li .coolrunner-pdk-address, #coolrunner-gls-droppoint-result #coolrunner-gls-addresses li .coolrunner-gls-address, #coolrunner-dao-droppoint-result #coolrunner-dao-addresses li .coolrunner-dao-address {
+    float         : right;
+    width         : 150px;
+    text-align    : left;
+    margin-bottom : 20px;
+}
+
+#coolrunner-posti-droppoint-result #coolrunner-posti-addresses li:last-child .coolrunner-posti-address, #coolrunner-pdk-droppoint-result #coolrunner-pdk-addresses li:last-child .coolrunner-pdk-address, #coolrunner-gls-droppoint-result #coolrunner-gls-addresses li:last-child .coolrunner-gls-address, #coolrunner-dao-droppoint-result #coolrunner-dao-addresses li:last-child .coolrunner-dao-address {
+    margin-bottom : 0;
+}
+
+#coolrunner-posti-droppoint-result #coolrunner-posti-addresses li .coolrunner-posti-address p:hover, #coolrunner-pdk-droppoint-result #coolrunner-pdk-addresses li .coolrunner-pdk-address p:hover, #coolrunner-gls-droppoint-result #coolrunner-gls-addresses li .coolrunner-gls-address p:hover, #coolrunner-dao-droppoint-result #coolrunner-dao-addresses li .coolrunner-dao-address p:hover,
+#coolrunner-posti-droppoint-result #coolrunner-posti-addresses li .coolrunner-posti-address label h4:hover, #coolrunner-pdk-droppoint-result #coolrunner-pdk-addresses li .coolrunner-pdk-address label h4:hover, #coolrunner-gls-droppoint-result #coolrunner-gls-addresses li .coolrunner-gls-address label h4:hover, #coolrunner-dao-droppoint-result #coolrunner-dao-addresses li .coolrunner-dao-address label h4:hover {
+    cursor : pointer;
+}
+
+#coolrunner-posti-droppoint-result #coolrunner-posti-addresses li .coolrunner-posti-address label h4, #coolrunner-pdk-droppoint-result #coolrunner-pdk-addresses li .coolrunner-pdk-address label h4, #coolrunner-gls-droppoint-result #coolrunner-gls-addresses li .coolrunner-gls-address label h4, #coolrunner-dao-droppoint-result #coolrunner-dao-addresses li .coolrunner-dao-address label h4 {
+    font-size      : 12px;
+    font-weight    : bold;
+    text-transform : uppercase;
+    margin-bottom  : 3px;
+}
+
+#coolrunner-posti-droppoint-result #coolrunner-posti-addresses li .coolrunner-posti-address p, #coolrunner-pdk-droppoint-result #coolrunner-pdk-addresses li .coolrunner-pdk-address p, #coolrunner-gls-droppoint-result #coolrunner-gls-addresses li .coolrunner-gls-address p, #coolrunner-dao-droppoint-result #coolrunner-dao-addresses li .coolrunner-dao-address p {
+    margin      : 0px;
+    font-size   : 12px;
+    color       : #666;
+    line-height : 16px;
+    font-weight : normal;
+}
+
+/* 
+RESULT: MAP ------------------------------------------------------------------------ */
+
+#coolrunner-posti-droppoint-result div.map, #coolrunner-pdk-droppoint-result div.map, #coolrunner-gls-droppoint-result div.map, #coolrunner-dao-droppoint-result div.map {
+    float     : left;
+    max-width : 500px;
+    width     : 50%;
+    height    : 100%;
+    display   : block;
+}
+
+#coolrunner-posti-droppoint-result div.map #coolrunner-posti-map-canvas, #coolrunner-pdk-droppoint-result div.map #coolrunner-pdk-map-canvas, #coolrunner-gls-droppoint-result div.map #coolrunner-gls-map-canvas, #coolrunner-dao-droppoint-result div.map #coolrunner-dao-map-canvas {
+    max-width : 500px;
+    width     : 100%;
+    height    : 100%;
+}
+
+/* 
+BUTTONS ----------------------------------------------------------------------------- */
+
+#coolrunner-posti-droppoint-wrapper #coolrunner-posti-droppoint-buttons-set, #coolrunner-pdk-droppoint-wrapper #coolrunner-pdk-droppoint-buttons-set, #coolrunner-gls-droppoint-wrapper #coolrunner-gls-droppoint-buttons-set, #coolrunner-dao-droppoint-wrapper #coolrunner-dao-droppoint-buttons-set {
+    padding    : 15px;
+    width      : 100%;
+    float      : left;
+    box-sizing : border-box;
+    border-top : 1px solid #E5E5E5;
+    height     : 72px;
+}
+
+button#coolrunner-posti-close-droppoint-selector-save, button#coolrunner-pdk-close-droppoint-selector-save, button#coolrunner-gls-close-droppoint-selector-save, button#coolrunner-dao-close-droppoint-selector-save,
+button#coolrunner-posti-close-droppoint-selector-remove, button#coolrunner-pdk-close-droppoint-selector-remove, button#coolrunner-gls-close-droppoint-selector-remove, button#coolrunner-dao-close-droppoint-selector-remove {
+    margin             : 0;
+    padding            : 0;
+    font               : helvetica, arial, sans-serif;
+    overflow           : visible;
+    -webkit-appearance : button;
+    cursor             : pointer;
+    text-align         : center;
+    text-transform     : uppercase;
+    font-weight        : bold;
+    width              : 120px;
+    font-size          : 13px;
+    font-weight        : 400;
+    vertical-align     : middle;
+    border-radius      : 4px;
+    padding            : 10px 0;
+}
+
+#coolrunner-posti-close-droppoint-selector-save, #coolrunner-pdk-close-droppoint-selector-save, #coolrunner-gls-close-droppoint-selector-save, #coolrunner-dao-close-droppoint-selector-save {
+    color            : #FFF;
+    background-color : #5CB85C;
+    border           : 1px solid #4CAE4C;
+    float            : right;
+}
+
+#coolrunner-posti-close-droppoint-selector-save:hover, #coolrunner-pdk-close-droppoint-selector-save:hover, #coolrunner-gls-close-droppoint-selector-save:hover, #coolrunner-dao-close-droppoint-selector-save:hover {
+    cursor           : pointer;
+    background-color : #449D44;
+    border-color     : #398439;
+}
+
+#coolrunner-posti-close-droppoint-selector-remove, #coolrunner-pdk-close-droppoint-selector-remove, #coolrunner-gls-close-droppoint-selector-remove, #coolrunner-dao-close-droppoint-selector-remove {
+    color            : #333;
+    background-color : #FFF;
+    border           : 1px solid #CCC;
+    float            : left;
+}
+
+#coolrunner-posti-close-droppoint-selector-remove:hover, #coolrunner-pdk-close-droppoint-selector-remove:hover, #coolrunner-gls-close-droppoint-selector-remove:hover, #coolrunner-dao-close-droppoint-selector-remove:hover {
+    cursor           : pointer;
+    background-color : #E6E6E6;
+    border-color     : #ADADAD;
+}
+
+#coolrunner-posti-droppoint-overlay .clearer:after, #coolrunner-pdk-droppoint-overlay .clearer:after, #coolrunner-gls-droppoint-overlay .clearer:after, #coolrunner-dao-droppoint-overlay .clearer:after {
+    display     : block;
+    content     : ".";
+    clear       : both;
+    font-size   : 0;
+    line-height : 0;
+    height      : 0;
+    overflow    : hidden;
+}
+
+/* 
+RESPONSIVE: SMALL SCREENS AND TABLETS --------------------------------------------- */
+
+@media only screen and (max-width : 1049px) {
+
+    #coolrunner-posti-droppoint-wrapper, #coolrunner-pdk-droppoint-wrapper, #coolrunner-gls-droppoint-wrapper, #coolrunner-dao-droppoint-wrapper {
+        width : 90%;
+    }
+
+    #coolrunner-posti-droppoint-result div.map, #coolrunner-pdk-droppoint-result div.map, #coolrunner-gls-droppoint-result div.map, #coolrunner-dao-droppoint-result div.map {
+        display : none;
+    }
+
+    #coolrunner-posti-droppoint-result #coolrunner-posti-address-container, #coolrunner-pdk-droppoint-result #coolrunner-pdk-address-container, #coolrunner-gls-droppoint-result #coolrunner-gls-address-container, #coolrunner-dao-droppoint-result #coolrunner-dao-address-container {
+        padding   : 30px;
+        max-width : none;
+        width     : 70%;
+    }
+
+    #coolrunner-posti-droppoint-result #coolrunner-posti-addresses li, #coolrunner-pdk-droppoint-result #coolrunner-pdk-addresses li, #coolrunner-gls-droppoint-result #coolrunner-gls-addresses li, #coolrunner-dao-droppoint-result #coolrunner-dao-addresses li {
+        width      : 33%;
+        min-height : 94px;
+    }
+
+    #coolrunner-posti-droppoint-result #coolrunner-posti-addresses li .coolrunner-posti-address, #coolrunner-pdk-droppoint-result #coolrunner-pdk-addresses li .coolrunner-pdk-address, #coolrunner-gls-droppoint-result #coolrunner-gls-addresses li .coolrunner-gls-address, #coolrunner-dao-droppoint-result #coolrunner-dao-addresses li .coolrunner-dao-address {
+        float       : left;
+        margin-left : 10px;
+        width       : 80%;
+    }
+
+    #coolrunner-posti-droppoint-result #coolrunner-posti-addresses li .coolrunner-posti-address p, #coolrunner-pdk-droppoint-result #coolrunner-pdk-addresses li .coolrunner-pdk-address p, #coolrunner-gls-droppoint-result #coolrunner-gls-addresses li .coolrunner-gls-address p, #coolrunner-dao-droppoint-result #coolrunner-dao-addresses li .coolrunner-dao-address p {
+        font-size : 11px;
+    }
+
+    #coolrunner-posti-droppoint-result #coolrunner-posti-opening-container, #coolrunner-pdk-droppoint-result #coolrunner-pdk-opening-container, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container {
+        padding   : 30px;
+        max-width : none;
+        width     : 30%;
+    }
+
+}
+
+/* 
+RESULT: TABLETS ------------------------------------------------------------------ */
+
+@media only screen and (max-width : 950px) {
+
+    #coolrunner-posti-droppoint-result #coolrunner-posti-addresses li, #coolrunner-pdk-droppoint-result #coolrunner-pdk-addresses li, #coolrunner-gls-droppoint-result #coolrunner-gls-addresses li, #coolrunner-dao-droppoint-result #coolrunner-dao-addresses li {
+        width      : 50%;
+        min-height : 80px;
+    }
+}
+
+/* 
+RESULT: TABLETS ------------------------------------------------------------------ */
+
+@media only screen and (max-width : 880px) {
+
+    #coolrunner-posti-droppoint-result #coolrunner-posti-address-container, #coolrunner-pdk-droppoint-result #coolrunner-pdk-address-container, #coolrunner-gls-droppoint-result #coolrunner-gls-address-container, #coolrunner-dao-droppoint-result #coolrunner-dao-address-container {
+        width : 65%;
+    }
+
+    #coolrunner-posti-droppoint-result #coolrunner-posti-opening-container, #coolrunner-pdk-droppoint-result #coolrunner-pdk-opening-container, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container {
+        width : 35%;
+    }
+
+    #coolrunner-posti-droppoint-result #coolrunner-posti-addresses li, #coolrunner-pdk-droppoint-result #coolrunner-pdk-addresses li, #coolrunner-gls-droppoint-result #coolrunner-gls-addresses li, #coolrunner-dao-droppoint-result #coolrunner-dao-addresses li {
+        width      : 50%;
+        min-height : 90px;
+    }
+
+}
+
+/* 
+RESULT: LARGE SMARTPHONES --------------------------------------------------------- */
+
+@media only screen and (max-width : 680px) {
+
+    #coolrunner-posti-droppoint-result #coolrunner-posti-address-container, #coolrunner-pdk-droppoint-result #coolrunner-pdk-address-container, #coolrunner-gls-droppoint-result #coolrunner-gls-address-container, #coolrunner-dao-droppoint-result #coolrunner-dao-address-container {
+        width : 50%;
+    }
+
+    #coolrunner-posti-droppoint-result #coolrunner-posti-opening-container, #coolrunner-pdk-droppoint-result #coolrunner-pdk-opening-container, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container {
+        width : 50%;
+    }
+
+    #coolrunner-posti-droppoint-result #coolrunner-posti-addresses li, #coolrunner-pdk-droppoint-result #coolrunner-pdk-addresses li, #coolrunner-gls-droppoint-result #coolrunner-gls-addresses li, #coolrunner-dao-droppoint-result #coolrunner-dao-addresses li {
+        width      : 100%;
+        min-height : 0;
+    }
+
+}
+
+/* 
+RESULT: SMARTPHONES ---------------------------------------------------------------- */
+
+@media only screen and (max-width : 480px) {
+
+    #coolrunner-posti-droppoint-wrapper, #coolrunner-pdk-droppoint-wrapper, #coolrunner-gls-droppoint-wrapper, #coolrunner-dao-droppoint-wrapper {
+        width      : 100%;
+        margin-top : 0;
+        position   : fixed;
+        height     : 100%;
+        max-height : 100%;
+    }
+
+    #coolrunner-posti-droppoint-result, #coolrunner-pdk-droppoint-result, #coolrunner-gls-droppoint-result, #coolrunner-dao-droppoint-result {
+        overflow-y : scroll;
+        overflow-x : hidden;
+    }
+
+    #coolrunner-posti-droppoint-result #coolrunner-posti-address-container, #coolrunner-pdk-droppoint-result #coolrunner-pdk-address-container, #coolrunner-gls-droppoint-result #coolrunner-gls-address-container, #coolrunner-dao-droppoint-result #coolrunner-dao-address-container,
+    #coolrunner-posti-droppoint-result #coolrunner-posti-opening-container, #coolrunner-pdk-droppoint-result #coolrunner-pdk-opening-container, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container {
+        padding    : 20px;
+        height     : auto;
+        max-height : none;
+        overflow-y : scroll;
+    }
+}
+
+/* 
+RESULT: SMALL SMARTPHONES ----------------------------------------------------------- */
+
+@media only screen and (max-width : 320px) {
+
+    #coolrunner-posti-droppoint-header h2, #coolrunner-pdk-droppoint-header h2, #coolrunner-gls-droppoint-header h2, #coolrunner-dao-droppoint-header h2 {
+        font-size : 1.25em;
+    }
+
+    #coolrunner-posti-droppoint-result #coolrunner-posti-address-container, #coolrunner-pdk-droppoint-result #coolrunner-pdk-address-container, #coolrunner-gls-droppoint-result #coolrunner-gls-address-container, #coolrunner-dao-droppoint-result #coolrunner-dao-address-container {
+        width  : 100%;
+        border : 0;
+    }
+
+    #coolrunner-posti-droppoint-result #coolrunner-posti-opening-container, #coolrunner-pdk-droppoint-result #coolrunner-pdk-opening-container, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container {
+        display : none;
+    }
+
+    #coolrunner-posti-droppoint-buttons-set button#coolrunner-posti-close-droppoint-selector-save, #coolrunner-pdk-droppoint-buttons-set button#coolrunner-pdk-close-droppoint-selector-save, #coolrunner-gls-droppoint-buttons-set button#coolrunner-gls-close-droppoint-selector-save, #coolrunner-dao-droppoint-buttons-set button#coolrunner-dao-close-droppoint-selector-save,
+    #coolrunner-posti-droppoint-buttons-set button#coolrunner-posti-close-droppoint-selector-remove, #coolrunner-pdk-droppoint-buttons-set button#coolrunner-pdk-close-droppoint-selector-remove, #coolrunner-gls-droppoint-buttons-set button#coolrunner-gls-close-droppoint-selector-remove, #coolrunner-dao-droppoint-buttons-set button#coolrunner-dao-close-droppoint-selector-remove {
+        width : 45%;
+    }
+}
+
+/* DROPPOINTS prefix = coolrunner-pdk- */
+/* DROPPOINTS prefix = coolrunner-gls- */
+
+/* RESET CSS -------------------------------------------------------------------- */
+
+#coolrunner-dhl-droppoint-wrapper h2, #coolrunner-pdk-droppoint-wrapper h2, #coolrunner-gls-droppoint-wrapper h2, #coolrunner-dao-droppoint-wrapper h2,
+#coolrunner-dhl-droppoint-wrapper h4, #coolrunner-pdk-droppoint-wrapper h4, #coolrunner-gls-droppoint-wrapper h4, #coolrunner-dao-droppoint-wrapper h4,
+#coolrunner-dhl-droppoint-wrapper p, #coolrunner-pdk-droppoint-wrapper p, #coolrunner-gls-droppoint-wrapper p, #coolrunner-dao-droppoint-wrapper p,
+#coolrunner-dhl-droppoint-wrapper a, #coolrunner-pdk-droppoint-wrapper a, #coolrunner-gls-droppoint-wrapper a, #coolrunner-dao-droppoint-wrapper a,
+#coolrunner-dhl-droppoint-wrapper span, #coolrunner-pdk-droppoint-wrapper span, #coolrunner-gls-droppoint-wrapper span, #coolrunner-dao-droppoint-wrapper span {
+    font-family : helvetica, arial, sans-serif;
+    font-size   : 12px;
+    background  : none;
+    color       : #0A263C;
+    text-align  : left;
+}
+
+#coolrunner-dhl-droppoint-wrapper a:active, #coolrunner-pdk-droppoint-wrapper a:active, #coolrunner-gls-droppoint-wrapper a:active, #coolrunner-dao-droppoint-wrapper a:active,
+#coolrunner-dhl-droppoint-wrapper a:focus, #coolrunner-pdk-droppoint-wrapper a:focus, #coolrunner-gls-droppoint-wrapper a:focus, #coolrunner-dao-droppoint-wrapper a:focus,
+#coolrunner-dhl-droppoint-wrapper a:hover, #coolrunner-pdk-droppoint-wrapper a:hover, #coolrunner-gls-droppoint-wrapper a:hover, #coolrunner-dao-droppoint-wrapper a:hover {
+    outline : 0;
+}
+
+#coolrunner-dhl-droppoint-wrapper button::-moz-focus-inner, #coolrunner-pdk-droppoint-wrapper button::-moz-focus-inner, #coolrunner-gls-droppoint-wrapper button::-moz-focus-inner, #coolrunner-dao-droppoint-wrapper button::-moz-focus-inner,
+#coolrunner-dhl-droppoint-wrapper input::-moz-focus-inner, #coolrunner-pdk-droppoint-wrapper input::-moz-focus-inner, #coolrunner-gls-droppoint-wrapper input::-moz-focus-inner, #coolrunner-dao-droppoint-wrapper input::-moz-focus-inner {
+    padding : 0;
+    border  : 0;
+}
+
+#coolrunner-dhl-droppoint-wrapper ul, #coolrunner-pdk-droppoint-wrapper ul, #coolrunner-gls-droppoint-wrapper ul, #coolrunner-dao-droppoint-wrapper ul {
+    list-style : none;
+}
+
+#coolrunner-dhl-droppoint-wrapper ul li, #coolrunner-pdk-droppoint-wrapper ul li, #coolrunner-gls-droppoint-wrapper ul li, #coolrunner-dao-droppoint-wrapper ul li {
+    float   : none;
+    padding : 0;
+    margin  : 0;
+}
+
+/* 
+ON-PAGE FORM -------------------------------------------------------------------- */
+
+#coolrunner-dhl-droppoint-form, #coolrunner-pdk-droppoint-form, #coolrunner-gls-droppoint-form, #coolrunner-dao-droppoint-form {
+    min-height  : 20px;
+    padding     : 10px 5px 10px 15px;
+    font-family : helvetica, arial, sans-serif;
+}
+
+#coolrunner-dhl-droppoint-form label, #coolrunner-pdk-droppoint-form label, #coolrunner-gls-droppoint-form label, #coolrunner-dao-droppoint-form label {
+    padding-left : 0px !important;
+    background   : none !important;
+    display      : block !important;
+}
+
+#coolrunner-dhl-droppoint-form .coolrunner-dhl-droppoint-description, #coolrunner-pdk-droppoint-form .coolrunner-pdk-droppoint-description, #coolrunner-gls-droppoint-form .coolrunner-gls-droppoint-description, #coolrunner-dao-droppoint-form .coolrunner-dao-droppoint-description {
+    margin-bottom : 7px;
+    font-style    : italic;
+}
+
+#coolrunner-dhl-droppoint-form input#coolrunner-dhl-postalCode, #coolrunner-pdk-droppoint-form input#coolrunner-pdk-postalCode, #coolrunner-gls-droppoint-form input#coolrunner-gls-postalCode, #coolrunner-dao-droppoint-form input#coolrunner-dao-postalCode {
+    padding : 1px 3px;
+    width   : 50px;
+}
+
+#coolrunner-dhl-selected-droppoint, #coolrunner-pdk-selected-droppoint, #coolrunner-gls-selected-droppoint, #coolrunner-dao-selected-droppoint {
+    margin-top : 5px;
+}
+
+/* 
+OVERLAY ------------------------------------------------------------------------- */
+
+#coolrunner-dhl-droppoint-overlay, #coolrunner-pdk-droppoint-overlay, #coolrunner-gls-droppoint-overlay, #coolrunner-dao-droppoint-overlay {
+    display : none;
+}
+
+#coolrunner-dhl-droppoint-bg-overlay, #coolrunner-pdk-droppoint-bg-overlay, #coolrunner-gls-droppoint-bg-overlay, #coolrunner-dao-droppoint-bg-overlay {
+    background-color : rgba(0, 0, 0, 0.4);
+    position         : fixed;
+    top              : 0;
+    bottom           : 0;
+    left             : 0;
+    right            : 0;
+    z-index          : 99998;
+}
+
+/* 
+WRAPPER ------------------------------------------------------------------------- */
+
+#coolrunner-dhl-droppoint-wrapper, #coolrunner-pdk-droppoint-wrapper, #coolrunner-gls-droppoint-wrapper, #coolrunner-dao-droppoint-wrapper {
+    position         : fixed;
+    max-width        : 1000px;
+    width            : 85%;
+    max-height       : 622px;
+    height           : 100%;
+    background-color : white;
+    top              : 0;
+    box-shadow       : 0px 0px 135px #444;
+    color            : #444;
+    font             : 12px/1.55 Arial, Helvetica, sans-serif;
+    border-radius    : 4px;
+    overflow         : hidden;
+    margin           : auto;
+    right            : 0;
+    left             : 0;
+    z-index          : 99999;
+}
+
+#coolrunner-dhl-droppoint-wrapper hr, #coolrunner-pdk-droppoint-wrapper hr, #coolrunner-gls-droppoint-wrapper hr, #coolrunner-dao-droppoint-wrapper hr {
+    border             : 0;
+    height             : 0;
+    border-top         : 1px solid #E5E5E5;
+    -webkit-box-sizing : content-box;
+    -moz-box-sizing    : content-box;
+    box-sizing         : content-box;
+}
+
+/* 
+HEADER -------------------------------------------------------------------------- */
+
+#coolrunner-dhl-droppoint-header, #coolrunner-pdk-droppoint-header, #coolrunner-gls-droppoint-header, #coolrunner-dao-droppoint-header {
+    position      : relative;
+    width         : 100%;
+    padding       : 15px;
+    box-sizing    : border-box;
+    height        : 50px;
+    border-bottom : 1px solid #E5E5E5;
+}
+
+#coolrunner-dhl-droppoint-header h2, #coolrunner-pdk-droppoint-header h2, #coolrunner-gls-droppoint-header h2, #coolrunner-dao-droppoint-header h2 {
+    font-size     : 18px;
+    line-height   : normal;
+    text-align    : center;
+    margin-bottom : 0;
+}
+
+/* 
+RESULT: CONTAINER ---------------------------------------------------------------- */
+
+#coolrunner-dhl-droppoint-result, #coolrunner-pdk-droppoint-result, #coolrunner-gls-droppoint-result, #coolrunner-dao-droppoint-result {
+    position : relative;
+    float    : left;
+    height   : auto;
+    width    : 100%;
+}
+
+/* 
+RESULT: OPENING HOURS ------------------------------------------------------------- */
+
+#coolrunner-dhl-droppoint-result #coolrunner-dhl-opening-container, #coolrunner-pdk-droppoint-result #coolrunner-pdk-opening-container, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container {
+    position   : absolute;
+    max-height : 500px;
+    max-width  : 250px;
+    width      : 25%;
+    padding    : 20px 25px;
+    text-align : left;
+    overflow-y : scroll;
+    right      : 0;
+    box-sizing : border-box;
+}
+
+#coolrunner-dhl-droppoint-result #coolrunner-dhl-opening-container .coolrunner-dhl-opening-header, #coolrunner-pdk-droppoint-result #coolrunner-pdk-opening-container .coolrunner-pdk-opening-header, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container .coolrunner-gls-opening-header, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container .coolrunner-dao-opening-header {
+    font-size      : 18px;
+    margin-bottom  : 20px;
+    color          : #0A263C;
+    font-weight    : 400;
+    font-style     : normal;
+    text-transform : uppercase;
+}
+
+#coolrunner-dhl-droppoint-result #coolrunner-dhl-opening-container .coolrunner-dhl-opening-header-empty, #coolrunner-pdk-droppoint-result #coolrunner-pdk-opening-container .coolrunner-pdk-opening-header-empty, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container .coolrunner-gls-opening-header-empty, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container .coolrunner-dao-opening-header-empty {
+    font-size   : 13px;
+    color       : #666;
+    font-weight : 400;
+    font-style  : normal;
+}
+
+#coolrunner-dhl-droppoint-result #coolrunner-dhl-opening-container span, #coolrunner-pdk-droppoint-result #coolrunner-pdk-opening-container span, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container span, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container span {
+    font-weight    : bold;
+    text-transform : uppercase;
+}
+
+#coolrunner-dhl-droppoint-result #coolrunner-dhl-opening-container .coolrunner-dhl-openinghours span, #coolrunner-pdk-droppoint-result #coolrunner-pdk-opening-container .coolrunner-pdk-openinghours span, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container .coolrunner-gls-openinghours span, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container .coolrunner-dao-openinghours span {
+    font-weight : normal;
+}
+
+#coolrunner-dhl-droppoint-result #coolrunner-dhl-opening-container .coolrunner-dhl-openinghours span.from::after, #coolrunner-pdk-droppoint-result #coolrunner-pdk-opening-container .coolrunner-pdk-openinghours span.from::after, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container .coolrunner-gls-openinghours span.from::after, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container .coolrunner-dao-openinghours span.from::after {
+    display : inline;
+    content : " - ";;
+}
+
+#coolrunner-dhl-droppoint-result #coolrunner-dhl-opening-container .coolrunner-dhl-content, #coolrunner-pdk-droppoint-result #coolrunner-pdk-opening-container .coolrunner-pdk-content, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container .coolrunner-gls-content, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container .coolrunner-dao-content {
+    margin-bottom : 20px;
+}
+
+#coolrunner-dhl-droppoint-result #coolrunner-dhl-opening-container ul, #coolrunner-pdk-droppoint-result #coolrunner-pdk-opening-container ul, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container ul, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container ul {
+    border     : 1px solid #E5E5E5;
+    margin-top : 4px;
+}
+
+#coolrunner-dhl-droppoint-result #coolrunner-dhl-opening-container ul li, #coolrunner-pdk-droppoint-result #coolrunner-pdk-opening-container ul li, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container ul li, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container ul li {
+    padding       : 4px 8px;
+    border-bottom : 1px solid #E5E5E5;
+}
+
+#coolrunner-dhl-droppoint-result #coolrunner-dhl-opening-container ul li:last-child, #coolrunner-pdk-droppoint-result #coolrunner-pdk-opening-container ul li:last-child, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container ul li:last-child, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container ul li:last-child {
+    border-bottom : 0;
+}
+
+#coolrunner-dhl-droppoint-result #coolrunner-dhl-opening-container ul .coolrunner-dhl-weekday, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container ul .coolrunner-gls-weekday, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container ul .coolrunner-dao-weekday {
+    display : inline-block;
+}
+
+#coolrunner-dhl-droppoint-result #coolrunner-dhl-opening-container ul .coolrunner-dhl-openinghours, #coolrunner-pdk-droppoint-result #coolrunner-pdk-opening-container ul .coolrunner-pdk-openinghours, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container ul .coolrunner-gls-openinghours, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container ul .coolrunner-dao-openinghours {
+    display : inline;
+    float   : right;
+}
+
+/* 
+RESULT: ADRESSES ------------------------------------------------------------------ */
+
+#coolrunner-dhl-droppoint-result #coolrunner-dhl-address-container, #coolrunner-pdk-droppoint-result #coolrunner-pdk-address-container, #coolrunner-gls-droppoint-result #coolrunner-gls-address-container, #coolrunner-dao-droppoint-result #coolrunner-dao-address-container {
+    float        : left;
+    max-height   : 500px;
+    max-width    : 250px;
+    width        : 25%;
+    padding      : 20px;
+    border-right : 1px solid #E5E5E5;
+    border-left  : 1px solid #E5E5E5;
+    box-sizing   : border-box;
+    overflow-y   : scroll;
+}
+
+#coolrunner-dhl-droppoint-result #coolrunner-dhl-addresses li, #coolrunner-pdk-droppoint-result #coolrunner-pdk-addresses li, #coolrunner-gls-droppoint-result #coolrunner-gls-addresses li, #coolrunner-dao-droppoint-result #coolrunner-dao-addresses li {
+    float       : left;
+    width       : 175px;
+    display     : block;
+    font-family : helvetica, arial, sans-serif;
+    overflow    : visible;
+}
+
+#coolrunner-dhl-droppoint-result #coolrunner-dhl-addresses li input.coolrunner-dhl-radio, #coolrunner-pdk-droppoint-result #coolrunner-pdk-addresses li input.coolrunner-pdk-radio, #coolrunner-gls-droppoint-result #coolrunner-gls-addresses li input.coolrunner-gls-radio, #coolrunner-dao-droppoint-result #coolrunner-dao-addresses li input.coolrunner-dao-radio {
+    float      : left;
+    display    : block;
+    width      : 13px;
+    height     : 13px;
+    margin     : 0px;
+    margin-top : 2px;
+}
+
+#coolrunner-dhl-droppoint-result #coolrunner-dhl-addresses li .coolrunner-dhl-address, #coolrunner-pdk-droppoint-result #coolrunner-pdk-addresses li .coolrunner-pdk-address, #coolrunner-gls-droppoint-result #coolrunner-gls-addresses li .coolrunner-gls-address, #coolrunner-dao-droppoint-result #coolrunner-dao-addresses li .coolrunner-dao-address {
+    float         : right;
+    width         : 150px;
+    text-align    : left;
+    margin-bottom : 20px;
+}
+
+#coolrunner-dhl-droppoint-result #coolrunner-dhl-addresses li:last-child .coolrunner-dhl-address, #coolrunner-pdk-droppoint-result #coolrunner-pdk-addresses li:last-child .coolrunner-pdk-address, #coolrunner-gls-droppoint-result #coolrunner-gls-addresses li:last-child .coolrunner-gls-address, #coolrunner-dao-droppoint-result #coolrunner-dao-addresses li:last-child .coolrunner-dao-address {
+    margin-bottom : 0;
+}
+
+#coolrunner-dhl-droppoint-result #coolrunner-dhl-addresses li .coolrunner-dhl-address p:hover, #coolrunner-pdk-droppoint-result #coolrunner-pdk-addresses li .coolrunner-pdk-address p:hover, #coolrunner-gls-droppoint-result #coolrunner-gls-addresses li .coolrunner-gls-address p:hover, #coolrunner-dao-droppoint-result #coolrunner-dao-addresses li .coolrunner-dao-address p:hover,
+#coolrunner-dhl-droppoint-result #coolrunner-dhl-addresses li .coolrunner-dhl-address label h4:hover, #coolrunner-pdk-droppoint-result #coolrunner-pdk-addresses li .coolrunner-pdk-address label h4:hover, #coolrunner-gls-droppoint-result #coolrunner-gls-addresses li .coolrunner-gls-address label h4:hover, #coolrunner-dao-droppoint-result #coolrunner-dao-addresses li .coolrunner-dao-address label h4:hover {
+    cursor : pointer;
+}
+
+#coolrunner-dhl-droppoint-result #coolrunner-dhl-addresses li .coolrunner-dhl-address label h4, #coolrunner-pdk-droppoint-result #coolrunner-pdk-addresses li .coolrunner-pdk-address label h4, #coolrunner-gls-droppoint-result #coolrunner-gls-addresses li .coolrunner-gls-address label h4, #coolrunner-dao-droppoint-result #coolrunner-dao-addresses li .coolrunner-dao-address label h4 {
+    font-size      : 12px;
+    font-weight    : bold;
+    text-transform : uppercase;
+    margin-bottom  : 3px;
+}
+
+#coolrunner-dhl-droppoint-result #coolrunner-dhl-addresses li .coolrunner-dhl-address p, #coolrunner-pdk-droppoint-result #coolrunner-pdk-addresses li .coolrunner-pdk-address p, #coolrunner-gls-droppoint-result #coolrunner-gls-addresses li .coolrunner-gls-address p, #coolrunner-dao-droppoint-result #coolrunner-dao-addresses li .coolrunner-dao-address p {
+    margin      : 0px;
+    font-size   : 12px;
+    color       : #666;
+    line-height : 16px;
+    font-weight : normal;
+}
+
+/* 
+RESULT: MAP ------------------------------------------------------------------------ */
+
+#coolrunner-dhl-droppoint-result div.map, #coolrunner-pdk-droppoint-result div.map, #coolrunner-gls-droppoint-result div.map, #coolrunner-dao-droppoint-result div.map {
+    float     : left;
+    max-width : 500px;
+    width     : 50%;
+    height    : 100%;
+    display   : block;
+}
+
+#coolrunner-dhl-droppoint-result div.map #coolrunner-dhl-map-canvas, #coolrunner-pdk-droppoint-result div.map #coolrunner-pdk-map-canvas, #coolrunner-gls-droppoint-result div.map #coolrunner-gls-map-canvas, #coolrunner-dao-droppoint-result div.map #coolrunner-dao-map-canvas {
+    max-width : 500px;
+    width     : 100%;
+    height    : 100%;
+}
+
+/* 
+BUTTONS ----------------------------------------------------------------------------- */
+
+#coolrunner-dhl-droppoint-wrapper #coolrunner-dhl-droppoint-buttons-set, #coolrunner-pdk-droppoint-wrapper #coolrunner-pdk-droppoint-buttons-set, #coolrunner-gls-droppoint-wrapper #coolrunner-gls-droppoint-buttons-set, #coolrunner-dao-droppoint-wrapper #coolrunner-dao-droppoint-buttons-set {
+    padding    : 15px;
+    width      : 100%;
+    float      : left;
+    box-sizing : border-box;
+    border-top : 1px solid #E5E5E5;
+    height     : 72px;
+}
+
+button#coolrunner-dhl-close-droppoint-selector-save, button#coolrunner-pdk-close-droppoint-selector-save, button#coolrunner-gls-close-droppoint-selector-save, button#coolrunner-dao-close-droppoint-selector-save,
+button#coolrunner-dhl-close-droppoint-selector-remove, button#coolrunner-pdk-close-droppoint-selector-remove, button#coolrunner-gls-close-droppoint-selector-remove, button#coolrunner-dao-close-droppoint-selector-remove {
+    margin             : 0;
+    padding            : 0;
+    font               : helvetica, arial, sans-serif;
+    overflow           : visible;
+    -webkit-appearance : button;
+    cursor             : pointer;
+    text-align         : center;
+    text-transform     : uppercase;
+    font-weight        : bold;
+    width              : 120px;
+    font-size          : 13px;
+    font-weight        : 400;
+    vertical-align     : middle;
+    border-radius      : 4px;
+    padding            : 10px 0;
+}
+
+#coolrunner-dhl-close-droppoint-selector-save, #coolrunner-pdk-close-droppoint-selector-save, #coolrunner-gls-close-droppoint-selector-save, #coolrunner-dao-close-droppoint-selector-save {
+    color            : #FFF;
+    background-color : #5CB85C;
+    border           : 1px solid #4CAE4C;
+    float            : right;
+}
+
+#coolrunner-dhl-close-droppoint-selector-save:hover, #coolrunner-pdk-close-droppoint-selector-save:hover, #coolrunner-gls-close-droppoint-selector-save:hover, #coolrunner-dao-close-droppoint-selector-save:hover {
+    cursor           : pointer;
+    background-color : #449D44;
+    border-color     : #398439;
+}
+
+#coolrunner-dhl-close-droppoint-selector-remove, #coolrunner-pdk-close-droppoint-selector-remove, #coolrunner-gls-close-droppoint-selector-remove, #coolrunner-dao-close-droppoint-selector-remove {
+    color            : #333;
+    background-color : #FFF;
+    border           : 1px solid #CCC;
+    float            : left;
+}
+
+#coolrunner-dhl-close-droppoint-selector-remove:hover, #coolrunner-pdk-close-droppoint-selector-remove:hover, #coolrunner-gls-close-droppoint-selector-remove:hover, #coolrunner-dao-close-droppoint-selector-remove:hover {
+    cursor           : pointer;
+    background-color : #E6E6E6;
+    border-color     : #ADADAD;
+}
+
+#coolrunner-dhl-droppoint-overlay .clearer:after, #coolrunner-pdk-droppoint-overlay .clearer:after, #coolrunner-gls-droppoint-overlay .clearer:after, #coolrunner-dao-droppoint-overlay .clearer:after {
+    display     : block;
+    content     : ".";
+    clear       : both;
+    font-size   : 0;
+    line-height : 0;
+    height      : 0;
+    overflow    : hidden;
+}
+
+/* 
+RESPONSIVE: SMALL SCREENS AND TABLETS --------------------------------------------- */
+
+@media only screen and (max-width : 1049px) {
+
+    #coolrunner-dhl-droppoint-wrapper, #coolrunner-pdk-droppoint-wrapper, #coolrunner-gls-droppoint-wrapper, #coolrunner-dao-droppoint-wrapper {
+        width : 90%;
+    }
+
+    #coolrunner-dhl-droppoint-result div.map, #coolrunner-pdk-droppoint-result div.map, #coolrunner-gls-droppoint-result div.map, #coolrunner-dao-droppoint-result div.map {
+        display : none;
+    }
+
+    #coolrunner-dhl-droppoint-result #coolrunner-dhl-address-container, #coolrunner-pdk-droppoint-result #coolrunner-pdk-address-container, #coolrunner-gls-droppoint-result #coolrunner-gls-address-container, #coolrunner-dao-droppoint-result #coolrunner-dao-address-container {
+        padding   : 30px;
+        max-width : none;
+        width     : 70%;
+    }
+
+    #coolrunner-dhl-droppoint-result #coolrunner-dhl-addresses li, #coolrunner-pdk-droppoint-result #coolrunner-pdk-addresses li, #coolrunner-gls-droppoint-result #coolrunner-gls-addresses li, #coolrunner-dao-droppoint-result #coolrunner-dao-addresses li {
+        width      : 33%;
+        min-height : 94px;
+    }
+
+    #coolrunner-dhl-droppoint-result #coolrunner-dhl-addresses li .coolrunner-dhl-address, #coolrunner-pdk-droppoint-result #coolrunner-pdk-addresses li .coolrunner-pdk-address, #coolrunner-gls-droppoint-result #coolrunner-gls-addresses li .coolrunner-gls-address, #coolrunner-dao-droppoint-result #coolrunner-dao-addresses li .coolrunner-dao-address {
+        float       : left;
+        margin-left : 10px;
+        width       : 80%;
+    }
+
+    #coolrunner-dhl-droppoint-result #coolrunner-dhl-addresses li .coolrunner-dhl-address p, #coolrunner-pdk-droppoint-result #coolrunner-pdk-addresses li .coolrunner-pdk-address p, #coolrunner-gls-droppoint-result #coolrunner-gls-addresses li .coolrunner-gls-address p, #coolrunner-dao-droppoint-result #coolrunner-dao-addresses li .coolrunner-dao-address p {
+        font-size : 11px;
+    }
+
+    #coolrunner-dhl-droppoint-result #coolrunner-dhl-opening-container, #coolrunner-pdk-droppoint-result #coolrunner-pdk-opening-container, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container {
+        padding   : 30px;
+        max-width : none;
+        width     : 30%;
+    }
+
+}
+
+/* 
+RESULT: TABLETS ------------------------------------------------------------------ */
+
+@media only screen and (max-width : 950px) {
+
+    #coolrunner-dhl-droppoint-result #coolrunner-dhl-addresses li, #coolrunner-pdk-droppoint-result #coolrunner-pdk-addresses li, #coolrunner-gls-droppoint-result #coolrunner-gls-addresses li, #coolrunner-dao-droppoint-result #coolrunner-dao-addresses li {
+        width      : 50%;
+        min-height : 80px;
+    }
+}
+
+/* 
+RESULT: TABLETS ------------------------------------------------------------------ */
+
+@media only screen and (max-width : 880px) {
+
+    #coolrunner-dhl-droppoint-result #coolrunner-dhl-address-container, #coolrunner-pdk-droppoint-result #coolrunner-pdk-address-container, #coolrunner-gls-droppoint-result #coolrunner-gls-address-container, #coolrunner-dao-droppoint-result #coolrunner-dao-address-container {
+        width : 65%;
+    }
+
+    #coolrunner-dhl-droppoint-result #coolrunner-dhl-opening-container, #coolrunner-pdk-droppoint-result #coolrunner-pdk-opening-container, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container {
+        width : 35%;
+    }
+
+    #coolrunner-dhl-droppoint-result #coolrunner-dhl-addresses li, #coolrunner-pdk-droppoint-result #coolrunner-pdk-addresses li, #coolrunner-gls-droppoint-result #coolrunner-gls-addresses li, #coolrunner-dao-droppoint-result #coolrunner-dao-addresses li {
+        width      : 50%;
+        min-height : 90px;
+    }
+
+}
+
+/* 
+RESULT: LARGE SMARTPHONES --------------------------------------------------------- */
+
+@media only screen and (max-width : 680px) {
+
+    #coolrunner-dhl-droppoint-result #coolrunner-dhl-address-container, #coolrunner-pdk-droppoint-result #coolrunner-pdk-address-container, #coolrunner-gls-droppoint-result #coolrunner-gls-address-container, #coolrunner-dao-droppoint-result #coolrunner-dao-address-container {
+        width : 50%;
+    }
+
+    #coolrunner-dhl-droppoint-result #coolrunner-dhl-opening-container, #coolrunner-pdk-droppoint-result #coolrunner-pdk-opening-container, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container {
+        width : 50%;
+    }
+
+    #coolrunner-dhl-droppoint-result #coolrunner-dhl-addresses li, #coolrunner-pdk-droppoint-result #coolrunner-pdk-addresses li, #coolrunner-gls-droppoint-result #coolrunner-gls-addresses li, #coolrunner-dao-droppoint-result #coolrunner-dao-addresses li {
+        width      : 100%;
+        min-height : 0;
+    }
+
+}
+
+/* 
+RESULT: SMARTPHONES ---------------------------------------------------------------- */
+
+@media only screen and (max-width : 480px) {
+
+    #coolrunner-dhl-droppoint-wrapper, #coolrunner-pdk-droppoint-wrapper, #coolrunner-gls-droppoint-wrapper, #coolrunner-dao-droppoint-wrapper {
+        width      : 100%;
+        margin-top : 0;
+        position   : fixed;
+        height     : 100%;
+        max-height : 100%;
+    }
+
+    #coolrunner-dhl-droppoint-result, #coolrunner-pdk-droppoint-result, #coolrunner-gls-droppoint-result, #coolrunner-dao-droppoint-result {
+        overflow-y : scroll;
+        overflow-x : hidden;
+    }
+
+    #coolrunner-dhl-droppoint-result #coolrunner-dhl-address-container, #coolrunner-pdk-droppoint-result #coolrunner-pdk-address-container, #coolrunner-gls-droppoint-result #coolrunner-gls-address-container, #coolrunner-dao-droppoint-result #coolrunner-dao-address-container,
+    #coolrunner-dhl-droppoint-result #coolrunner-dhl-opening-container, #coolrunner-pdk-droppoint-result #coolrunner-pdk-opening-container, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container {
+        padding    : 20px;
+        height     : auto;
+        max-height : none;
+        overflow-y : scroll;
+    }
+}
+
+/* 
+RESULT: SMALL SMARTPHONES ----------------------------------------------------------- */
+
+@media only screen and (max-width : 320px) {
+
+    #coolrunner-dhl-droppoint-header h2, #coolrunner-pdk-droppoint-header h2, #coolrunner-gls-droppoint-header h2, #coolrunner-dao-droppoint-header h2 {
+        font-size : 1.25em;
+    }
+
+    #coolrunner-dhl-droppoint-result #coolrunner-dhl-address-container, #coolrunner-pdk-droppoint-result #coolrunner-pdk-address-container, #coolrunner-gls-droppoint-result #coolrunner-gls-address-container, #coolrunner-dao-droppoint-result #coolrunner-dao-address-container {
+        width  : 100%;
+        border : 0;
+    }
+
+    #coolrunner-dhl-droppoint-result #coolrunner-dhl-opening-container, #coolrunner-pdk-droppoint-result #coolrunner-pdk-opening-container, #coolrunner-gls-droppoint-result #coolrunner-gls-opening-container, #coolrunner-dao-droppoint-result #coolrunner-dao-opening-container {
+        display : none;
+    }
+
+    #coolrunner-dhl-droppoint-buttons-set button#coolrunner-dhl-close-droppoint-selector-save, #coolrunner-pdk-droppoint-buttons-set button#coolrunner-pdk-close-droppoint-selector-save, #coolrunner-gls-droppoint-buttons-set button#coolrunner-gls-close-droppoint-selector-save, #coolrunner-dao-droppoint-buttons-set button#coolrunner-dao-close-droppoint-selector-save,
+    #coolrunner-dhl-droppoint-buttons-set button#coolrunner-dhl-close-droppoint-selector-remove, #coolrunner-pdk-droppoint-buttons-set button#coolrunner-pdk-close-droppoint-selector-remove, #coolrunner-gls-droppoint-buttons-set button#coolrunner-gls-close-droppoint-selector-remove, #coolrunner-dao-droppoint-buttons-set button#coolrunner-dao-close-droppoint-selector-remove {
+        width : 45%;
+    }
+}

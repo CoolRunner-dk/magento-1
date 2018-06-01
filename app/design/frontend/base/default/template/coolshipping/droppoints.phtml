@@ -1,0 +1,409 @@
+<?php $prefix = str_replace("_", "-", $this->getCode()); ?>
+
+<?php
+/** @var $this CoolRunner_CoolShipping_Block_Servicepoints_Abstract */
+$this;
+?>
+
+<div style="display: none;" id="carrier-<?php $this->theCode() ?>" data-carrier="<?php $this->theCode() ?>" data-base-zip="<?php echo $this->getZipCode(); ?>" class="coolrunner-carrier">
+    <div class="coolrunner-servicepoint-form" id="<?php $this->theCode() ?>-servicepoint-form" data-carrier="<?php $this->theCode(); ?>">
+        <div class="coolrunner-form">
+            <div class="row">
+                <label for="<?php $this->theCode() ?>-zip-code"><?php echo $this->__('Enter Zip Code:') ?></label>
+                <input id="<?php $this->theCode() ?>-zip-code" data-type="zip-code" type="text" value="<?php echo $this->getZipCode(); ?>">
+            </div>
+            <div class="row">
+                <button class="button" id="carrier-servicepoint-button" type="button"><?php echo $this->__('Find Servicepoint') ?></button>
+            </div>
+            <div class="row">
+                <div class="form-header">
+                    <?php echo $this->__('Pickup Information:') ?>
+                </div>
+            </div>
+            <div class="row half">
+                <div class="row">
+                    <label for="<?php $this->theCode() ?>-pickup-firstname"><?php echo $this->__('First name:') ?></label>
+                    <input id="<?php $this->theCode() ?>-pickup-firstname" name="<?php $this->theCode() ?>-pickup-firstname"
+                           type="text" required value="<?php echo $this->getPickupFirstname() ?>">
+                </div>
+                <div class="row">
+                    <label for="<?php $this->theCode() ?>-pickup-lastname"><?php echo $this->__('Last name:') ?></label>
+                    <input id="<?php $this->theCode() ?>-pickup-lastname" name="<?php $this->theCode() ?>-pickup-lastname"
+                           type="text" required value="<?php echo $this->getPickupLastname() ?>">
+                </div>
+                <div class="row">
+                    <label for="<?php $this->theCode() ?>-pickup-phone"><?php echo $this->__('Telephone:') ?></label>
+                    <input id="<?php $this->theCode() ?>-pickup-phone" name="<?php $this->theCode() ?>-pickup-phone"
+                           type="text" required value="<?php echo $this->getTelephone(); ?>">
+                </div>
+            </div>
+            <div class="row half">
+                <label><?php echo $this->__('Chosen Servicepoint:') ?></label>
+                <div class="shown-address">
+                    <span class="servicepoint-name"></span>
+                    <span class="servicepoint-street"></span>
+                    <span class="servicepoint-city"></span>
+                </div>
+                <div class="no-address">
+                    <?php echo $this->__('No servicepoint chosen') ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="coolrunner-servicepoint-overlay">
+        <template class="servicepoint-template">
+            <li class="servicepoint">
+                <input type="checkbox" data-name="servicepoint">
+                <span class="checkbox"></span>
+                <label>
+                    <div class="servicepoint-name"></div>
+                    <div class="servicepoint-address"></div>
+                    <div class="servicepoint-distance"></div>
+                </label>
+            </li>
+        </template>
+        <div class="servicepoints">
+            <div class="servicepoints-header"><?php echo $this->__('Find Servicepoint:') ?></div>
+            <div class="servicepoints-map">
+                <div class="coolrunner-map-canvas"></div>
+            </div>
+            <ul class="servicepoints-list"></ul>
+            <div class="servicepoints-openhours">
+                <div class="servicepoints-openhours-header">
+                    <?php echo $this->__('Opening Hours:') ?>
+                </div>
+                <table>
+                    <tr class="open-monday">
+                        <td><?php echo $this->__('Monday') ?></td>
+                        <td>8:00 - 16:00</td>
+                    </tr>
+                    <tr class="open-tuesday">
+                        <td><?php echo $this->__('Tuesday') ?></td>
+                        <td>8:00 - 16:00</td>
+                    </tr>
+                    <tr class="open-wednesday">
+                        <td><?php echo $this->__('Wednesday') ?></td>
+                        <td>8:00 - 16:00</td>
+                    </tr>
+                    <tr class="open-thursday">
+                        <td><?php echo $this->__('Thursdag') ?></td>
+                        <td>8:00 - 16:00</td>
+                    </tr>
+                    <tr class="open-friday">
+                        <td><?php echo $this->__('Fridag') ?></td>
+                        <td>8:00 - 16:00</td>
+                    </tr>
+                    <tr class="open-saturday">
+                        <td><?php echo $this->__('Saturday') ?></td>
+                        <td>8:00 - 16:00</td>
+                    </tr>
+                    <tr class="open-sunday">
+                        <td><?php echo $this->__('Sunday') ?></td>
+                        <td>8:00 - 16:00</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="servicepoints-controls">
+                <button type="button" class="button" data-cancel><?php echo $this->__('Cancel') ?></button>
+                <button type="button" class="button" data-select><?php echo $this->__('Select') ?></button>
+            </div>
+        </div>
+    </div>
+    <div class="coolrunner-loading-overlay">
+        <div class="coolrunner-loading-icon"></div>
+    </div>
+
+    <div class="hidden address">
+        <input type="hidden" name="<?php $this->theCode() ?>-servicepoint-name"
+               id="<?php $this->theCode() ?>-servicepoint-name" value=""/>
+        <input type="hidden" name="<?php $this->theCode() ?>-servicepoint-city"
+               id="<?php $this->theCode() ?>-servicepoint-city" value=""/>
+        <input type="hidden" name="<?php $this->theCode() ?>-servicepoint-zip-code"
+               id="<?php $this->theCode() ?>-servicepoint-postalcode" value=""/>
+        <input type="hidden" name="<?php $this->theCode() ?>-servicepoint-street"
+               id="<?php $this->theCode() ?>-servicepoint-streetname" value=""/>
+        <input type="hidden" name="<?php $this->theCode() ?>-servicepoint-id"
+               id="<?php $this->theCode() ?>-servicepoint-id" value=""/>
+    </div>
+</div>
+
+<script type="application/javascript">
+    jQuery(function ($) {
+        $('input[name=shipping_method][value*=<?php $this->theCode() ?>][value*=droppoint]').on('change input', function () {
+            $('.coolrunner-carrier').trigger('coolrunner_reset');
+        }).attr('data-trigger', 1);
+
+
+        $('#carrier-<?php $this->theCode() ?>').each(function () {
+            var _carrier = $(this),
+                carrier = _carrier.attr('data-carrier'),
+                form = _carrier.find('.coolrunner-form'),
+                zipCodeInput = form.find('[data-type="zip-code"]'),
+                loading_overlay = _carrier.find('.coolrunner-loading-overlay'),
+                picker_overlay = _carrier.find('.coolrunner-servicepoint-overlay'),
+                picker_list = picker_overlay.find('.servicepoints-list'),
+                opening_hours = picker_overlay.find('.servicepoints-openhours table'),
+                selected_servicepoint = null;
+
+            zipCodeInput.on('keyup', function (e) {
+                if (e.keyCode === 13) {
+                    e.preventDefault();
+                    form.find('#carrier-servicepoint-button').click();
+                    return false;
+                }
+            });
+            $(document).on('keyup', function (e) {
+                if (picker_overlay.css('display') === 'block' && e.keyCode === 27) {
+                    e.preventDefault();
+                    picker_overlay.find('button[data-cancel]').trigger('click');
+                    return false;
+                }
+            });
+            picker_overlay.on('click', function (e) {
+                if ($(e.target).attr('class') === $(this).attr('class')) {
+                    picker_overlay.find('button[data-cancel]').trigger('click');
+                }
+            });
+            if (_carrier.attr('data-bound') === undefined) {
+                $('input[name=shipping_method][value^=coolrunner_<?php $this->theCode() ?>][value*=droppoint]').each(function () {
+                    var _ = $(this);
+                    _.on('coolrunner_reset', function () {
+                        if (_.is(':checked')) {
+                            $('#carrier-<?php $this->theCode() ?>').css('display', 'block');
+                        } else {
+                            $('#carrier-<?php $this->theCode() ?>').css('display', 'none');
+                        }
+                    });
+
+                    _.trigger('coolrunner_reset');
+                });
+
+                form.find('button').click(function () {
+                    var zipCode = zipCodeInput.val(),
+                        countryCode = '<?php echo $this->getQuote()->getShippingAddress()->getCountry() ?>';
+                    new Ajax.Request('<?php echo $this->getDroppointsUrl() ?>', {
+                        method: 'get',
+                        parameters: {
+                            'zip-code': zipCode,
+                            'country-code': countryCode,
+                            'carrier': carrier
+                        },
+                        onComplete: function (data) {
+                            data = JSON.parse(data.responseText);
+                            var coords = [],
+                                markers = [],
+                                map,
+                                centerNMin = 9999999,
+                                centerNMax = -9999999,
+                                centerEMin = 9999999,
+                                centerEMax = -9999999;
+                            for (var i = 0; i < data.result.length; i++) {
+                                (function (entry) {
+                                    if (picker_list.find('[data-id="' + entry.id + '"]').length === 0) {
+                                        var template = $(_carrier.find('.servicepoint-template').html()),
+                                            randid = btoa(Math.round((Math.random() * 99999))) + '-' + entry.id;
+
+                                        template.attr('data-id', entry.id);
+                                        template.find('.servicepoint-name').html(entry.name);
+                                        template.find('.servicepoint-address').html(entry.address.street + ', ' + entry.address.zip_code + ' ' + entry.address.city);
+                                        if (entry.distance && _carrier.attr('data-base-zip') == zipCode) {
+                                            template.find('.servicepoint-distance').html((entry.distance / 1000).toFixed(2) + 'km');
+                                        }
+                                        template.find('label').attr('for', randid);
+                                        template.find('input').attr('id', randid);
+
+                                        template.attr('data-json', JSON.stringify(entry));
+
+                                        template.on('click', function () {
+                                            picker_list.find('.servicepoint').removeClass('selected');
+                                            picker_list.find('.servicepoint input:checked').prop('checked', '');
+                                            template.addClass('selected');
+                                            template.find('input').prop('checked', true);
+
+                                            selected_servicepoint = JSON.parse(JSON.stringify(entry));
+
+                                            opening_hours.fadeIn();
+                                        });
+
+                                        template.on('mouseover click', function () {
+                                            for (var day in entry.opening_hours) {
+                                                if (entry.opening_hours[day].from && entry.opening_hours[day].to) {
+                                                    opening_hours.find('.open-' + day + ' td:nth-child(2)').html(entry.opening_hours[day].from + '-' + entry.opening_hours[day].to)
+                                                } else {
+                                                    opening_hours.find('.open-' + day + ' td:nth-child(2)').html('<?php echo $this->__('Closed') ?>')
+                                                }
+                                            }
+                                        });
+
+                                        if (selected_servicepoint !== null && selected_servicepoint.id === entry.id) {
+                                            template.trigger('click');
+                                        }
+
+                                        if (parseFloat(entry.coordinates.latitude) > centerNMax) {
+                                            centerNMax = parseFloat(entry.coordinates.latitude);
+                                        }
+                                        if (parseFloat(entry.coordinates.latitude) < centerNMin) {
+                                            centerNMin = parseFloat(entry.coordinates.latitude);
+                                        }
+                                        if (parseFloat(entry.coordinates.longitude) > centerEMax) {
+                                            centerEMax = parseFloat(entry.coordinates.longitude);
+                                        }
+                                        if (parseFloat(entry.coordinates.longitude) < centerEMin) {
+                                            centerEMin = parseFloat(entry.coordinates.longitude);
+                                        }
+                                        coords.push([parseFloat(entry.coordinates.latitude), parseFloat(entry.coordinates.longitude), template]);
+
+                                        picker_list.append(template);
+                                    }
+                                })(data.result[i]);
+                            }
+
+                            var lat = 0,
+                                lon = 0;
+
+                            for (var j = 0; j < coords.length; j++) {
+                                lat = lat + parseFloat(coords[j][0]);
+                                lon = lon + parseFloat(coords[j][1]);
+                            }
+
+                            var mapOptions = {
+                                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                                zoomControl: true,
+                                disableDoubleClickZoom: true,
+                                keyboardShortcuts: false,
+                                streetViewControl: false
+                            };
+
+                            map = new google.maps.Map(_carrier.find('.coolrunner-map-canvas').get(0), mapOptions);
+                            map.fitBounds(new google.maps.LatLngBounds(new google.maps.LatLng(centerNMin, centerEMin), new google.maps.LatLng(centerNMax, centerEMax)));
+                            map.setZoom(13);
+
+                            for (var k = 0; k < coords.length; k++) {
+                                var servicepoint = coords[k][2];
+                                (function (servicepoint) {
+
+                                    self = this;
+                                    var myLatlng = new google.maps.LatLng(parseFloat(coords[k][0]), parseFloat(coords[k][1])),
+                                        marker = new google.maps.Marker({
+                                            position: myLatlng,
+                                            title: servicepoint.find('.servicepoint-name').html()
+                                        });
+
+                                    markers.push(marker);
+
+                                    marker.setMap(map);
+
+                                    function set_servicepoint() {
+                                        marker.setAnimation(google.maps.Animation.BOUNCE);
+                                        servicepoint.addClass('hover');
+                                    }
+
+                                    function reset_servicepoint() {
+                                        marker.setAnimation(null);
+                                        servicepoint.removeClass('hover');
+                                    }
+
+                                    // Transfer click to the parent servicepoint
+                                    google.maps.event.addListener(marker, 'click', function () {
+                                        servicepoint.click();
+                                    });
+
+                                    // Add animation events
+                                    google.maps.event.addListener(marker, 'mouseover', function () {
+                                        servicepoint.trigger('mouseover');
+                                    });
+                                    google.maps.event.addListener(marker, 'mouseout', function () {
+                                        servicepoint.trigger('mouseleave');
+                                    });
+                                    servicepoint.on('mouseover', set_servicepoint);
+                                    servicepoint.on('mouseleave', reset_servicepoint);
+                                })(servicepoint);
+                            }
+                            picker_overlay.fadeIn();
+                        }
+                    });
+                    loading_overlay.fadeIn(500);
+                });
+
+                picker_overlay.find('button[data-select]').on('click', function () {
+                    var req = null,
+                        timer = null;
+                    if (selected_servicepoint === null) {
+                        req = picker_overlay.find('.coolrunner-servicepoint-required');
+                        if (req.length === 0) {
+                            req = $('<li class="coolrunner-servicepoint-required"><?php echo $this->__('Select Servicepoint!') ?></li>');
+                            picker_list.prepend(req);
+                            req.fadeIn();
+                        }
+
+                        clearTimeout(timer);
+                        req.addClass('pulse');
+                        timer = setTimeout(function () {
+                            req.removeClass('pulse');
+                        }, 3000);
+
+                        return false;
+                    }
+                    _carrier.find('.shown-address').find('.servicepoint-name').html(selected_servicepoint.name);
+                    _carrier.find('.shown-address').find('.servicepoint-street').html(selected_servicepoint.address.street);
+                    _carrier.find('.shown-address').find('.servicepoint-city').html(selected_servicepoint.address.zip_code + ' ' + selected_servicepoint.address.city);
+
+                    _carrier.find('.hidden.address').find('[name="<?php $this->theCode() ?>-servicepoint-name"]').val(selected_servicepoint.name);
+                    _carrier.find('.hidden.address').find('[name="<?php $this->theCode() ?>-servicepoint-city"]').val(selected_servicepoint.address.city);
+                    _carrier.find('.hidden.address').find('[name="<?php $this->theCode() ?>-servicepoint-zip-code"]').val(selected_servicepoint.address.zip_code);
+                    _carrier.find('.hidden.address').find('[name="<?php $this->theCode() ?>-servicepoint-street"]').val(selected_servicepoint.address.street);
+                    _carrier.find('.hidden.address').find('[name="<?php $this->theCode() ?>-servicepoint-id"]').val(selected_servicepoint.id);
+                    picker_overlay.fadeOut(250);
+                    loading_overlay.fadeOut(250, function () {
+                        if (req !== null) {
+                            req.remove();
+                        }
+                        opening_hours.hide();
+                        picker_list.html('');
+
+                        _carrier.find('.shown-address').fadeIn();
+                        _carrier.find('.shown-address').next().fadeOut();
+
+                        $('#shipping-method-buttons-container').find('button').prop('disabled', '');
+                    });
+                });
+
+                picker_overlay.find('button[data-cancel]').on('click', function () {
+                    picker_overlay.fadeOut(250);
+                    loading_overlay.fadeOut(250, function () {
+                        opening_hours.hide();
+                        picker_list.html('');
+                        _carrier.trigger('coolrunner_reset');
+                    });
+
+                });
+
+                _carrier.attr('data-bound', 1);
+            }
+
+            function cr_reset() {
+                selected_servicepoint = null;
+                _carrier.find('.shown-address span').html('');
+                _carrier.find('.hidden.address input').val('');
+
+                _carrier.find('.shown-address').hide();
+                _carrier.find('.shown-address').next().show();
+
+                $('#shipping-method-buttons-container').find('button').prop('disabled', 'disabled');
+            }
+
+            _carrier.on('coolrunner_reset', cr_reset).trigger('coolrunner_reset');
+        });
+
+        $('input[name=shipping_method]:not([data-bound])').each(function () {
+            $(this).on('change input click', function () {
+                $('.coolrunner-carrier, input[name=shipping_method]').trigger('coolrunner_reset');
+
+                if (!$(this).is('[data-trigger]')) {
+                    $('#shipping-method-buttons-container').find('button').prop('disabled', false);
+                }
+            }).attr('data-bound', 1);
+        });
+    });
+</script>

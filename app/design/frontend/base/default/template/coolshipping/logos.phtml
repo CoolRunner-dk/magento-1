@@ -1,0 +1,39 @@
+<?php $storeId = Mage::app()->getStore()->getId(); ?>
+<?php $carriers = $this->getCarriers(); ?>
+
+<?php if (Mage::getStoreConfig('coolrunner/settings/show_logos', $storeId)): ?>
+
+    <script type="text/javascript">
+
+        <?php foreach($carriers as $carrier): ?>
+
+        <?php $logoUrl = $this->getSkinUrl('coolshipping/images/' . $carrier . '.png'); ?>
+
+        coolrunner_<?php echo $carrier;?>_logos = {
+
+            start: function () {
+                coolrunner_<?php echo $carrier; ?>_logos.setLogos();
+            },
+
+            setLogos: function () {
+                coolrunner_<?php echo $carrier; ?>_logos.setLogoAsBullets();
+            },
+
+            setLogoAsBullets: function () {
+
+                $$('label[for^=s_method_coolrunner_' + '<?php echo $carrier;?>' + ']').each(function (value) {
+                    $(value).insert({
+                        top: '<img class="coolrunner-logo" src="<?php echo $logoUrl;?>"/>'
+                    })
+                });
+
+            }
+
+        };
+        coolrunner_<?php echo $carrier;?>_logos.start();
+
+        <?php endforeach; ?>
+
+    </script>
+
+<?php endif; ?>

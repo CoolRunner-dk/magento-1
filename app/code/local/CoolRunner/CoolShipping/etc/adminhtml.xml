@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<config>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <coolshipping translate="title" module="coolrunner">
+                                        <title>CoolRunner Section</title>
+                                        <sort_order>1</sort_order>
+                                    </coolshipping>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <menu>
+        <coolrunner translate="title" module="coolrunner">
+            <title>CoolRunner</title>
+            <sort_order>90</sort_order>
+            <children>
+                <coolshipping translate="title" module="coolrunner">
+                    <title>CoolShipping</title>
+                    <sort_order>10</sort_order>
+                    <children>
+                        <coolshipping_configuration translate="title" module="coolrunner">
+                            <title>CoolShipping Configuration</title>
+                            <action>adminhtml/system_config/edit/section/coolrunner</action>
+                            <sort_order>10</sort_order>
+                        </coolshipping_configuration>
+                        <coolshipping_labels translate="title" module="coolrunner">
+                            <title>CoolShipping Labels</title>
+                            <action>coolrunner/shipping/index</action>
+                            <sort_order>20</sort_order>
+                        </coolshipping_labels>
+                        <coolshipping_prices translate="title" module="coolrunner">
+                            <title>CoolShipping Prices</title>
+                            <action>coolrunner/shipping/prices</action>
+                            <sort_order>30</sort_order>
+                        </coolshipping_prices>
+                    </children>
+                </coolshipping>
+            </children>
+        </coolrunner>
+        <sales translate="title" module="coolrunner">
+            <children>
+                <coolshipping_labels translate="title" module="coolrunner">
+                    <title>CoolShipping Labels</title>
+                    <action>coolrunner/shipping/index</action>
+                    <sort_order>30</sort_order>
+                </coolshipping_labels>
+            </children>
+        </sales>
+    </menu>
+</config>

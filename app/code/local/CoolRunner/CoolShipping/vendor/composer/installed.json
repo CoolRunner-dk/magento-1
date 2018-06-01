@@ -1,0 +1,48 @@
+[
+    {
+        "name": "coolrunner/php-sdk",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/CoolRunner-dk/coolrunner-php-sdk.git",
+            "reference": "f46abbf2bc9a3932f2cbb5cade80f57f8ee89c00"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/CoolRunner-dk/coolrunner-php-sdk/zipball/f46abbf2bc9a3932f2cbb5cade80f57f8ee89c00",
+            "reference": "f46abbf2bc9a3932f2cbb5cade80f57f8ee89c00",
+            "shasum": ""
+        },
+        "require": {
+            "ext-curl": "*",
+            "php": ">=5.6"
+        },
+        "time": "2018-05-31T07:32:47+00:00",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "CoolRunnerSDK\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Morten Harders",
+                "email": "mh@coolrunner.dk",
+                "role": "Developer"
+            }
+        ],
+        "description": "CoolRunner API SDK",
+        "homepage": "https://coolrunner.dk",
+        "keywords": [
+            "coolrunner",
+            "sdk",
+            "shipping"
+        ]
+    }
+]
