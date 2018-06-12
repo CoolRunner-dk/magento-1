@@ -15,7 +15,7 @@ class CoolRunner_CoolShipping_Helper_Database
         /** @var Mage_Core_Model_Resource $res */
         $res = Mage::getSingleton('core/resource');
         $read = $res->getConnection('core_read');
-        $tablename = $res->getTableName('coolrunner_config_data');
+        $tablename = $res->getTableName('coolrunner_coolshipping_config_data');
 
         $select = $read->select()->from($tablename)->where('`key` = ?', $key);
 
@@ -31,7 +31,7 @@ class CoolRunner_CoolShipping_Helper_Database
         /** @var Mage_Core_Model_Resource $res */
         $res = Mage::getSingleton('core/resource');
         $write = $res->getConnection('core_write');
-        $tablename = $res->getTableName('coolrunner_config_data');
+        $tablename = $res->getTableName('coolrunner_coolshipping_config_data');
 
         $data = array(
             'key' => $key,

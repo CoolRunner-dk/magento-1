@@ -236,7 +236,7 @@ class CoolRunner_CoolShipping_Model_Api extends Mage_Core_Model_Abstract
         $order_id = $order->getId();
         $resource = Mage::getSingleton('core/resource');
         $read = $resource->getConnection('core_read');
-        $table = $resource->getTableName('coolrunner_sales_order_info');
+        $table = $resource->getTableName('coolrunner_coolshipping_sales_order_info');
         $query = "SELECT * FROM $table WHERE order_id='$order_id'";
 
         $results = $read->fetchAll($query);

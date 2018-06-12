@@ -7,7 +7,7 @@ error_log('Installer run');
 
 try {
     $installer->run("
-		CREATE TABLE IF NOT EXISTS {$this->getTable('coolrunner_sales_order_pdf')} (
+		CREATE TABLE IF NOT EXISTS {$this->getTable('coolrunner_coolshipping_sales_order_pdf')} (
             `id` INT(11) NOT NULL AUTO_INCREMENT,
             `order_id` INT(11) NOT NULL,
             `filename` VARCHAR(255) NOT NULL,
@@ -29,7 +29,7 @@ try {
 
 try {
     $installer->run("
-		CREATE TABLE IF NOT EXISTS {$this->getTable('coolrunner_config_data')} (
+		CREATE TABLE IF NOT EXISTS {$this->getTable('coolrunner_coolshipping_config_data')} (
             `id` INT(11) NOT NULL AUTO_INCREMENT,
             `key` VARCHAR(255) NOT NULL,
             `value` MEDIUMTEXT NULL,
@@ -43,7 +43,7 @@ try {
 
 try {
     $installer->run("
-		CREATE TABLE IF NOT EXISTS {$this->getTable('coolrunner_sales_order_info')} (
+		CREATE TABLE IF NOT EXISTS {$this->getTable('coolrunner_coolshipping_sales_order_info')} (
             `quote_id` INT(11) NOT NULL,
             `order_id` INT(11) NULL DEFAULT NULL,
             `carrier` VARCHAR(10) NULL DEFAULT NULL,

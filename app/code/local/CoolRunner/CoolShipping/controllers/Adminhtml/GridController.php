@@ -87,7 +87,7 @@ class CoolRunner_CoolShipping_Adminhtml_GridController extends Mage_Adminhtml_Co
 						$message = isset($shipment['message']) ? $shipment['message'] : "";
 
 						$resource = Mage::getSingleton('core/resource');
-						$table = $resource->getTableName('coolrunner_sales_order_pdf');
+						$table = $resource->getTableName('coolrunner_coolshipping_sales_order_pdf');
 						
 						$query = "INSERT INTO $table (order_id,filename,package_number,pdf_base64,pdf_link,shipment_id,message) VALUES ($order_id,'$filename','$package_number','$pdf_base64','$pdf_link','$shipment_id','$message')";
 						

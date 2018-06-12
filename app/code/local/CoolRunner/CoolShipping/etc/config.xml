@@ -34,10 +34,10 @@
                 <class>CoolRunner_CoolShipping_Model_Resource</class>
                 <entities>
                     <order_pdf>
-                        <table>coolrunner_sales_order_pdf</table>
+                        <table>coolrunner_coolshipping_sales_order_pdf</table>
                     </order_pdf>
                     <order_info>
-                        <table>coolrunner_sales_order_info</table>
+                        <table>coolrunner_coolshipping_sales_order_info</table>
                     </order_info>
                 </entities>
             </coolrunner_resource>

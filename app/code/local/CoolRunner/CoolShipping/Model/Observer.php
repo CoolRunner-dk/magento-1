@@ -131,7 +131,7 @@ class CoolRunner_CoolShipping_Model_Observer {
                     $resource = Mage::getSingleton('core/resource');
 
                     $write = $resource->getConnection('core_write');
-                    $table = $resource->getTableName('coolrunner_sales_order_info');
+                    $table = $resource->getTableName('coolrunner_coolshipping_sales_order_info');
 
                     $sql = "INSERT INTO $table 
                               (quote_id, carrier, servicepoint, firstname, lastname,telephone)
@@ -217,7 +217,7 @@ class CoolRunner_CoolShipping_Model_Observer {
         $resource = Mage::getSingleton('core/resource');
 
         $write = $resource->getConnection('core_write');
-        $table = $resource->getTableName('coolrunner_sales_order_info');
+        $table = $resource->getTableName('coolrunner_coolshipping_sales_order_info');
         $sql = "UPDATE $table SET 
                   order_id=:order_id 
                 WHERE quote_id=:quote_id";

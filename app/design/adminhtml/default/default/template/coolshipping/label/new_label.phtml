@@ -33,7 +33,7 @@ $api = Mage::getModel('coolrunner/apiv3')->loadAPI(Mage_Core_Model_App::ADMIN_ST
     <?php echo $this->__('Create Label') ?>
 </h1>
 <hr>
-<h2><?php echo $this->__('Order No.:') ?><?php echo $this->__getId() ?></h2>
+<h2><?php echo $this->__('Order No.:') ?><?php echo $order_info->getIncrementId() ?></h2>
 <hr>
 <h4><?php echo $order_info->getShippingDescription() ?></h4>
 <form id="package-form" method="post" action="<?php echo $post_href ?>">
