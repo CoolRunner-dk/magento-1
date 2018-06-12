@@ -14,8 +14,9 @@ mkdir -p step_2/app/etc/modules
 cp -R ../app step_1
 cp -R ../skin step_1
 cp -R ../app/etc/modules/CoolRunner_CoolShipping.xml step_2/app/etc/modules/CoolRunner_CoolShipping.xml
+cp -R ../CoolShipping\ Manual.pdf ./
 rm -rf step_1/app/etc/
-zip -rq $FILENAME step_1 step_2
+zip -rq $FILENAME step_1 step_2 CoolShipping\ Manual.pdf
 mv -f $FILENAME ../
 cd ..
 rm -rf _build
