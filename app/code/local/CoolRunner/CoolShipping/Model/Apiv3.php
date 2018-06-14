@@ -28,7 +28,7 @@ class CoolRunner_CoolShipping_Model_Apiv3
         if (!self::$_autoloaded) {
             spl_autoload_register(function ($class_name) {
                 if (strpos($class_name, 'CoolRunnerSDK') !== false && !class_exists($class_name)) {
-                    $sdk_src = $_SERVER['DOCUMENT_ROOT'] . 'app/code/local/CoolRunner/CoolShipping/vendor/coolrunner/php-sdk/src/';
+                    $sdk_src = Mage::getBaseDir('base') . '/app/code/local/CoolRunner/CoolShipping/vendor/coolrunner/php-sdk/src/';
                     $class_name = str_replace('CoolRunnerSDK', '', $class_name);
                     $fn = implode(DIRECTORY_SEPARATOR, array_filter(explode('\\', $class_name . '.php')));
                     $fn = preg_replace('/\\+|\/+/i', DIRECTORY_SEPARATOR, $fn);
