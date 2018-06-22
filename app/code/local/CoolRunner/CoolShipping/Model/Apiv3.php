@@ -17,6 +17,7 @@ class CoolRunner_CoolShipping_Model_Apiv3
         $email = Mage::helper('coolrunner')->getConfig('coolrunner/settings/email', $store_id);
         $token = Mage::helper('coolrunner')->getConfig('coolrunner/settings/token', $store_id);
 
+        Mage::helper('coolrunner/logger')->log('Loaded APIv3');
         return \CoolRunnerSDK\API::load($email, $token, 'CoolRunner CoolShipping Magento 1 Module');
     }
 

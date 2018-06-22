@@ -31,6 +31,7 @@ class CoolRunner_CoolShipping_Model_Order_Info extends Mage_Core_Model_Abstract
      * @return mixed|self
      */
     public function infoExists($order_id) {
+        Mage::helper('coolrunner/logger')->log('Checking order information existence', $order_id);
         return !empty($this->getCollection()->addFieldToFilter('order_id', array($order_id))->getFirstItem()->_data);
     }
 

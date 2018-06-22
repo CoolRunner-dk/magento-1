@@ -25,6 +25,7 @@ class CoolRunner_CoolShipping_Block_Adminhtml_System_Config_Conditions extends M
                 $this->addOption($key, $label);
             }
         }
+        Mage::helper('coolrunner/logger')->log('Rendered Conditions config');
         
         return parent::_toHtml();
     }

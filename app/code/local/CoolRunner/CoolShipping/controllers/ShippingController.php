@@ -8,45 +8,65 @@ class CoolRunner_CoolShipping_ShippingController
     }
 
     protected function _isAllowed() {
+        Mage::helper('coolrunner/logger')->log('Accessing ShippingController');
+        if (Mage::getSingleton('admin/session')->isAllowed('coolrunner')) {
+            Mage::helper('coolrunner/logger')->log('Can access ShippingController');
+        } else {
+            Mage::helper('coolrunner/logger')->log('Cannot access ShippingController');
+        }
+
         return Mage::getSingleton('admin/session')->isAllowed('coolrunner');
     }
 
     public function indexAction() {
+        Mage::helper('coolrunner/logger')->log('Started indexAction');
         if (CoolRunner_CoolShipping_Model_Tools::isActive()) {
             $this->_title($this->__('CoolShipping'))->_title($this->__('Labels'));
             $this->loadLayout();
             $this->_setActiveMenu('sales/labels');
             $this->renderLayout();
+            Mage::helper('coolrunner/logger')->log('Rendered indexAction');
         }
+        Mage::helper('coolrunner/logger')->log('Stopped indexAction');
     }
 
     public function gridAction() {
+        Mage::helper('coolrunner/logger')->log('Started gridAction');
         if (CoolRunner_CoolShipping_Model_Tools::isActive() && $this->getRequest()->isAjax()) {
             $this->getResponse()->setBody(
                 $this->getLayout()->createBlock('coolrunner/shipping_labels_grid')->toHtml()
             );
+            Mage::helper('coolrunner/logger')->log('Rendered gridAction');
         }
+        Mage::helper('coolrunner/logger')->log('Stopped gridAction');
     }
 
     public function pricesAction() {
+        Mage::helper('coolrunner/logger')->log('Started pricesAction');
         if (CoolRunner_CoolShipping_Model_Tools::isActive()) {
             $this->_title($this->__('CoolShipping'))->_title($this->__('Prices'));
             $this->loadLayout();
             $this->_setActiveMenu('coolrunner/prices');
             $this->renderLayout();
+            Mage::helper('coolrunner/logger')->log('Rendered pricesAction');
         }
+        Mage::helper('coolrunner/logger')->log('Stopped pricesAction');
     }
 
     public function getTrackingAction() {
+        Mage::helper('coolrunner/logger')->log('Started getTrackingAction');
         if (CoolRunner_CoolShipping_Model_Tools::isActive()) {
             /** @var CoolRunner_CoolShipping_Helper_Information $helper */
             $helper = Mage::helper('coolrunner/information');
 
             include $helper->getTemplate('admin', 'label/tracking_label');
+            Mage::helper('coolrunner/logger')->log('Rendered getTrackingAction');
         }
+        Mage::helper('coolrunner/logger')->log('Stopped getTrackingAction');
     }
 
     public function getLabelAction($download = true) {
+        Mage::helper('coolrunner/logger')->log('Started getLabelAction');
         if (CoolRunner_CoolShipping_Model_Tools::isActive()) {
             $order_id = $this->getRequest()->getParam('order_id');
             $dl = $this->getRequest()->getParam('download', false);
@@ -63,11 +83,14 @@ class CoolRunner_CoolShipping_ShippingController
             header('Content-Type: application/pdf');
             echo $this->fetchPdf($order_pdf);
 
+            Mage::helper('coolrunner/logger')->log('Rendered getLabelAction');
             return true;
         }
+        Mage::helper('coolrunner/logger')->log('Stopped getLabelAction');
     }
 
     public function bulkCreateAction() {
+        Mage::helper('coolrunner/logger')->log('Started bulkCreateAction');
         if (CoolRunner_CoolShipping_Model_Tools::isActive()) {
             /** @var CoolRunner_CoolShipping_Model_Order_Pdf $pdf */
             $pdf = Mage::getModel('coolrunner/order_pdf');
@@ -147,11 +170,14 @@ class CoolRunner_CoolShipping_ShippingController
                 }
 
                 $this->renderLayout();
+                Mage::helper('coolrunner/logger')->log('Rendered bulkCreateAction');
             }
         }
+        Mage::helper('coolrunner/logger')->log('Stopped bulkCreateAction');
     }
 
     public function createLabelAction() {
+        Mage::helper('coolrunner/logger')->log('Started createLabelAction');
         if (CoolRunner_CoolShipping_Model_Tools::isActive()) {
             $order_id = $this->__getId();
             $size = $this->getRequest()->getParam('package-size', false);
@@ -173,10 +199,13 @@ class CoolRunner_CoolShipping_ShippingController
                     include $helper->getTemplate('admin', 'label/new_label');
                     break;
             }
+            Mage::helper('coolrunner/logger')->log('Rendered createLabelAction');
         }
+        Mage::helper('coolrunner/logger')->log('Stopped createLabelAction');
     }
 
     public function downloadPdfsAction() {
+        Mage::helper('coolrunner/logger')->log('Stopped downloadPdfsAction');
         if (CoolRunner_CoolShipping_Model_Tools::isActive()) {
             $params = $this->getRequest()->getParams();
             if (isset($params['order_ids']) && is_array($params['order_ids']) && !empty($params['order_ids'])) {
@@ -198,6 +227,8 @@ class CoolRunner_CoolShipping_ShippingController
 
                 $filename = "CoolRunner_Pdf_Labels_" . Mage::getModel('core/date')->date("Y-m-d_H-i-s") . ".pdf";
 
+                Mage::helper('coolrunner/logger')->log('Rendered downloadPdfsAction');
+                Mage::helper('coolrunner/logger')->log('Stopped downloadPdfsAction');
                 return $this->_prepareDownloadResponse($filename, $pdf->render(), 'application/pdf');
 //
 //            $collection = Mage::getModel('coolrunner/order_pdf')->getCollection()
@@ -266,6 +297,7 @@ class CoolRunner_CoolShipping_ShippingController
     }
 
     public function getPackagePriceAction() {
+        Mage::helper('coolrunner/logger')->log('Started getPackagePriceAction');
         $params = $this->getRequest()->getParams();
         /** @var CoolRunnerSDK\API $api */
         $api = Mage::getModel('coolrunner/apiv3')->loadApi(Mage_Core_Model_App::ADMIN_STORE_ID);
@@ -294,7 +326,9 @@ class CoolRunner_CoolShipping_ShippingController
         } else {
             echo json_encode($this->__('No matching products for carrier'));
         }
+        Mage::helper('coolrunner/logger')->log('Rendered getPackagePriceAction');
 
+        Mage::helper('coolrunner/logger')->log('Stopped getPackagePriceAction');
 //        echo $api->getProducts('dk')->getCountry($country)->getCarrier($carrier_full[0])->getType($carrier_full[1])->findProduct($shipment)->toJson();
     }
 }

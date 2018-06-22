@@ -47,11 +47,11 @@ class CoolRunner_CoolShipping_Block_Adminhtml_System_Config_CarrierProductServic
             if ($resp = $apiv3->getLastResponse()) {
                 if ($resp->isOk()) {
                     $database->set('pricelist', $options);
-                } elseif($resp->isUnauthorized()) {
+                } else if ($resp->isUnauthorized()) {
                     $session->addWarning('The email and/or token used is incorrect');
-                } elseif($resp->isForbidden()) {
+                } else if ($resp->isForbidden()) {
                     $session->addWarning('The email and/or token doesn\'t allow access to the resource');
-                } elseif($resp->isInternalError() || $resp->isServiceUnavailable()) {
+                } else if ($resp->isInternalError() || $resp->isServiceUnavailable()) {
                     $session->addWarning('CoolRunner can\'t process the request right now - Try again later');
                 }
             } else {
@@ -69,12 +69,13 @@ class CoolRunner_CoolShipping_Block_Adminhtml_System_Config_CarrierProductServic
 
     public function _toHtml() {
         if (!$this->getOptions()) {
-            $this->addOption('', 'Pick service',array('style' => 'display: none; opacity: 0'));
+            $this->addOption('', 'Pick service', array('style' => 'display: none; opacity: 0'));
             foreach ($this->_getOptions() as $key => $value) {
                 $this->addOption($key, $value['label'], array('countries' => implode(' ', $value['countries'])));
             }
         }
 
+        Mage::helper('coolrunner/logger')->log('Rendered CarrierProductService config');
         return parent::_toHtml();
     }
 }

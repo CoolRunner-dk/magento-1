@@ -12,16 +12,15 @@ class CoolRunner_CoolShipping_Block_Adminhtml_Grid_Widget_Column_Renderer_Shippi
         /** @var Mage_Sales_Model_Order_Address $address */
         $address = $shipping_collection->addFieldToFilter('parent_id', array($id))->addFieldToFilter('address_type', array('shipping'))->getFirstItem();
 
-        $street = (function ($address) {
-            $street_comps = array();
-            for ($i = 1; $i <= 4; $i++) {
-                $street_comps[] = $address->getStreet($i);
-            }
-            return implode(', ', array_filter($street_comps));
-        })($address);
+        $street_comps = array();
+        for ($i = 1; $i <= 4; $i++) {
+            $street_comps[] = $address->getStreet($i);
+        }
+        $street = implode(', ', array_filter($street_comps));
 
         $country = $tools->isoToCountry($address->getCountryId());
 
+        Mage::helper('coolrunner/logger')->log('Returned Tracking column for order #', $row->getIncrementId());
         return "{$street}, {$address->getPostcode()} {$address->getCity()}," . ($address->getRegion() ? " {$address->getRegion()}," : '') . " {$country}";
     }
 }

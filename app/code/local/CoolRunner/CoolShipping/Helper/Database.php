@@ -12,6 +12,7 @@ class CoolRunner_CoolShipping_Helper_Database
      * @return mixed Config value or $default on failure
      */
     public function get($key, $default = null) {
+        Mage::helper('coolrunner/logger')->log('Fetching CoolRunner Config', $key, (string)$default);
         /** @var Mage_Core_Model_Resource $res */
         $res = Mage::getSingleton('core/resource');
         $read = $res->getConnection('core_read');
@@ -28,6 +29,7 @@ class CoolRunner_CoolShipping_Helper_Database
     }
 
     public function set($key, $value) {
+        Mage::helper('coolrunner/logger')->log('Fetching CoolRunner Config', $key);
         /** @var Mage_Core_Model_Resource $res */
         $res = Mage::getSingleton('core/resource');
         $write = $res->getConnection('core_write');

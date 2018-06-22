@@ -6,19 +6,19 @@
         "source": {
             "type": "git",
             "url": "https://github.com/CoolRunner-dk/coolrunner-php-sdk.git",
-            "reference": "a99f087b19c4c532051c3a47d5ca5e7435eaad16"
+            "reference": "6736518230dfddff7b225fbe9afb2e6a2d993a7c"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/CoolRunner-dk/coolrunner-php-sdk/zipball/a99f087b19c4c532051c3a47d5ca5e7435eaad16",
-            "reference": "a99f087b19c4c532051c3a47d5ca5e7435eaad16",
+            "url": "https://api.github.com/repos/CoolRunner-dk/coolrunner-php-sdk/zipball/6736518230dfddff7b225fbe9afb2e6a2d993a7c",
+            "reference": "6736518230dfddff7b225fbe9afb2e6a2d993a7c",
             "shasum": ""
         },
         "require": {
             "ext-curl": "*",
             "php": ">=5.6"
         },
-        "time": "2018-06-13T12:47:29+00:00",
+        "time": "2018-06-15T10:59:01+00:00",
         "type": "library",
         "installation-source": "source",
         "autoload": {

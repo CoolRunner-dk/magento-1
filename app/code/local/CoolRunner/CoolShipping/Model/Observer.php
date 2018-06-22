@@ -9,29 +9,35 @@ class CoolRunner_CoolShipping_Model_Observer {
         $block = $observer->getEvent()->getBlock();
         if ($block instanceof Mage_Checkout_Block_Onepage_Shipping_Method_Available ||
             $block instanceof AW_Onestepcheckout_Block_Onestep_Form_Shippingmethod) {
+            Mage::helper('coolrunner/logger')->log('Triggered observer method appendDroppointHtml ', get_class($block));
             $transport = $observer->getEvent()->getTransport();
             $html = $transport->getHtml();
             if (strpos($html, 'coolrunner_postnord_private_droppoint') !== false) {
+                Mage::helper('coolrunner/logger')->log('Matched coolrunner_postnord_private_droppoint');
                 $html .= $block->getLayout()
                     ->createBlock('coolrunner/servicepoints_postnord')
                     ->setTemplate('coolshipping/droppoints.phtml')->toHtml();
             }
             if (strpos($html, 'coolrunner_gls_private_droppoint') !== false) {
+                Mage::helper('coolrunner/logger')->log('Matched coolrunner_gls_private_droppoint');
                 $html .= $block->getLayout()
                     ->createBlock('coolrunner/servicepoints_gls')
                     ->setTemplate('coolshipping/droppoints.phtml')->toHtml();
             }
             if (strpos($html, 'coolrunner_dao_private_droppoint') !== false) {
+                Mage::helper('coolrunner/logger')->log('Matched coolrunner_dao_private_droppoint');
                 $html .= $block->getLayout()
                     ->createBlock('coolrunner/servicepoints_dao')
                     ->setTemplate('coolshipping/droppoints.phtml')->toHtml();
             }
             if (strpos($html, 'coolrunner_dhl_private_droppoint') !== false) {
+                Mage::helper('coolrunner/logger')->log('Matched coolrunner_dhl_private_droppoint');
                 $html .= $block->getLayout()
                     ->createBlock('coolrunner/servicepoints_dhl')
                     ->setTemplate('coolshipping/droppoints.phtml')->toHtml();
             }
             if (strpos($html, 'coolrunner_posti_private_droppoint') !== false) {
+                Mage::helper('coolrunner/logger')->log('Matched coolrunner_posti_private_droppoint');
                 $html .= $block->getLayout()
                     ->createBlock('coolrunner/servicepoints_posti')
                     ->setTemplate('coolshipping/droppoints.phtml')->toHtml();
@@ -54,6 +60,7 @@ class CoolRunner_CoolShipping_Model_Observer {
                 $isLabelGrid
             ) &&
             Mage::getStoreConfig('coolrunner/settings/active')) {
+            Mage::helper('coolrunner/logger')->log('Triggered observer method addMassAction ', get_class($block));
             /** @var CoolRunner_CoolShipping_Helper_Information $helper */
             $helper = Mage::helper('coolrunner/information');
 
@@ -113,6 +120,7 @@ class CoolRunner_CoolShipping_Model_Observer {
             foreach ($carriers as $carrier) {
                 $code = $prefix . "_" . $carrier;
                 if (strpos($shippingMethod, $code) !== false) {
+                    Mage::helper('coolrunner/logger')->log('Triggered observer method saveQuoteData on ' . $code);
                     $quote_id = $quote->getId();
 
                     // Pickup information

@@ -1,11 +1,16 @@
 <?php
-class CoolRunner_CoolShipping_Block_Adminhtml_System_Config_PackageSize extends Mage_Adminhtml_Block_System_Config_Form_Field_Array_Abstract
-{
+
+class CoolRunner_CoolShipping_Block_Adminhtml_System_Config_PackageSize
+    extends Mage_Adminhtml_Block_System_Config_Form_Field_Array_Abstract {
     protected $_block;
 
-    protected function _getBlockToRenderer($type)
-    {
-    	if (!$this->{"_$type"}) {
+    protected function _toHtml() {
+        Mage::helper('coolrunner/logger')->log('Rendered PackageSize config');
+        return parent::_toHtml();
+    }
+
+    protected function _getBlockToRenderer($type) {
+        if (!$this->{"_$type"}) {
             $this->{"_$type"} = $this->getLayout()->createBlock(
                 "coolrunner/adminhtml_system_config_$type", '',
                 array('is_render_to_js_template' => true)
@@ -14,38 +19,37 @@ class CoolRunner_CoolShipping_Block_Adminhtml_System_Config_PackageSize extends 
         }
         return $this->{"_$type"};
     }
-    
-    protected function _prepareToRender()
-    {
+
+    protected function _prepareToRender() {
         $this->addColumn('title', array(
-            'label' => Mage::helper('coolrunner')->__('Your Title'),
+            'label'    => Mage::helper('coolrunner')->__('Your Title'),
             'renderer' => 'text',
-            'class' => 'title',
+            'class'    => 'title',
         ));
         $this->addColumn('weight', array(
-            'label' => Mage::helper('coolrunner')->__('Weight up to (kg)'),
+            'label'    => Mage::helper('coolrunner')->__('Weight up to (kg)'),
             'renderer' => 'text',
-            'class' => 'weight',
+            'class'    => 'weight',
         ));
         $this->addColumn('length', array(
-            'label' => Mage::helper('coolrunner')->__('Package Length'),
+            'label'    => Mage::helper('coolrunner')->__('Package Length'),
             'renderer' => 'text',
-            'class' => 'length',
+            'class'    => 'length',
         ));
         $this->addColumn('width', array(
-            'label' => Mage::helper('coolrunner')->__('Package Width'),
+            'label'    => Mage::helper('coolrunner')->__('Package Width'),
             'renderer' => 'text',
-            'class' => 'width',
-        ));        
+            'class'    => 'width',
+        ));
         $this->addColumn('height', array(
-            'label' => Mage::helper('coolrunner')->__('Package Height'),
+            'label'    => Mage::helper('coolrunner')->__('Package Height'),
             'renderer' => 'text',
-            'class' => 'height',
+            'class'    => 'height',
         ));
         $this->addColumn('sortable', array(
-            'label' => Mage::helper('coolrunner')->__('Move'),
+            'label'    => Mage::helper('coolrunner')->__('Move'),
             'renderer' => $this->_getBlockToRenderer('sortable'),
-            'style' => 'width:100px',
+            'style'    => 'width:100px',
         ));
 
         $this->_addAfter = false;

@@ -43,6 +43,7 @@ class CoolRunner_CoolShipping_Model_Order_Pdf
      * @return mixed|self
      */
     public function labelExists($order_id) {
+        Mage::helper('coolrunner/logger')->log('Checking for label existence', $order_id);
         return !empty($this->getCollection()->addFieldToFilter('order_id', array($order_id))->getFirstItem()->_data);
     }
 
@@ -84,10 +85,13 @@ class CoolRunner_CoolShipping_Model_Order_Pdf
             }
         }
 
+        Mage::helper('coolrunner/logger')->log('Retrieving cache size', serialize($sizes));
+
         return $sizes;
     }
 
     public function clearCacheTypes($list) {
+        Mage::helper('coolrunner/logger')->log('Clearing cache');
         $list = array_filter(array_map('strtolower', $list), function ($entry) {
             return in_array($entry, array('database', 'disk'));
         });
@@ -124,6 +128,7 @@ class CoolRunner_CoolShipping_Model_Order_Pdf
     }
 
     public function createFromOrderId($order_id, $package_size) {
+        Mage::helper('coolrunner/logger')->log('Creating PDF from Order ID', $order_id, serialize($package_size));
         /** @var CoolRunner_CoolShipping_Helper_Information $helper */
         $helper = Mage::helper('coolrunner/information');
         /** @var \CoolRunnerSDK\API $apiv3 */

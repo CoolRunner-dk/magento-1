@@ -3,6 +3,7 @@
 class CoolRunner_CoolShipping_DroppointController
     extends Mage_Core_Controller_Front_Action {
     public function getDroppointsFromPostalCodeAction() {
+        Mage::helper('coolrunner/logger')->log('Started getDroppointsFromPostalCodeAction');
         $this->getResponse()->setHeader('Content-type', 'text/json; charset=UTF-8');
         $params = $this->getRequest()->getParams();
 
@@ -25,14 +26,17 @@ class CoolRunner_CoolShipping_DroppointController
                 $street = array_shift($street);
                 $city = $quote->getBillingAddress()->getCity();
 
+                Mage::helper('coolrunner/logger')->log('Matched billing address');
                 $data = $api->findServicepoints($carrier, $country_code, $postal_code, '', $street);
-            } elseif($quote->getShippingAddress()->getPostcode() === $postal_code) {
+            } else if ($quote->getShippingAddress()->getPostcode() === $postal_code) {
                 $street = $quote->getShippingAddress()->getStreet();
                 $street = array_shift($street);
                 $city = $quote->getShippingAddress()->getCity();
 
+                Mage::helper('coolrunner/logger')->log('Matched shipping address');
                 $data = $api->findServicepoints($carrier, $country_code, $postal_code, '', $street);
             } else {
+                Mage::helper('coolrunner/logger')->log('Matched postal code address');
                 $data = $api->findServicepoints($carrier, $country_code, $postal_code);
             }
 
@@ -44,10 +48,13 @@ class CoolRunner_CoolShipping_DroppointController
                 $servicepoints[] = $sp;
             }
 
-            $this->getResponse()->setBody(json_encode(array('status' => 'ok', 'message' => '', 'result' => $servicepoints),JSON_PRETTY_PRINT));
+            Mage::helper('coolrunner/logger')->log(sprintf('Found %s servicepoints', count($servicepoints)));
+            $this->getResponse()->setBody(json_encode(array('status' => 'ok', 'message' => '', 'result' => $servicepoints), JSON_PRETTY_PRINT));
         } else {
+            Mage::helper('coolrunner/logger')->log('Missing carrier, country code or postal code', $carrier, $country_code, $postal_code);
             $result = json_encode($params);
             $this->getResponse()->setBody($result);
         }
+        Mage::helper('coolrunner/logger')->log('Stopped getDroppointsFromPostalCodeAction');
     }
 }

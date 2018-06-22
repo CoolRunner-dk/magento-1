@@ -9,6 +9,7 @@ class CoolRunner_CoolShipping_Helper_Information
      * @return bool
      */
     public function isActive() {
+        Mage::helper('coolrunner/logger')->log('Checking module active state');
         return !!Mage::getStoreConfig('coolrunner/settings/active');
     }
 
@@ -31,6 +32,7 @@ class CoolRunner_CoolShipping_Helper_Information
         }
         $base = Mage::getBaseDir();
 
+        Mage::helper('coolrunner/logger')->log('Fetching template file', $type, $template, "{$base}/app/design/$type/{$template}.phtml");
         return "{$base}/app/design/$type/{$template}.phtml";
     }
 
@@ -50,7 +52,7 @@ class CoolRunner_CoolShipping_Helper_Information
      * @return CoolRunner_CoolShipping_Model_Order_Pdf
      */
     public function getOrderPdf($order_id) {
-        return $this->getOrderPdfCollection()->addFieldToFilter('order_id',array($order_id))->getFirstItem();
+        return $this->getOrderPdfCollection()->addFieldToFilter('order_id', array($order_id))->getFirstItem();
     }
 
     /**
@@ -67,7 +69,7 @@ class CoolRunner_CoolShipping_Helper_Information
      * @return CoolRunner_CoolShipping_Model_Order_Info
      */
     public function getOrderInfo($order_id) {
-        return $this->getOrderInfoCollection()->addFieldToFilter('order_id',array($order_id))->getFirstItem();
+        return $this->getOrderInfoCollection()->addFieldToFilter('order_id', array($order_id))->getFirstItem();
     }
 
     /**
@@ -90,7 +92,7 @@ class CoolRunner_CoolShipping_Helper_Information
         $order = $this->getOrderByEntityId($order_id);
         $col = $order->getShipmentsCollection();
 
-        if(count($col) !== 0) {
+        if (count($col) !== 0) {
             return $col->getFirstItem();
         }
 
@@ -108,7 +110,7 @@ class CoolRunner_CoolShipping_Helper_Information
         $collection = $this->getOrderByEntityId($order_id)->getItemsCollection();
         $ret = array();
         foreach ($collection as $key => $item) {
-            if(floatval($item->getBasePrice()) != 0) {
+            if (floatval($item->getBasePrice()) != 0) {
                 $ret[$key] = $item;
             }
         }
@@ -131,7 +133,7 @@ class CoolRunner_CoolShipping_Helper_Information
      *
      * @return array|string[]
      */
-    public function getSenderInformation()  {
+    public function getSenderInformation() {
         $sender = array(
             'name'      => 'name',
             'attention' => 'attention',
@@ -157,8 +159,8 @@ class CoolRunner_CoolShipping_Helper_Information
      * @return CoolRunner_CoolShipping_Model_Order_Info|false
      */
     public function getReceiverInformation($order_id) {
-        $order_info = $this->getOrderInfoCollection()->addFieldToFilter('order_id',array($order_id));
-        if($order_info->count() !== 0) {
+        $order_info = $this->getOrderInfoCollection()->addFieldToFilter('order_id', array($order_id));
+        if ($order_info->count() !== 0) {
             $order_info = $order_info->getFirstItem();
             return $order_info;
         }

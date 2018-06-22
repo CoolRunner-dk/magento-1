@@ -4,6 +4,7 @@ class CoolRunner_CoolShipping_Block_Adminhtml_Sales_Order_Grid
     extends Mage_Adminhtml_Block_Sales_Order_Grid {
     protected function _prepareColumns() {
         parent::_prepareColumns();
+        Mage::helper('coolrunner/logger')->log('Adding Shipping column to Sales_Order_Grid');
 
         if (Mage::getStoreConfig('coolrunner/settings/active')) {
             $this->addColumn('cool_shipping',
@@ -20,6 +21,7 @@ class CoolRunner_CoolShipping_Block_Adminhtml_Sales_Order_Grid
 
             $this->addColumnsOrder('cool_shipping', 'action');
         }
+        Mage::helper('coolrunner/logger')->log('Added Shipping column to Sales_Order_Grid');
 
         return $this;
     }

@@ -8,6 +8,7 @@ class CoolRunner_CoolShipping_Block_Shipping_Labels_Grid
     }
 
     public function __construct(array $attributes = array()) {
+        Mage::helper('coolrunner/logger')->log('Accessing Shipping_Labels_Grid');
         parent::__construct($attributes);
         $this->setId('coolrunner_label_grid');
         $this->setDefaultSort('label_created_at');
@@ -26,8 +27,10 @@ class CoolRunner_CoolShipping_Block_Shipping_Labels_Grid
     }
 
     protected function _prepareCollection() {
+        Mage::helper('coolrunner/logger')->log('Preparing collection for Shipping_Labels_Grid');
         /** @var Mage_Sales_Model_Resource_Order_Grid_Collection $collection */
         $collection = Mage::getResourceModel($this->_getCollectionClass());
+        Mage::helper('coolrunner/logger')->log('ResourceModel loaded for Shipping_Labels_Grid');
 
         $collection
             ->join(array('a' => 'coolrunner/order_info'),
@@ -50,6 +53,8 @@ class CoolRunner_CoolShipping_Block_Shipping_Labels_Grid
                        'ship_country'    => 'country_id'
                    ));
 
+        Mage::helper('coolrunner/logger')->log('Collection joined for Shipping_Labels_Grid');
+
         /** @var CoolRunner_CoolShipping_Model_Order_Pdf $pdf */
         $pdf = Mage::getModel('coolrunner/order_pdf');
         foreach ($collection as &$entry) {
@@ -71,10 +76,12 @@ class CoolRunner_CoolShipping_Block_Shipping_Labels_Grid
         }
 
         $this->setCollection($collection);
+        Mage::helper('coolrunner/logger')->log('Collection set for Shipping_Labels_Grid');
         return parent::_prepareColumns();
     }
 
     protected function _prepareColumns() {
+        Mage::helper('coolrunner/logger')->log('Preparing columns for Shipping_Labels_Grid');
         $this->removeColumn('created_at');
 
         $this->addColumn('real_order_id', array(
@@ -85,6 +92,7 @@ class CoolRunner_CoolShipping_Block_Shipping_Labels_Grid
             'sortable' => false,
             'filter'   => false
         ));
+        Mage::helper('coolrunner/logger')->log('Added column "Order #" for Shipping_Labels_Grid');
 
         $this->addColumn('customer*_id', array(
             'header'   => Mage::helper('coolrunner')->__('Customer ID'),
@@ -94,6 +102,7 @@ class CoolRunner_CoolShipping_Block_Shipping_Labels_Grid
             'sortable' => false,
             'filter'   => false
         ));
+        Mage::helper('coolrunner/logger')->log('Added column "Customer ID" for Shipping_Labels_Grid');
 
         if (!Mage::app()->isSingleStoreMode()) {
             $this->addColumn('store_id', array(
@@ -106,6 +115,7 @@ class CoolRunner_CoolShipping_Block_Shipping_Labels_Grid
                 'sortable'        => false,
                 'filter'   => false
             ));
+            Mage::helper('coolrunner/logger')->log('Added column "Purchased From (Store)" for Shipping_Labels_Grid');
         }
 
         $this->addColumn('excl_tax', array(
@@ -117,6 +127,7 @@ class CoolRunner_CoolShipping_Block_Shipping_Labels_Grid
             'sortable'      => false,
             'filter'   => false
         ));
+        Mage::helper('coolrunner/logger')->log('Added column "Price excl. tax" for Shipping_Labels_Grid');
 
         $this->addColumn('incl_tax', array(
             'header'        => Mage::helper('sales')->__('Price incl. tax'),
@@ -128,6 +139,7 @@ class CoolRunner_CoolShipping_Block_Shipping_Labels_Grid
             'sortable'      => false,
             'filter'   => false
         ));
+        Mage::helper('coolrunner/logger')->log('Added column "Price incl. tax" for Shipping_Labels_Grid');
 
         $this->addColumn('billing_name', array(
             'header'   => Mage::helper('sales')->__('Bill to Name'),
@@ -136,6 +148,7 @@ class CoolRunner_CoolShipping_Block_Shipping_Labels_Grid
             'sortable' => false,
             'filter'   => false
         ));
+        Mage::helper('coolrunner/logger')->log('Added column "Bill to Name" for Shipping_Labels_Grid');
 
         $this->addColumn('shipping_name', array(
             'header'   => Mage::helper('sales')->__('Ship to Name'),
@@ -144,6 +157,7 @@ class CoolRunner_CoolShipping_Block_Shipping_Labels_Grid
             'sortable' => false,
             'filter'   => false
         ));
+        Mage::helper('coolrunner/logger')->log('Added column "Ship to Name" for Shipping_Labels_Grid');
 
         $this->addColumn('shipping_address', array(
             'header'   => Mage::helper('sales')->__('Ship to Address'),
@@ -152,6 +166,7 @@ class CoolRunner_CoolShipping_Block_Shipping_Labels_Grid
             'sortable' => false,
             'filter'   => false,
         ));
+        Mage::helper('coolrunner/logger')->log('Added column "Ship to Address" for Shipping_Labels_Grid');
 
         $this->addColumn('package_number', array(
             'header'   => $this->__('Package Number'),
@@ -161,6 +176,7 @@ class CoolRunner_CoolShipping_Block_Shipping_Labels_Grid
             'sortable' => false,
             'filter'   => false,
         ));
+        Mage::helper('coolrunner/logger')->log('Added column "Package Number" for Shipping_Labels_Grid');
 
         $this->addColumn('label_at', array(
             'header' => Mage::helper('sales')->__('Label Ordered On'),
@@ -170,6 +186,7 @@ class CoolRunner_CoolShipping_Block_Shipping_Labels_Grid
             'sortable' => false,
             'filter'   => false
         ));
+        Mage::helper('coolrunner/logger')->log('Added column "Label Ordered On" for Shipping_Labels_Grid');
 
         $this->addColumn('status', array(
             'header'   => Mage::helper('sales')->__('Order Status'),
@@ -180,6 +197,7 @@ class CoolRunner_CoolShipping_Block_Shipping_Labels_Grid
             'sortable' => false,
             'filter'   => false
         ));
+        Mage::helper('coolrunner/logger')->log('Added column "Order Status" for Shipping_Labels_Grid');
 
         $this->addColumn('cool_shipping', array(
             'header'   => 'Shipping',
@@ -188,8 +206,10 @@ class CoolRunner_CoolShipping_Block_Shipping_Labels_Grid
             'filter'   => false,
             'sortable' => false,
         ));
+        Mage::helper('coolrunner/logger')->log('Added column "Shipping" for Shipping_Labels_Grid');
 
         $this->addColumnsOrder('cool_shipping', 'action');
+        Mage::helper('coolrunner/logger')->log('Re-ordered columns for Shipping_Labels_Grid');
 
         return $this;
     }
@@ -199,6 +219,7 @@ class CoolRunner_CoolShipping_Block_Shipping_Labels_Grid
         $this->setMassactionIdField('order_id');
         $this->getMassactionBlock()->setFormFieldName('order_ids');
         $this->getMassactionBlock()->setUseSelectAll(true);
+        Mage::helper('coolrunner/logger')->log('Prepared mass action for Shipping_Labels_Grid');
         return $this;
     }
 

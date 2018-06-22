@@ -3,6 +3,7 @@
 class CoolRunner_CoolShipping_Helper_Data
     extends Mage_Core_Helper_Abstract {
     public function getUrlContent($url) {
+        Mage::helper('coolrunner/logger')->log('Fetching URL', $url);
         $content = "";
         if (function_exists('curl_version')) {
             $info = curl_init($url);
@@ -42,21 +43,27 @@ class CoolRunner_CoolShipping_Helper_Data
     }
 
     public function getConfig($path, $storeId = false) {
+        Mage::helper('coolrunner/logger')->log('Fetching Config', "$storeId => $path");
         if ($storeId !== false) {
             return Mage::getStoreConfig($path, $storeId);
-        } else if ($storecode = Mage::app()->getRequest()->getParam('store')) {
-            $storeCollection = Mage::getModel('core/store')->getCollection()->addFieldToFilter('code', $storecode);
-            $storeId = $storeCollection->getFirstItem()->getStoreId();
-            return Mage::getStoreConfig($path, $storeId);
-        } else if ($websitecode = Mage::app()->getRequest()->getParam('website')) {
-            $websiteCollection = Mage::getModel('core/website')->getCollection()->addFieldToFilter('code', $websitecode);
-            $websiteId = $websiteCollection->getFirstItem()->getWebsiteId();
-            return Mage::app()->getWebsite($websiteId)->getConfig($path);
+        } else {
+            if ($storecode = Mage::app()->getRequest()->getParam('store')) {
+                $storeCollection = Mage::getModel('core/store')->getCollection()->addFieldToFilter('code', $storecode);
+                $storeId = $storeCollection->getFirstItem()->getStoreId();
+                return Mage::getStoreConfig($path, $storeId);
+            } else {
+                if ($websitecode = Mage::app()->getRequest()->getParam('website')) {
+                    $websiteCollection = Mage::getModel('core/website')->getCollection()->addFieldToFilter('code', $websitecode);
+                    $websiteId = $websiteCollection->getFirstItem()->getWebsiteId();
+                    return Mage::app()->getWebsite($websiteId)->getConfig($path);
+                }
+            }
         }
         return Mage::getStoreConfig($path);
     }
 
     public function getCarrierProductServiceOptions($withLabels = false, $extraAuto = false) {
+        Mage::helper('coolrunner/logger')->log('Fetching CarrierProductServiceOptions');
         /** @var CoolRunner_CoolShipping_Helper_Database $database */
         $database = Mage::helper('coolrunner/database');
         /** @var Mage_Adminhtml_Model_Session $session */

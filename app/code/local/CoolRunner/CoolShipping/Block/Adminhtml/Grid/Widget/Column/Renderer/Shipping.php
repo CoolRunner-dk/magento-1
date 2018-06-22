@@ -42,6 +42,7 @@ class CoolRunner_CoolShipping_Block_Adminhtml_Grid_Widget_Column_Renderer_Shippi
         $order = $helper->getOrderByEntityId($id);
 
         if (!is_null($base) && !is_null($img) && !is_null($text) && $order && !$order->isCanceled()) {
+            Mage::helper('coolrunner/logger')->log('Returned Shipping column for order #', $row->getIncrementId());
             return
                 "<a style='display: block; white-space: nowrap; vertical-align: middle;' href='javascript:void(0)' 
                     data-href='{$base}order_id/{$id}/$dl' 
@@ -50,6 +51,7 @@ class CoolRunner_CoolShipping_Block_Adminhtml_Grid_Widget_Column_Renderer_Shippi
                         {$text}
                 </a>";
         } else {
+            Mage::helper('coolrunner/logger')->log('Could\'t return Shipping column for order #', $row->getIncrementId());
             return null;
         }
     }
