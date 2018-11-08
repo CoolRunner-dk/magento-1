@@ -14,6 +14,11 @@ class CoolRunner_CoolShipping_Helper_Logger {
             $msg .= "\n    $arg";
         }
         $msg = "$msg\n        $at\n";
-        Mage::log($msg, Zend_Log::DEBUG, "coolrunner-debug-{$date}.log", true);
+
+        $enable_logger = Mage::getStoreConfig('coolrunner/information/debug_mode');
+        $enable_logger = (bool)$enable_logger;
+        if ($enable_logger) {
+            Mage::log($msg, Zend_Log::DEBUG, "coolrunner-debug-{$date}.log", true);
+        }
     }
 }

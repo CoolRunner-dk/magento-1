@@ -66,7 +66,13 @@ class CoolRunner_CoolShipping_Model_Carrier_Abstract extends Mage_Shipping_Model
 
         $carrier_product_services_added = array();
         $zone_from = Mage::helper('coolrunner')->getConfig("coolrunner/sender/country");
-        $countries = $api->getProducts($zone_from);
+        $cache_key = "coolrunner_{$zone_from}_{$store_id}";
+        if($countries = Mage::app()->getCache()->load($cache_key)) {
+            $countries = unserialize($countries);
+        } else {
+            $countries = $api->getProducts($zone_from);
+            Mage::app()->getCache()->save(serialize($countries),$cache_key);
+        }
 
         $carriers = array();
         foreach ($countries->getCountry($request->getData('dest_country_id')) as $ca => $prod) {
