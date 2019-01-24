@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/CoolRunner-dk/coolrunner-php-sdk.git",
-                "reference": "6736518230dfddff7b225fbe9afb2e6a2d993a7c"
+                "reference": "5d958669a289609b69b2f2049bbc5d229b09651b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CoolRunner-dk/coolrunner-php-sdk/zipball/6736518230dfddff7b225fbe9afb2e6a2d993a7c",
-                "reference": "6736518230dfddff7b225fbe9afb2e6a2d993a7c",
+                "url": "https://api.github.com/repos/CoolRunner-dk/coolrunner-php-sdk/zipball/5d958669a289609b69b2f2049bbc5d229b09651b",
+                "reference": "5d958669a289609b69b2f2049bbc5d229b09651b",
                 "shasum": ""
             },
             "require": {
@@ -48,7 +48,7 @@
                 "sdk",
                 "shipping"
             ],
-            "time": "2018-06-15T10:59:01+00:00"
+            "time": "2018-09-11T07:41:35+00:00"
         }
     ],
     "packages-dev": [],
