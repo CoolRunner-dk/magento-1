@@ -222,6 +222,13 @@
                 <sort_order>10</sort_order>
                 <sallowspecific>0</sallowspecific>
             </coolrunner_gls>
+            <coolrunner_bring>
+                <active>1</active>
+                <model>coolrunner/carrier_bring</model>
+                <title>Bring</title>
+                <sort_order>10</sort_order>
+                <sallowspecific>0</sallowspecific>
+            </coolrunner_bring>
             <coolrunner_dhl>
                 <active>1</active>
                 <model>coolrunner/carrier_dhl</model>

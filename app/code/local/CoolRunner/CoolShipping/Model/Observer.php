@@ -1,46 +1,56 @@
 <?php
 
-class CoolRunner_CoolShipping_Model_Observer {
-    public function __construct() {
+class CoolRunner_CoolShipping_Model_Observer
+{
+    public function __construct()
+    {
         Mage::getModel('coolrunner/apiv3')->autoload();
     }
 
-    public function appendDroppointHtml($observer) {
+    public function appendDroppointHtml($observer)
+    {
         $block = $observer->getEvent()->getBlock();
         if ($block instanceof Mage_Checkout_Block_Onepage_Shipping_Method_Available ||
             $block instanceof AW_Onestepcheckout_Block_Onestep_Form_Shippingmethod) {
             Mage::helper('coolrunner/logger')->log('Triggered observer method appendDroppointHtml ', get_class($block));
             $transport = $observer->getEvent()->getTransport();
-            $html = $transport->getHtml();
+            $html      = $transport->getHtml();
+            Mage::helper('coolrunner/logger')->log($html);
             if (strpos($html, 'coolrunner_postnord_private_droppoint') !== false) {
                 Mage::helper('coolrunner/logger')->log('Matched coolrunner_postnord_private_droppoint');
                 $html .= $block->getLayout()
-                    ->createBlock('coolrunner/servicepoints_postnord')
-                    ->setTemplate('coolshipping/droppoints.phtml')->toHtml();
+                               ->createBlock('coolrunner/servicepoints_postnord')
+                               ->setTemplate('coolshipping/droppoints.phtml')->toHtml();
             }
             if (strpos($html, 'coolrunner_gls_private_droppoint') !== false) {
                 Mage::helper('coolrunner/logger')->log('Matched coolrunner_gls_private_droppoint');
                 $html .= $block->getLayout()
-                    ->createBlock('coolrunner/servicepoints_gls')
-                    ->setTemplate('coolshipping/droppoints.phtml')->toHtml();
+                               ->createBlock('coolrunner/servicepoints_gls')
+                               ->setTemplate('coolshipping/droppoints.phtml')->toHtml();
+            }
+            if (strpos($html, 'coolrunner_bring_private_droppoint') !== false) {
+                Mage::helper('coolrunner/logger')->log('Matched coolrunner_bring_private_droppoint');
+                $html .= $block->getLayout()
+                               ->createBlock('coolrunner/servicepoints_bring')
+                               ->setTemplate('coolshipping/droppoints.phtml')->toHtml();
             }
             if (strpos($html, 'coolrunner_dao_private_droppoint') !== false) {
                 Mage::helper('coolrunner/logger')->log('Matched coolrunner_dao_private_droppoint');
                 $html .= $block->getLayout()
-                    ->createBlock('coolrunner/servicepoints_dao')
-                    ->setTemplate('coolshipping/droppoints.phtml')->toHtml();
+                               ->createBlock('coolrunner/servicepoints_dao')
+                               ->setTemplate('coolshipping/droppoints.phtml')->toHtml();
             }
             if (strpos($html, 'coolrunner_dhl_private_droppoint') !== false) {
                 Mage::helper('coolrunner/logger')->log('Matched coolrunner_dhl_private_droppoint');
                 $html .= $block->getLayout()
-                    ->createBlock('coolrunner/servicepoints_dhl')
-                    ->setTemplate('coolshipping/droppoints.phtml')->toHtml();
+                               ->createBlock('coolrunner/servicepoints_dhl')
+                               ->setTemplate('coolshipping/droppoints.phtml')->toHtml();
             }
             if (strpos($html, 'coolrunner_posti_private_droppoint') !== false) {
                 Mage::helper('coolrunner/logger')->log('Matched coolrunner_posti_private_droppoint');
                 $html .= $block->getLayout()
-                    ->createBlock('coolrunner/servicepoints_posti')
-                    ->setTemplate('coolshipping/droppoints.phtml')->toHtml();
+                               ->createBlock('coolrunner/servicepoints_posti')
+                               ->setTemplate('coolshipping/droppoints.phtml')->toHtml();
             }
 
             $html .= $block->getLayout()->createBlock('coolrunner/logos')->setTemplate('coolshipping/logos.phtml')->toHtml();
@@ -48,7 +58,8 @@ class CoolRunner_CoolShipping_Model_Observer {
         }
     }
 
-    public function addMassAction($observer) {
+    public function addMassAction($observer)
+    {
         /** @var Mage_Adminhtml_Block_Widget_Grid_Massaction $block */
         $block = $observer->getEvent()->getBlock();
 
@@ -88,7 +99,7 @@ class CoolRunner_CoolShipping_Model_Observer {
             );
 
             foreach ($types as $id => $type) {
-                if (!$isLabelGrid) {
+                if ( ! $isLabelGrid) {
                     $block->addItem($id, $type);
                 } else {
                     if (strpos($id, 'blank') === false) {
@@ -105,7 +116,8 @@ class CoolRunner_CoolShipping_Model_Observer {
      *
      * @throws Varien_Exception
      */
-    public function saveQuoteData($observer) {
+    public function saveQuoteData($observer)
+    {
         /** @var Mage_Core_Controller_Request_Http $request */
         $request = Mage::app()->getRequest();
         /** @var Mage_Sales_Model_Quote $quote */
@@ -113,8 +125,8 @@ class CoolRunner_CoolShipping_Model_Observer {
 
         $shippingMethod = $quote->getShippingAddress()->getData('shipping_method');
 
-        $prefix = "coolrunner";
-        $carriers = array('dao', "postnord", 'gls', 'dhl', 'coolrunner', 'posti');
+        $prefix   = "coolrunner";
+        $carriers = array('dao', "postnord", 'gls', 'dhl', 'coolrunner', 'posti', 'bring');
 
         if (strpos($shippingMethod, $prefix . "_") !== false) {
             foreach ($carriers as $carrier) {
@@ -125,14 +137,14 @@ class CoolRunner_CoolShipping_Model_Observer {
 
                     // Pickup information
                     $pickup_firstname = trim($request->getPost("$carrier-pickup-firstname", ''));
-                    $pickup_lastname = trim($request->getPost("$carrier-pickup-lastname", ''));
+                    $pickup_lastname  = trim($request->getPost("$carrier-pickup-lastname", ''));
                     $pickup_telephone = trim($request->getPost("$carrier-pickup-phone", ''));
 
                     // Servicepoint information
-                    $servicepoint_id = trim($request->getPost("$carrier-servicepoint-id", ''));
-                    $servicepoint_name = trim($request->getPost("$carrier-servicepoint-name", ''));
-                    $servicepoint_city = trim($request->getPost("$carrier-servicepoint-city", ''));
-                    $servicepoint_zip = trim($request->getPost("$carrier-servicepoint-zip-code", ''));
+                    $servicepoint_id     = trim($request->getPost("$carrier-servicepoint-id", ''));
+                    $servicepoint_name   = trim($request->getPost("$carrier-servicepoint-name", ''));
+                    $servicepoint_city   = trim($request->getPost("$carrier-servicepoint-city", ''));
+                    $servicepoint_zip    = trim($request->getPost("$carrier-servicepoint-zip-code", ''));
                     $servicepoint_street = trim($request->getPost("$carrier-servicepoint-street", ''));
 
                     /** @var Mage_Core_Model_Resource $resource */
@@ -166,17 +178,17 @@ class CoolRunner_CoolShipping_Model_Observer {
                     if (strpos($shippingMethod, 'droppoint') !== false) {
                         try {
                             $quote_shipping_address = $quote->getShippingAddress()
-                                ->setFirstname($pickup_firstname)
-                                ->setLastname($pickup_lastname)
-                                ->setCompany($servicepoint_name)
-                                ->setStreet($servicepoint_street)
-                                ->setPostcode($servicepoint_zip)
-                                ->setCity($servicepoint_city)
-                                ->setTelephone($pickup_telephone)
-                                ->setFax('');
+                                                            ->setFirstname($pickup_firstname)
+                                                            ->setLastname($pickup_lastname)
+                                                            ->setCompany($servicepoint_name)
+                                                            ->setStreet($servicepoint_street)
+                                                            ->setPostcode($servicepoint_zip)
+                                                            ->setCity($servicepoint_city)
+                                                            ->setTelephone($pickup_telephone)
+                                                            ->setFax('');
 
-                            $table = $resource->getTableName('sales/quote_address');
-                            $sql = "UPDATE $table SET 
+                            $table  = $resource->getTableName('sales/quote_address');
+                            $sql    = "UPDATE $table SET 
                                         firstname=:firstname, 
                                         lastname=:lastname, 
                                         company=:sp_id, 
@@ -214,7 +226,8 @@ class CoolRunner_CoolShipping_Model_Observer {
      *
      * @throws Varien_Exception
      */
-    public function saveDataOnOrder($observer) {
+    public function saveDataOnOrder($observer)
+    {
         $quote = $observer->getEvent()->getQuote();
         $order = $observer->getEvent()->getOrder();
 
@@ -224,9 +237,9 @@ class CoolRunner_CoolShipping_Model_Observer {
         /** @var Mage_Core_Model_Resource $resource */
         $resource = Mage::getSingleton('core/resource');
 
-        $write = $resource->getConnection('core_write');
-        $table = $resource->getTableName('coolrunner_coolshipping_sales_order_info');
-        $sql = "UPDATE $table SET 
+        $write  = $resource->getConnection('core_write');
+        $table  = $resource->getTableName('coolrunner_coolshipping_sales_order_info');
+        $sql    = "UPDATE $table SET 
                   order_id=:order_id 
                 WHERE quote_id=:quote_id";
         $params = array(
